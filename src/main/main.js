@@ -39,13 +39,20 @@ const Main = () => {
       setSelectedElement(null);
     }
   };
+
+  const deleteElementById = (id) => {
+    setElements(elements.filter(elem => elem.id !== id));
+  }
+
+  const getElementById = (id) => {
+    setSelectedElement(id)
+  }
+
   return (
     <div style={{ display: 'flex', height: '100vh' }}>
-      {/* Options Zone */}
-      <div style={{ flex: '0 0 20%', backgroundColor: '#f0f0f0', padding: '10px' }}>
-        <SideMenu onAddElement={handleAddElement} />
-      </div>
-      {/* Main Zone */}
+
+      <SideMenu onAddElement={handleAddElement} getElementById={getElementById} deleteElementById={deleteElementById} />
+
       <MDBContainer fluid style={{ flex: '1', overflow: 'auto', position: 'relative' }} className="canvas-wrapper p-0">
         <Stage
           className="h-100 w-100 d-flex"
@@ -73,35 +80,6 @@ const Main = () => {
                       elems[i] = newAttrs;
                       setElements(elems);
                     }} />
-                  {/*{element.type === 'text' && (*/}
-                  {/*  <Text*/}
-                  {/*    x={element.x}*/}
-                  {/*    y={element.y}*/}
-                  {/*    text={element.text}*/}
-                  {/*    draggable*/}
-                  {/*    onClick={() => handleElementClick(index)}*/}
-                  {/*  />*/}
-                  {/*)}*/}
-                  {/*{element.type === 'rectangle' && (*/}
-                  {/*  <Element*/}
-                  {/*    fill="red"*/}
-                  {/*    x={element.x}*/}
-                  {/*    y={element.y}*/}
-                  {/*    width={element.width}*/}
-                  {/*    height={element.height}*/}
-                  {/*    draggable*/}
-                  {/*    onClick={() => handleElementClick(index)}*/}
-                  {/*  />*/}
-                  {/*)}*/}
-                  {/*{element.type === 'circle' && (*/}
-                  {/*  <Circle*/}
-                  {/*    x={element.x}*/}
-                  {/*    y={element.y}*/}
-                  {/*    radius={element.radius}*/}
-                  {/*    draggable*/}
-                  {/*    onClick={() => handleElementClick(index)}*/}
-                  {/*  />*/}
-                  {/*)}*/}
                 </React.Fragment>
               );
             })}

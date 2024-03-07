@@ -1,8 +1,10 @@
 .konvajs-content {
   background: white;
   margin: auto;
+  box-shadow: 0 0 10px -4px #999;
 }
 
 .canvas-wrapper {
-  background: #bbb;
+  background: #bbb;background: url('https://img.freepik.com/premium-vector/abstract-seamless-pattern-small-rhombus-pixels-white-colors_444390-9083.jpg?w=1380');
+  background-size: 5%;
 }

@@ -1,0 +1,23 @@
+#side-menu {
+  box-shadow: 0 0 10px -4px #999;
+  z-index: 10;
+  background: white;
+}
+
+.layer-cell {
+  display: flex;
+  align-items: center;
+}
+
+.layer-cell span {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.layer-row {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
