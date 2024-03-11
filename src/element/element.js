@@ -14,26 +14,23 @@ const Element = ({ shapeProps, canvasSize, onSelect, onChange }) => {
           ref={shapeRef}
           {...shapeProps}
           draggable
+          onDragStart={(e) => {
+            onSelect();
+          }}
           onDragEnd={(e) => {
-            // onChange({
-            //   ...shapeProps,
-            //   x: e.target.x(),
-            //   y: e.target.y(),
-            // });
+            onChange({
+              ...shapeProps,
+              x: e.target.x() - canvasSize.width / 2,
+              y: e.target.y() - canvasSize.height / 2,
+            });
           }}
           onTransformEnd={(e) => {
             const node = shapeRef.current;
             if (node) {
-              const scaleX = node.scaleX();
-              const scaleY = node.scaleY();
-
-              // we will reset it back
-              // node.scaleX(1);
-              // node.scaleY(1);
               onChange({
                 ...shapeProps,
-                x: node.x(),
-                y: node.y(),
+                x: node.x() - canvasSize.width / 2,
+                y: node.y() - canvasSize.height / 2,
                 // set minimal value
                 width: Math.max(5, node.width()),
                 height: Math.max(5, node.height()),
@@ -50,9 +47,10 @@ const Element = ({ shapeProps, canvasSize, onSelect, onChange }) => {
           ref={shapeRef}
           {...shapeProps}
           draggable
+          onDragStart={(e) => {
+            onSelect();
+          }}
           onDragEnd={(e) => {
-            console.log(e.target.x())
-            console.log(e.target.y())
             onChange({
               ...shapeProps,
               x: e.target.x() - canvasSize.width / 2,
