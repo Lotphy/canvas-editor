@@ -3,7 +3,7 @@ import { MDBBtn, MDBCol, MDBIcon, MDBRow } from 'mdb-react-ui-kit';
 import './SideMenu.css';
 
 const SideMenu = ({ onAddElement, getElementById, deleteElementById }) => {
-  const [selectedTool, setSelectedTool] = useState('');
+  const [selectedTool, setSelectedTool] = useState('rectangle');
   const [elements, setElements] = useState([]);
 
   const handleAddElement = () => {
@@ -23,14 +23,16 @@ const SideMenu = ({ onAddElement, getElementById, deleteElementById }) => {
     setElements([...elements, newElement]);
   };
 
-  const onDeleteLayer = (id) => {
+  const onDeleteLayer = (e, id) => {
+    e.stopPropagation();
     setElements(elements.filter(elem => elem.id !== id));
     deleteElementById(id);
   }
 
   const renderLayers = () => {
     const layers = [];
-    elements.forEach(elem => {
+    for(let i = elements.length - 1; i >= 0 ; i--) {
+      const elem = elements[i];
       const layer = (
         <MDBRow className="layer-row mb-2 mx-0" key={elem.id} onClick={() => getElementById(elem.id)}>
           <MDBCol className="layer-cell col-2">
@@ -50,13 +52,13 @@ const SideMenu = ({ onAddElement, getElementById, deleteElementById }) => {
           </MDBCol>
           <MDBCol className="layer-cell col-5"><span className="d-inline-block">{elem.id}</span></MDBCol>
           <MDBCol className="layer-cell col-3 pe-0">
-            <MDBBtn className="px-3 w-100" color="danger" onClick={() => onDeleteLayer(elem.id)}>
+            <MDBBtn className="px-3 w-100" color="danger" onClick={(e) => onDeleteLayer(e, elem.id)}>
               <MDBIcon far icon="trash-alt" />
             </MDBBtn>
           </MDBCol>
         </MDBRow>);
       layers.push(layer);
-    })
+    }
     return layers;
   }
 

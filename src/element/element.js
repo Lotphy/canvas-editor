@@ -1,17 +1,8 @@
 import React from 'react';
-import { Rect, Text, Transformer } from 'react-konva';
+import { Rect, Text } from 'react-konva';
 
-const Element = ({ shapeProps, isSelected, onSelect, onChange }) => {
+const Element = ({ shapeProps, canvasSize, onSelect, onChange }) => {
   const shapeRef = React.useRef();
-  const trRef = React.useRef();
-
-  React.useEffect(() => {
-    if (isSelected) {
-      // we need to attach transformer manually
-      trRef.current.nodes([shapeRef.current]);
-      trRef.current.getLayer().batchDraw();
-    }
-  }, [isSelected]);
 
   return (
     <>
@@ -24,28 +15,30 @@ const Element = ({ shapeProps, isSelected, onSelect, onChange }) => {
           {...shapeProps}
           draggable
           onDragEnd={(e) => {
-            onChange({
-              ...shapeProps,
-              x: e.target.x(),
-              y: e.target.y(),
-            });
+            // onChange({
+            //   ...shapeProps,
+            //   x: e.target.x(),
+            //   y: e.target.y(),
+            // });
           }}
           onTransformEnd={(e) => {
             const node = shapeRef.current;
-            const scaleX = node.scaleX();
-            const scaleY = node.scaleY();
+            if (node) {
+              const scaleX = node.scaleX();
+              const scaleY = node.scaleY();
 
-            // we will reset it back
-            // node.scaleX(1);
-            // node.scaleY(1);
-            onChange({
-              ...shapeProps,
-              x: node.x(),
-              y: node.y(),
-              // set minimal value
-              width: Math.max(5, node.width()),
-              height: Math.max(5, node.height()),
-            });
+              // we will reset it back
+              // node.scaleX(1);
+              // node.scaleY(1);
+              onChange({
+                ...shapeProps,
+                x: node.x(),
+                y: node.y(),
+                // set minimal value
+                width: Math.max(5, node.width()),
+                height: Math.max(5, node.height()),
+              });
+            }
           }}
         />
       }
@@ -58,10 +51,12 @@ const Element = ({ shapeProps, isSelected, onSelect, onChange }) => {
           {...shapeProps}
           draggable
           onDragEnd={(e) => {
+            console.log(e.target.x())
+            console.log(e.target.y())
             onChange({
               ...shapeProps,
-              x: e.target.x(),
-              y: e.target.y(),
+              x: e.target.x() - canvasSize.width / 2,
+              y: e.target.y() - canvasSize.height / 2,
             });
           }}
           onTransformEnd={(e) => {
@@ -74,8 +69,8 @@ const Element = ({ shapeProps, isSelected, onSelect, onChange }) => {
             node.scaleY(1);
             onChange({
               ...shapeProps,
-              x: node.x(),
-              y: node.y(),
+              x: node.x() - canvasSize.width / 2,
+              y: node.y() - canvasSize.height / 2,
               // set minimal value
               width: Math.max(5, node.width() * scaleX),
               height: Math.max(5, node.height() * scaleY),
@@ -83,19 +78,6 @@ const Element = ({ shapeProps, isSelected, onSelect, onChange }) => {
           }}
         />
       }
-      {isSelected && (
-        <Transformer
-          ref={trRef}
-          flipEnabled={false}
-          boundBoxFunc={(oldBox, newBox) => {
-            // limit resize
-            if (Math.abs(newBox.width) < 5 || Math.abs(newBox.height) < 5) {
-              return oldBox;
-            }
-            return newBox;
-          }}
-        />
-      )}
     </>
   );
 };

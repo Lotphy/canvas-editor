@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { MDBContainer } from 'mdb-react-ui-kit'; // Assuming you're using MDBootstrap
-import Konva from 'konva';
-import { Stage, Layer, Rect, Text, Circle, Transformer } from 'react-konva';
+import { MDBContainer } from 'mdb-react-ui-kit';
+import { Stage, Layer, Rect, Group, Transformer } from 'react-konva';
 import SideMenu from '../side_menu/SideMenu';
 import Element from '../element/element';
 import './main.css';
@@ -11,14 +10,21 @@ const Main = () => {
   const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
   const [elements, setElements] = useState([]);
   const [selectedElement, setSelectedElement] = useState(null);
+  const transformerRef = useRef(null);
 
   useEffect(() => {
     // Update canvas size on window resize
     const updateCanvasSize = () => {
-      setCanvasSize({
-        width: 500,
-        height: 500,
-      });
+
+      const canvasWrapper = document.querySelector('.canvas-wrapper');
+      if (canvasWrapper) {
+        const width = canvasWrapper.offsetWidth;
+        const height = canvasWrapper.offsetHeight;
+        setCanvasSize({
+          width,
+          height,
+        });
+      }
     };
 
     updateCanvasSize();
@@ -34,19 +40,20 @@ const Main = () => {
 
   const checkDeselect = (e) => {
     // deselect when clicked on empty area
-    const clickedOnEmpty = e.target === e.target.getStage();
+    const clickedOnEmpty = e.target.attrs?.name === 'stage';
     if (clickedOnEmpty) {
       setSelectedElement(null);
     }
   };
 
   const deleteElementById = (id) => {
-    setElements(elements.filter(elem => elem.id !== id));
-  }
+    setElements(elements.filter((elem) => elem.id !== id));
+    setSelectedElement(null);
+  };
 
   const getElementById = (id) => {
-    setSelectedElement(id)
-  }
+    setSelectedElement(id);
+  };
 
   return (
     <div style={{ display: 'flex', height: '100vh' }}>
@@ -59,30 +66,65 @@ const Main = () => {
           width={canvasSize.width}
           height={canvasSize.height}
           ref={stageRef}
-          scaleX={canvasSize.width / 500} // Adjust as per your canvas size
-          scaleY={canvasSize.height / 500} // Adjust as per your canvas size
           onMouseDown={checkDeselect}
           onTouchStart={checkDeselect}
         >
           <Layer>
+            {/* Gray background */}
+            <Rect name="stage" width={canvasSize.width} height={canvasSize.height} fill="#ccc" />
+
+            {/* Brighter square shape representing the drawable zone */}
+            <Rect
+              name="stage"
+              x={(canvasSize.width - 400) / 2} // Adjust the square position as needed
+              y={(canvasSize.height - 400) / 2} // Adjust the square position as needed
+              width={400} // Adjust the square size as needed
+              height={400} // Adjust the square size as needed
+              fill="#fff" // Adjust the square color as needed
+              stroke="#999" // Adjust the stroke color as needed
+              strokeWidth={2} // Adjust the stroke width as needed
+            />
+
             {/* Render Elements */}
-            {elements.map((element, i) => {
-              return (
-                <React.Fragment key={i}>
-                  <Element
-                    shapeProps={element}
-                    isSelected={element.id === selectedElement}
-                    onSelect={() => {
-                      setSelectedElement(element.id);
-                    }}
-                    onChange={(newAttrs) => {
-                      const elems = elements.slice();
-                      elems[i] = newAttrs;
-                      setElements(elems);
-                    }} />
-                </React.Fragment>
-              );
-            })}
+            <Group
+              clipFunc={(ctx) => ctx.rect((canvasSize.width - 400) / 2, (canvasSize.height - 400) / 2, 400, 400)}
+            >
+              {elements.map((element, i) => {
+                return (
+                  <React.Fragment key={i}>
+                    <Element
+                      id={element.id}
+                      shapeProps={{...element, x: element.x + canvasSize.width / 2, y: element.y + canvasSize.height / 2}}
+                      isSelected={element.id === selectedElement}
+                      canvasSize={canvasSize}
+                      onSelect={() => {
+                        setSelectedElement(element.id);
+                      }}
+                      onChange={(newAttrs) => {
+                        const elems = elements.slice();
+                        elems[i] = newAttrs;
+                        setElements(elems);
+                      }}
+                    />
+                  </React.Fragment>
+                );
+              })}
+            </Group>
+
+            {/* Transformer for the selected element */}
+            {selectedElement && (
+              <Transformer
+                ref={transformerRef}
+                nodes={stageRef.current.findOne(`#${selectedElement}`) && [stageRef.current.findOne(`#${selectedElement}`)]} // Assuming elements have unique IDs
+                boundBoxFunc={(oldBox, newBox) => {
+                  // limit resize
+                  if (Math.abs(newBox.width) < 5 || Math.abs(newBox.height) < 5) {
+                    return oldBox;
+                  }
+                  return newBox;
+                }}
+              />
+            )}
           </Layer>
         </Stage>
       </MDBContainer>
