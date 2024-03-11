@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { MDBBtn, MDBCol, MDBIcon, MDBRow } from 'mdb-react-ui-kit';
 import './LayersMenu.css';
 
-const LayersMenu = ({ onAddElement, getElementById, deleteElementById }) => {
+const LayersMenu = () => {
   const [selectedTool, setSelectedTool] = useState('rectangle');
   const [elements, setElements] = useState([]);
 
@@ -19,14 +19,14 @@ const LayersMenu = ({ onAddElement, getElementById, deleteElementById }) => {
       newElement = { type: 'circle', x: 50, y: 50, radius: 50 };
     }
     newElement = { ...newElement, id };
-    onAddElement(newElement);
+    document.dispatchEvent(new CustomEvent('addElement', {detail: {elem: newElement}}));
     setElements([...elements, newElement]);
   };
 
   const onDeleteLayer = (e, id) => {
     e.stopPropagation();
     setElements(elements.filter(elem => elem.id !== id));
-    deleteElementById(id);
+    document.dispatchEvent(new CustomEvent('deleteElementById', {detail: {id: id}}));
   }
 
   const renderLayers = () => {
@@ -34,7 +34,9 @@ const LayersMenu = ({ onAddElement, getElementById, deleteElementById }) => {
     for(let i = elements.length - 1; i >= 0 ; i--) {
       const elem = elements[i];
       const layer = (
-        <MDBRow className="layer-row mb-2 mx-0" key={elem.id} onClick={() => getElementById(elem.id)}>
+        <MDBRow className="layer-row mb-2 mx-0" key={elem.id} onClick={() => {
+          document.dispatchEvent(new CustomEvent('getElementById', {detail: {id: elem.id}}));
+        }}>
           <MDBCol className="layer-cell col-2">
             <span className="d-inline-block">
               {

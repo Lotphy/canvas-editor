@@ -4,6 +4,7 @@ import { Stage, Layer, Rect, Group, Transformer } from 'react-konva';
 import LayersMenu from '../LayersMenu/LayersMenu';
 import Element from '../element/element';
 import './main.css';
+import SideMenu from '../SideMenu/SideMenu';
 
 const Main = () => {
   const stageRef = useRef(null);
@@ -13,6 +14,7 @@ const Main = () => {
   const transformerRef = useRef(null);
 
   useEffect(() => {
+    initEventsListeners();
     // Update canvas size on window resize
     const updateCanvasSize = () => {
 
@@ -30,13 +32,10 @@ const Main = () => {
     updateCanvasSize();
     window.addEventListener('resize', updateCanvasSize);
     return () => {
+      removeEventsListeners();
       window.removeEventListener('resize', updateCanvasSize);
     };
   }, []);
-
-  const handleAddElement = (newElement) => {
-    setElements([...elements, newElement]);
-  };
 
   const checkDeselect = (e) => {
     // deselect when clicked on empty area
@@ -46,19 +45,39 @@ const Main = () => {
     }
   };
 
-  const deleteElementById = (id) => {
-    setElements(elements.filter((elem) => elem.id !== id));
+  const handleAddElement = (event) => {
+    const newElement = event.detail.elem;
+    setElements(prevElements => [...prevElements, newElement]);
+  };
+
+  const deleteElementById = (event) => {
+    const id = event.detail.id;
+    setElements(elements => elements.filter((elem) => elem.id !== id));
     setSelectedElement(null);
   };
 
-  const getElementById = (id) => {
+  const getElementById = (event) => {
+    const id = event.detail.id;
     setSelectedElement(id);
   };
 
+  const initEventsListeners = () => {
+    document.addEventListener('addElement', handleAddElement);
+    document.addEventListener('getElementById', getElementById);
+    document.addEventListener('deleteElementById', deleteElementById);
+  }
+
+  const removeEventsListeners = () => {
+    document.addEventListener('addElement', handleAddElement);
+    document.addEventListener('getElementById', getElementById);
+    document.addEventListener('deleteElementById', deleteElementById);
+  }
+
   return (
     <div style={{ display: 'flex', height: '100vh' }}>
+      {elements.length}
 
-      <LayersMenu onAddElement={handleAddElement} getElementById={getElementById} deleteElementById={deleteElementById} />
+      <SideMenu />
 
       <MDBContainer fluid style={{ flex: '1', overflow: 'auto', position: 'relative' }} className="canvas-wrapper p-0">
         <Stage
