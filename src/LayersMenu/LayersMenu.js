@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { MDBBtn, MDBCol, MDBIcon, MDBRow } from 'mdb-react-ui-kit';
-import './SideMenu.css';
+import './LayersMenu.css';
 
-const SideMenu = ({ onAddElement, getElementById, deleteElementById }) => {
+const LayersMenu = ({ onAddElement, getElementById, deleteElementById }) => {
   const [selectedTool, setSelectedTool] = useState('rectangle');
   const [elements, setElements] = useState([]);
 
@@ -53,7 +53,7 @@ const SideMenu = ({ onAddElement, getElementById, deleteElementById }) => {
           <MDBCol className="layer-cell col-5"><span className="d-inline-block">{elem.id}</span></MDBCol>
           <MDBCol className="layer-cell col-3 pe-0">
             <MDBBtn className="px-3 w-100" color="danger" onClick={(e) => onDeleteLayer(e, elem.id)}>
-              <MDBIcon far icon="trash-alt" />
+              <span className="flaticon-059-trash-can" />
             </MDBBtn>
           </MDBCol>
         </MDBRow>);
@@ -89,4 +89,4 @@ const SideMenu = ({ onAddElement, getElementById, deleteElementById }) => {
   );
 };
 
-export default SideMenu;
+export default LayersMenu;

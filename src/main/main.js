@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { MDBContainer } from 'mdb-react-ui-kit';
 import { Stage, Layer, Rect, Group, Transformer } from 'react-konva';
-import SideMenu from '../side_menu/SideMenu';
+import LayersMenu from '../LayersMenu/LayersMenu';
 import Element from '../element/element';
 import './main.css';
 
@@ -58,7 +58,7 @@ const Main = () => {
   return (
     <div style={{ display: 'flex', height: '100vh' }}>
 
-      <SideMenu onAddElement={handleAddElement} getElementById={getElementById} deleteElementById={deleteElementById} />
+      <LayersMenu onAddElement={handleAddElement} getElementById={getElementById} deleteElementById={deleteElementById} />
 
       <MDBContainer fluid style={{ flex: '1', overflow: 'auto', position: 'relative' }} className="canvas-wrapper p-0">
         <Stage
