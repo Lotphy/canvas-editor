@@ -3,8 +3,8 @@ import stageReducer from './stage.reducer';
 
 const store = configureStore({
   reducer: {
-    stage: stageReducer,
+    stage: stageReducer
   }
-})
+});
 
-export default store
+export default store;

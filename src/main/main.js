@@ -6,7 +6,7 @@ import Element from '../element/element';
 import './main.css';
 import SideMenu from '../SideMenu/SideMenu';
 import { useDispatch } from 'react-redux';
-import { setChildren } from '../shared/store/stage.reducer';
+import { setStageElements } from '../shared/store/stage.reducer';
 
 const Main = () => {
   const stageRef = useRef(null);
@@ -42,7 +42,7 @@ const Main = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(setChildren({
+    dispatch(setStageElements({
       elements
     }))
   }, [elements])

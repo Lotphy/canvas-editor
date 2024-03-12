@@ -4,18 +4,18 @@ const stageSlice = createSlice({
   name: 'stage',
   initialState: {},
   reducers: {
-    setChildren(state, action) {
+    setStageElements(state, action) {
       state = {
         ...state,
-        children: action.payload.elements
+        elements: action.payload.elements
       }
       return state;
     }
   }
 })
 
-export const { setChildren } = stageSlice.actions;
+export const { setStageElements } = stageSlice.actions;
 
-export const getChildren = ((state) => state.stage.children);
+export const getStageElements = ((state) => state.stage.elements);
 
 export default stageSlice.reducer;

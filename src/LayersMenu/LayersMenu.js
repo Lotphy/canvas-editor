@@ -2,17 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { MDBBtn, MDBCol, MDBIcon, MDBRow } from 'mdb-react-ui-kit';
 import './LayersMenu.css';
 import { useSelector } from 'react-redux';
-import { getChildren } from '../shared/store/stage.reducer';
+import { getStageElements } from '../shared/store/stage.reducer';
 
 const LayersMenu = () => {
   const [selectedTool, setSelectedTool] = useState('rectangle');
   const [elements, setElements] = useState([]);
-  const children = useSelector(getChildren);
+  const storeElements = useSelector(getStageElements);
 
   useEffect(() => {
-    console.log(children)
-    setElements(children);
-  }, [children])
+    setElements(storeElements);
+  }, [storeElements])
 
   const handleAddElement = () => {
     let newElement;
