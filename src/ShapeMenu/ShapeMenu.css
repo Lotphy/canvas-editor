@@ -1,0 +1,21 @@
+#options-drawer .element-btn {
+  height: 100px;
+  background: none;
+  border: 1px solid gray;
+  color: gray;
+  font-size: 32px;
+  box-shadow: none;
+  margin-bottom: 8px;
+}
+
+#options-drawer .element-btn:hover {
+  background: var(--mdb-primary);
+  color: white;
+ }
+
+.shape-btn {
+  width: 100%;
+  cursor: pointer;
+  font-size: 60px;
+  padding: 16px 0;
+}

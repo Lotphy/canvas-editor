@@ -13,22 +13,6 @@ const LayersMenu = () => {
     setElements(storeElements);
   }, [storeElements])
 
-  const handleAddElement = () => {
-    let newElement;
-    const id = crypto.randomUUID();
-    if (selectedTool === 'text') {
-      newElement = { type: 'text', fill: `#${Math.floor(Math.random() * 16777215).toString(16)}`, text: 'Sample Text', x: 50, y: 50 };
-    } else if (selectedTool === 'image') {
-      // You can add your image logic here
-    } else if (selectedTool === 'rectangle') {
-      newElement = { type: 'rectangle', fill: `#${Math.floor(Math.random() * 16777215).toString(16)}`, x: 50, y: 50, width: 100, height: 100 };
-    } else if (selectedTool === 'circle') {
-      newElement = { type: 'circle', x: 50, y: 50, radius: 50 };
-    }
-    newElement = { ...newElement, id };
-    document.dispatchEvent(new CustomEvent('addElement', {detail: {elem: newElement}}));
-  };
-
   const onDeleteLayer = (e, id) => {
     e.stopPropagation();
     document.dispatchEvent(new CustomEvent('deleteElementById', {detail: {id}}));
@@ -46,7 +30,11 @@ const LayersMenu = () => {
             <span className="d-inline-block">
               {
                 elem.type === 'rectangle' &&
-                <i className="fas fa-shapes"></i>
+                <i className="fas fa-square"></i>
+              }
+              {
+                elem.type === 'circle' &&
+                <i className="fas fa-circle"></i>
               }
               {
                 elem.type === 'text' &&
@@ -70,29 +58,10 @@ const LayersMenu = () => {
   }
 
   return (
-    <div id="side-menu" className="d-flex flex-column p-3">
-      <select
-        className="mb-2"
-        value={selectedTool}
-        onChange={(e) => setSelectedTool(e.target.value)}
-      >
-        <option value="">Add New Element</option>
-        <option value="text">text</option>
-        <option value="image">image</option>
-        <option value="rectangle">rectangle</option>
-        <option value="circle">circle</option>
-      </select>
-      <MDBBtn onClick={handleAddElement}>
-        <MDBIcon className="fas fa-plus"></MDBIcon>
-      </MDBBtn>
-      {/* Layers View */}
       <div className="overflow-auto">
-        <h5 className="my-3">Layers</h5>
-
+        <h5 className="">Layers</h5>
         {renderLayers()}
-        {/* Layers view content goes here */}
       </div>
-    </div>
   );
 };
 
