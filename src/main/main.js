@@ -5,6 +5,8 @@ import LayersMenu from '../LayersMenu/LayersMenu';
 import Element from '../element/element';
 import './main.css';
 import SideMenu from '../SideMenu/SideMenu';
+import { useDispatch } from 'react-redux';
+import { setChildren } from '../shared/store/stage.reducer';
 
 const Main = () => {
   const stageRef = useRef(null);
@@ -13,6 +15,7 @@ const Main = () => {
   const [selectedElement, setSelectedElement] = useState(null);
   const transformerRef = useRef(null);
   const layerRef = useRef(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     initEventsListeners();
@@ -38,6 +41,12 @@ const Main = () => {
     };
   }, []);
 
+  useEffect(() => {
+    dispatch(setChildren({
+      elements
+    }))
+  }, [elements])
+
   const checkDeselect = (e) => {
     // deselect when clicked on empty area
     const clickedOnEmpty = e.target.attrs?.name === 'stage';
@@ -62,22 +71,16 @@ const Main = () => {
     setSelectedElement(id);
   };
 
-  const getAllElements = () => {
-    return layerRef.current.getChildren();
-  }
-
   const initEventsListeners = () => {
     document.addEventListener('addElement', handleAddElement);
     document.addEventListener('getElementById', getElementById);
     document.addEventListener('deleteElementById', deleteElementById);
-    document.addEventListener('getAllElements', getAllElements);
   }
 
   const removeEventsListeners = () => {
     document.addEventListener('addElement', handleAddElement);
     document.addEventListener('getElementById', getElementById);
     document.addEventListener('deleteElementById', deleteElementById);
-    document.addEventListener('getAllElements', getAllElements);
   }
 
   return (

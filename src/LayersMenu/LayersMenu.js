@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MDBBtn, MDBCol, MDBIcon, MDBRow } from 'mdb-react-ui-kit';
 import './LayersMenu.css';
+import { useSelector } from 'react-redux';
+import { getChildren } from '../shared/store/stage.reducer';
 
 const LayersMenu = () => {
   const [selectedTool, setSelectedTool] = useState('rectangle');
   const [elements, setElements] = useState([]);
+  const children = useSelector(getChildren);
+
+  useEffect(() => {
+    console.log(children)
+    setElements(children);
+  }, [children])
 
   const handleAddElement = () => {
     let newElement;
@@ -20,17 +28,16 @@ const LayersMenu = () => {
     }
     newElement = { ...newElement, id };
     document.dispatchEvent(new CustomEvent('addElement', {detail: {elem: newElement}}));
-    setElements([...elements, newElement]);
   };
 
   const onDeleteLayer = (e, id) => {
     e.stopPropagation();
-    setElements(elements.filter(elem => elem.id !== id));
+    document.dispatchEvent(new CustomEvent('deleteElementById', {detail: {id}}));
   }
 
   const renderLayers = () => {
     const layers = [];
-    for(let i = elements.length - 1; i >= 0 ; i--) {
+    for(let i = elements?.length - 1; i >= 0 ; i--) {
       const elem = elements[i];
       const layer = (
         <MDBRow className="layer-row mb-2 mx-0" key={elem.id} onClick={() => {
