@@ -1,0 +1,15 @@
+.btn {
+  border-radius: 0;
+}
+
+#drawer {
+  background: #332d2d;
+  left: 0;
+  top: 0;
+  height: 100%;
+  z-index: 10;
+}
+
+#side-menu {
+  width: 300px;
+}

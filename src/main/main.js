@@ -12,6 +12,7 @@ const Main = () => {
   const [elements, setElements] = useState([]);
   const [selectedElement, setSelectedElement] = useState(null);
   const transformerRef = useRef(null);
+  const layerRef = useRef(null);
 
   useEffect(() => {
     initEventsListeners();
@@ -61,25 +62,30 @@ const Main = () => {
     setSelectedElement(id);
   };
 
+  const getAllElements = () => {
+    return layerRef.current.getChildren();
+  }
+
   const initEventsListeners = () => {
     document.addEventListener('addElement', handleAddElement);
     document.addEventListener('getElementById', getElementById);
     document.addEventListener('deleteElementById', deleteElementById);
+    document.addEventListener('getAllElements', getAllElements);
   }
 
   const removeEventsListeners = () => {
     document.addEventListener('addElement', handleAddElement);
     document.addEventListener('getElementById', getElementById);
     document.addEventListener('deleteElementById', deleteElementById);
+    document.addEventListener('getAllElements', getAllElements);
   }
 
   return (
     <div style={{ display: 'flex', height: '100vh' }}>
-      {elements.length}
 
       <SideMenu />
 
-      <MDBContainer fluid style={{ flex: '1', overflow: 'auto', position: 'relative' }} className="canvas-wrapper p-0">
+      <MDBContainer fluid style={{ flex: '1', overflow: 'hidden', position: 'relative' }} className="canvas-wrapper p-0">
         <Stage
           className="h-100 w-100 d-flex"
           width={canvasSize.width}
@@ -106,6 +112,7 @@ const Main = () => {
 
             {/* Render Elements */}
             <Group
+              ref={layerRef}
               clipFunc={(ctx) => ctx.rect((canvasSize.width - 400) / 2, (canvasSize.height - 400) / 2, 400, 400)}
             >
               {elements.map((element, i) => {

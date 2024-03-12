@@ -26,7 +26,6 @@ const LayersMenu = () => {
   const onDeleteLayer = (e, id) => {
     e.stopPropagation();
     setElements(elements.filter(elem => elem.id !== id));
-    document.dispatchEvent(new CustomEvent('deleteElementById', {detail: {id: id}}));
   }
 
   const renderLayers = () => {
@@ -55,7 +54,7 @@ const LayersMenu = () => {
           <MDBCol className="layer-cell col-5"><span className="d-inline-block">{elem.id}</span></MDBCol>
           <MDBCol className="layer-cell col-3 pe-0">
             <MDBBtn className="px-3 w-100" color="danger" onClick={(e) => onDeleteLayer(e, elem.id)}>
-              <span className="flaticon-059-trash-can" />
+              <span className="flaticon-059-trash-can fs-4" />
             </MDBBtn>
           </MDBCol>
         </MDBRow>);
@@ -65,7 +64,7 @@ const LayersMenu = () => {
   }
 
   return (
-    <div id="side-menu" className="d-flex flex-column" style={{ flex: '0 0 20%', maxWidth: '20%', backgroundColor: '#f0f0f0', padding: '10px' }}>
+    <div id="side-menu" className="d-flex flex-column p-3">
       <select
         className="mb-2"
         value={selectedTool}
