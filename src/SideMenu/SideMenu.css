@@ -12,7 +12,7 @@
 
 #options-drawer {
   width: 300px;
-  box-shadow: 0 0 8px 0 #999;
+  box-shadow: 0 0 8px -4px #171717;
   position: relative;
   z-index: 5;
 }

@@ -100,7 +100,7 @@ const Main = () => {
     const trNode = transformerRef.current;
     const trBox = trNode?.getClientRect();
     const tooltipX = trBox?.x + trBox?.width / 2;
-    const tooltipY = trBox?.y > 100 ? trBox?.y - 30 : trBox?.y + trBox?.height + 30; // Adjust the distance from the transformer
+    const tooltipY = trBox?.y > canvasSize.height / 2 ? trBox?.y : trBox?.y + trBox?.height + 80; // Adjust the distance from the transformer
     setTooltipPosition({ x: tooltipX, y: tooltipY });
   };
 
@@ -131,7 +131,7 @@ const Main = () => {
 
         <MDBContainer fluid style={{ flex: '1', overflow: 'hidden', position: 'relative' }}
                       className="canvas-wrapper p-0">
-          <TopMenu node={layerRef} id={selectedElement}/>
+          <TopMenu node={layerRef} id={selectedElement} />
 
           <Stage
             className="h-100 w-100 d-flex"

@@ -13,7 +13,11 @@ const ShapeMenu = () => {
         newElement = {
           id,
           type: 'rectangle',
+          stroke: 'black',
+          strokeWidth: 0,
           fill: `#${Math.floor(Math.random() * 16777215).toString(16)}`,
+          cornerRadius: 0,
+          opacity: 1,
           scaleX: 1,
           scaleY: 1,
           x: 50,

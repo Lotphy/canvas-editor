@@ -1,3 +1,12 @@
 #top-menu {
     height: 50px;
 }
+
+#top-menu label {
+    font-size: 1rem;
+    text-transform: none;
+}
+
+#top-menu .form-outline {
+    width: 80px;
+}
