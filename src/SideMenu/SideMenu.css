@@ -18,10 +18,20 @@
 }
 
 #options-selector {
-  box-shadow: 0 0 8px 0 #999;
   position: relative;
-  z-index: 10;
-  background: #332d2d;
+  z-index: 15;
+  background: var(--mdb-dark);
+}
+
+#options-selector .btn {
+  background: none;
+  box-shadow: none;
+}
+
+#options-selector .btn-active,
+#options-selector .btn:hover {
+  background: var(--mdb-primary);
+  color: white;
 }
 
 .element-selector {

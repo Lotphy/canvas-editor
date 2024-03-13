@@ -6,7 +6,7 @@ import ShapeMenu from '../ShapeMenu/ShapeMenu';
 import TextMenu from '../TextMenu/TextMenu';
 
 const SideMenu = () => {
-  const [toggledDrawer, setToggledDrawer] = useState('');
+  const [toggledDrawer, setToggledDrawer] = useState('shape');
 
   useEffect(() => {
     window.dispatchEvent(new Event('resize'));
@@ -15,26 +15,22 @@ const SideMenu = () => {
   return (
     <div className="d-flex">
       <div id="options-selector" className="d-flex flex-column">
-        <MDBBtn color={toggledDrawer === 'layer' ? 'primary' : 'dark'}
-                className="p-3"
+        <MDBBtn className={`p-3 ${toggledDrawer === 'layer' ? 'btn-active' : ''}`}
                 onClick={() => setToggledDrawer('layer')}
         >
           <MDBIcon className="fs-2" fas icon="layer-group" />
         </MDBBtn>
-        <MDBBtn color={toggledDrawer === 'text' ? 'primary' : 'dark'}
-                className="p-3"
+        <MDBBtn className={`p-3 ${toggledDrawer === 'text' ? 'btn-active' : ''}`}
                 onClick={() => setToggledDrawer('text')}
         >
           <MDBIcon className="fs-2" fas icon="font" />
         </MDBBtn>
-        <MDBBtn color={toggledDrawer === 'shape' ? 'primary' : 'dark'}
-                className="p-3"
+        <MDBBtn className={`p-3 ${toggledDrawer === 'shape' ? 'btn-active' : ''}`}
                 onClick={() => setToggledDrawer('shape')}
         >
           <MDBIcon className="fs-2" fas icon="shapes" />
         </MDBBtn>
-        <MDBBtn color={toggledDrawer === 'image' ? 'primary' : 'dark'}
-                className="p-3"
+        <MDBBtn className={`p-3 ${toggledDrawer === 'image' ? 'btn-active' : ''}`}
                 onClick={() => setToggledDrawer('image')}
         >
           <MDBIcon className="fs-2" fas icon="image" />

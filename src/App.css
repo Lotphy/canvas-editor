@@ -1,6 +1,12 @@
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+:root {
+  --mdb-primary: #6a26ff; /* Your desired primary color */
+  --mdb-primary-rgb: 106, 38, 255;
+  --mdb-danger: #f41f42;
+  --mdb-danger-rgb: 244, 31, 66;
+  --mdb-secondary: #6aff00;
+  --mdb-secondary-rgb: 106, 255, 0;
+  --dark-purple: #190B37;
+  --purple: #3800A6;
 }
 
 @media (prefers-reduced-motion: no-preference) {
