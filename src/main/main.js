@@ -6,19 +6,17 @@ import './main.css';
 import SideMenu from '../SideMenu/SideMenu';
 import { useDispatch, useSelector } from 'react-redux';
 import { getStageElements, setStageElements } from '../shared/store/stage.reducer';
-import TopMenu from '../TopMenu/TopMenu';
+import AttrsMenu from '../AttrsMenu/AttrsMenu';
 
 const Main = () => {
   const stageRef = useRef(null);
   const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
   const [elements, setElements] = useState([]);
-  const [selectedElement, setSelectedElement] = useState(null);
-  const [displayTooltip, setDisplayTooltip] = useState(false);
+  const [selectedElementId, setSelectedElementId] = useState(null);
   const transformerRef = useRef(null);
   const layerRef = useRef(null);
   const dispatch = useDispatch();
   const storeElements = useSelector(getStageElements);
-  const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     initEventsListeners();
@@ -48,22 +46,20 @@ const Main = () => {
   }, []);
 
   useEffect(() => {
+    window.dispatchEvent(new Event('resize'));
+  }, [selectedElementId])
+
+  useEffect(() => {
     dispatch(setStageElements({
       elements
     }))
   }, [elements])
 
-  useEffect(() => {
-    if (selectedElement) {
-      handleTransform();
-    }
-  }, [selectedElement]);
-
   const checkDeselect = (e) => {
     // deselect when clicked on empty area
     const clickedOnEmpty = e.target.attrs?.name === 'stage';
     if (clickedOnEmpty) {
-      setSelectedElement(null);
+      setSelectedElementId(null);
     }
   };
 
@@ -74,13 +70,13 @@ const Main = () => {
 
   const deleteElementById = (event) => {
     const id = event.detail.id;
-    setElements(storeElements => storeElements.filter((elem) => elem.id !== id));
-    setSelectedElement(null);
+    setElements(elems => elems.filter((elem) => elem.id !== id));
+    setSelectedElementId(null);
   };
 
   const getElementById = (event) => {
     const id = event.detail.id;
-    setSelectedElement(id);
+    setSelectedElementId(id);
   };
 
   const initEventsListeners = () => {
@@ -95,34 +91,6 @@ const Main = () => {
     document.addEventListener('deleteElementById', deleteElementById);
   }
 
-  const handleTransform = () => {
-    setDisplayTooltip(true);
-    const trNode = transformerRef.current;
-    const trBox = trNode?.getClientRect();
-    const tooltipX = trBox?.x + trBox?.width / 2;
-    const tooltipY = trBox?.y > canvasSize.height / 2 ? trBox?.y : trBox?.y + trBox?.height + 80; // Adjust the distance from the transformer
-    setTooltipPosition({ x: tooltipX, y: tooltipY });
-  };
-
-  const Tooltip = ({ x, y }) => {
-    return (
-      <div
-        style={{
-          position: 'absolute',
-          left: x,
-          top: y,
-          transform: 'translate(-50%, -50%)', // Center the tooltip
-          backgroundColor: 'rgba(255, 255, 255, 0.8)',
-          padding: '8px',
-          borderRadius: '4px',
-          boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-        }}
-      >
-        <button>Button</button>
-      </div>
-    );
-  };
-
   return (
     <div className="d-flex vh-100 flex-column">
 
@@ -131,7 +99,7 @@ const Main = () => {
 
         <MDBContainer fluid style={{ flex: '1', overflow: 'hidden', position: 'relative' }}
                       className="canvas-wrapper p-0">
-          <TopMenu node={layerRef} id={selectedElement} />
+          <AttrsMenu node={layerRef} id={selectedElementId} />
 
           <Stage
             className="h-100 w-100 d-flex"
@@ -172,10 +140,12 @@ const Main = () => {
                           x: element.x + canvasSize.width / 2,
                           y: element.y + canvasSize.height / 2
                         }}
-                        isSelected={element.id === selectedElement}
+                        isSelected={element.id === selectedElementId}
                         canvasSize={canvasSize}
+                        stage={stageRef.current.getStage()}
+                        trasnformer={transformerRef.current}
                         onSelect={() => {
-                          setSelectedElement(element.id);
+                          setSelectedElementId(element.id);
                         }}
                         onChange={(newAttrs) => {
                           const elems = elements.slice();
@@ -189,10 +159,10 @@ const Main = () => {
               </Group>
 
               {/* Transformer for the selected element */}
-              {selectedElement && (
+              {selectedElementId && (
                 <Transformer
                   ref={transformerRef}
-                  nodes={stageRef.current.findOne(`#${selectedElement}`) && [stageRef.current.findOne(`#${selectedElement}`)]} // Assuming elements have unique IDs
+                  nodes={stageRef.current.findOne(`#${selectedElementId}`) && [stageRef.current.findOne(`#${selectedElementId}`)]} // Assuming elements have unique IDs
                   boundBoxFunc={(oldBox, newBox) => {
                     // limit resize
                     if (Math.abs(newBox.width) < 5 || Math.abs(newBox.height) < 5) {
@@ -200,21 +170,14 @@ const Main = () => {
                     }
                     return newBox;
                   }}
-                  onTransformStart={() => setDisplayTooltip(false)}
-                  onDragStart={() => setDisplayTooltip(false)}
-                  onTransformEnd={handleTransform}
-                  onDragEnd={handleTransform}
                 >
-
                 </Transformer>
               )}
             </Layer>
 
           </Stage>
-          {displayTooltip && (
-            <Tooltip x={tooltipPosition.x} y={tooltipPosition.y}/>
-          )}
         </MDBContainer>
+
       </div>
     </div>
   );

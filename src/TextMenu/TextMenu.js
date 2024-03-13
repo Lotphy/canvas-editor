@@ -10,12 +10,15 @@ const TextMenu = () => {
       id,
       type: 'text',
       fill: `#${Math.floor(Math.random() * 16777215).toString(16)}`,
+      strokeWidth: 0,
+      stroke: 'black',
       fontSize: 32,
       fontFamily: 'Arial',
       text: 'Sample Text',
-      align: 'center',
+      align: 'left',
       scaleX: 1,
       scaleY: 1,
+      width:200,
       x: -75,
       y: -50
     };

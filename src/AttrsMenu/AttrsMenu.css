@@ -1,0 +1,24 @@
+#attrs-menu {
+    height: 50px;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 10;
+}
+
+#attrs-menu label {
+    font-size: 1rem;
+    text-transform: none;
+}
+
+#attrs-menu .form-outline {
+    width: 80px;
+}
+
+.text-bubble {
+    position: absolute;
+    left: 50px;
+    top: 50%;
+    z-index: 15;
+}

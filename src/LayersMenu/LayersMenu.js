@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux';
 import { getStageElements } from '../shared/store/stage.reducer';
 
 const LayersMenu = () => {
-  const [selectedTool, setSelectedTool] = useState('rectangle');
   const [elements, setElements] = useState([]);
   const storeElements = useSelector(getStageElements);
 

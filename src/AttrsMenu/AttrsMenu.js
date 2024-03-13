@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import './TopMenu.css';
+import './AttrsMenu.css';
 import { MDBBtn, MDBIcon, MDBInput } from "mdb-react-ui-kit";
 
-const TopMenu = ({ node, id }) => {
+const AttrsMenu = ({ node, id }) => {
 	const [element, setElement] = useState(null);
 	const [strokeWidth, setStrokeWidth] = useState(0);
 	const [cornerRadius, setCornerRadius] = useState(0);
@@ -25,7 +25,7 @@ const TopMenu = ({ node, id }) => {
 	};
 
 	return (
-		<div id="top-menu" className="bg-dark px-3 d-flex align-items-center">
+		<div id="attrs-menu" className="bg-dark px-3 d-flex align-items-center">
 			{id && (
 				<div className="d-flex">
 					<MDBBtn className="text-white d-flex align-items-center bg-transparent shadow-0 px-3">
@@ -68,4 +68,4 @@ const TopMenu = ({ node, id }) => {
 	);
 };
 
-export default TopMenu;
+export default AttrsMenu;
