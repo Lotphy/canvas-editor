@@ -1,5 +1,5 @@
 import React  from 'react';
-import { MDBBtn, MDBIcon, } from 'mdb-react-ui-kit';
+import { MDBBtn } from 'mdb-react-ui-kit';
 import './TextMenu.css';
 
 const TextMenu = () => {

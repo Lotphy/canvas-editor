@@ -6,6 +6,7 @@ import './main.css';
 import SideMenu from '../SideMenu/SideMenu';
 import { useDispatch, useSelector } from 'react-redux';
 import { getStageElements, setStageElements } from '../shared/store/stage.reducer';
+import TopMenu from '../TopMenu/TopMenu';
 
 const Main = () => {
   const stageRef = useRef(null);
@@ -123,69 +124,72 @@ const Main = () => {
   };
 
   return (
-    <div style={{ display: 'flex', height: '100vh' }}>
+    <div className="d-flex vh-100 flex-column">
 
-      <SideMenu/>
+      <div className="d-flex w-100 h-100">
+        <SideMenu/>
 
-      <MDBContainer fluid style={{ flex: '1', overflow: 'hidden', position: 'relative' }}
-                    className="canvas-wrapper p-0">
-        <Stage
-          className="h-100 w-100 d-flex"
-          width={canvasSize.width}
-          height={canvasSize.height}
-          ref={stageRef}
-          onMouseDown={checkDeselect}
-          onTouchStart={checkDeselect}
-        >
-          <Layer>
-            {/* Gray background */}
-            <Rect name="stage" width={canvasSize.width} height={canvasSize.height} fill="#ccc"/>
+        <MDBContainer fluid style={{ flex: '1', overflow: 'hidden', position: 'relative' }}
+                      className="canvas-wrapper p-0">
+          <TopMenu element={stageRef?.current?.findOne(`#${selectedElement}`)}/>
 
-            {/* Brighter square shape representing the drawable zone */}
-            <Rect
-              name="stage"
-              x={(canvasSize.width - 400) / 2} // Adjust the square position as needed
-              y={(canvasSize.height - 400) / 2} // Adjust the square position as needed
-              width={400} // Adjust the square size as needed
-              height={400} // Adjust the square size as needed
-              fill="#fff" // Adjust the square color as needed
-              stroke="#999" // Adjust the stroke color as needed
-              strokeWidth={2} // Adjust the stroke width as needed
-            />
+          <Stage
+            className="h-100 w-100 d-flex"
+            width={canvasSize.width}
+            height={canvasSize.height}
+            ref={stageRef}
+            onMouseDown={checkDeselect}
+            onTouchStart={checkDeselect}
+          >
+            <Layer>
+              {/* Gray background */}
+              <Rect name="stage" width={canvasSize.width} height={canvasSize.height} fill="#ccc"/>
 
-            {/* Render Elements */}
-            <Group
-              ref={layerRef}
-              clipFunc={(ctx) => ctx.rect((canvasSize.width - 400) / 2, (canvasSize.height - 400) / 2, 400, 400)}
-            >
-              {elements.map((element, i) => {
-                return (
-                  <React.Fragment key={i}>
-                    <Element
-                      id={element.id}
-                      shapeProps={{
-                        ...element,
-                        x: element.x + canvasSize.width / 2,
-                        y: element.y + canvasSize.height / 2
-                      }}
-                      isSelected={element.id === selectedElement}
-                      canvasSize={canvasSize}
-                      onSelect={() => {
-                        setSelectedElement(element.id);
-                      }}
-                      onChange={(newAttrs) => {
-                        const elems = elements.slice();
-                        elems[i] = newAttrs;
-                        setElements(elems);
-                      }}
-                    />
-                  </React.Fragment>
-                );
-              })}
-            </Group>
+              {/* Brighter square shape representing the drawable zone */}
+              <Rect
+                name="stage"
+                x={(canvasSize.width - 400) / 2} // Adjust the square position as needed
+                y={(canvasSize.height - 400) / 2} // Adjust the square position as needed
+                width={400} // Adjust the square size as needed
+                height={400} // Adjust the square size as needed
+                fill="#fff" // Adjust the square color as needed
+                stroke="#999" // Adjust the stroke color as needed
+                strokeWidth={2} // Adjust the stroke width as needed
+              />
 
-            {/* Transformer for the selected element */}
-            {selectedElement && (
+              {/* Render Elements */}
+              <Group
+                ref={layerRef}
+                clipFunc={(ctx) => ctx.rect((canvasSize.width - 400) / 2, (canvasSize.height - 400) / 2, 400, 400)}
+              >
+                {elements.map((element, i) => {
+                  return (
+                    <React.Fragment key={i}>
+                      <Element
+                        id={element.id}
+                        shapeProps={{
+                          ...element,
+                          x: element.x + canvasSize.width / 2,
+                          y: element.y + canvasSize.height / 2
+                        }}
+                        isSelected={element.id === selectedElement}
+                        canvasSize={canvasSize}
+                        onSelect={() => {
+                          setSelectedElement(element.id);
+                        }}
+                        onChange={(newAttrs) => {
+                          const elems = elements.slice();
+                          elems[i] = newAttrs;
+                          setElements(elems);
+                        }}
+                      />
+                    </React.Fragment>
+                  );
+                })}
+              </Group>
+
+              {/* Transformer for the selected element */}
+              {selectedElement && (
                 <Transformer
                   ref={transformerRef}
                   nodes={stageRef.current.findOne(`#${selectedElement}`) && [stageRef.current.findOne(`#${selectedElement}`)]} // Assuming elements have unique IDs
@@ -203,14 +207,15 @@ const Main = () => {
                 >
 
                 </Transformer>
-            )}
-          </Layer>
+              )}
+            </Layer>
 
-        </Stage>
-        {displayTooltip && (
-          <Tooltip x={tooltipPosition.x} y={tooltipPosition.y}/>
-        )}
-      </MDBContainer>
+          </Stage>
+          {displayTooltip && (
+            <Tooltip x={tooltipPosition.x} y={tooltipPosition.y}/>
+          )}
+        </MDBContainer>
+      </div>
     </div>
   );
 };
