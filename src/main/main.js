@@ -131,7 +131,7 @@ const Main = () => {
 
         <MDBContainer fluid style={{ flex: '1', overflow: 'hidden', position: 'relative' }}
                       className="canvas-wrapper p-0">
-          <TopMenu element={stageRef?.current?.findOne(`#${selectedElement}`)}/>
+          <TopMenu node={layerRef} id={selectedElement}/>
 
           <Stage
             className="h-100 w-100 d-flex"
