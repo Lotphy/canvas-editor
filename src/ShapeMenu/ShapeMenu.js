@@ -14,6 +14,8 @@ const ShapeMenu = () => {
           id,
           type: 'rectangle',
           fill: `#${Math.floor(Math.random() * 16777215).toString(16)}`,
+          scaleX: 1,
+          scaleY: 1,
           x: 50,
           y: 50,
           width: 100,
@@ -27,7 +29,10 @@ const ShapeMenu = () => {
           fill: `#${Math.floor(Math.random() * 16777215).toString(16)}`,
           x: 50,
           y: 50,
-          radius: 50,
+          radius: {
+            x: 50,
+            y: 50
+          },
         };
         break;
       default:

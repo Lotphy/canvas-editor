@@ -5,8 +5,8 @@ import LayersMenu from '../LayersMenu/LayersMenu';
 import Element from '../element/element';
 import './main.css';
 import SideMenu from '../SideMenu/SideMenu';
-import { useDispatch } from 'react-redux';
-import { setStageElements } from '../shared/store/stage.reducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { getStageElements, setStageElements } from '../shared/store/stage.reducer';
 
 const Main = () => {
   const stageRef = useRef(null);
@@ -16,6 +16,7 @@ const Main = () => {
   const transformerRef = useRef(null);
   const layerRef = useRef(null);
   const dispatch = useDispatch();
+  const storeElements = useSelector(getStageElements);
 
   useEffect(() => {
     initEventsListeners();
@@ -62,7 +63,7 @@ const Main = () => {
 
   const deleteElementById = (event) => {
     const id = event.detail.id;
-    setElements(elements => elements.filter((elem) => elem.id !== id));
+    setElements(storeElements => storeElements.filter((elem) => elem.id !== id));
     setSelectedElement(null);
   };
 

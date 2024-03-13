@@ -14,6 +14,8 @@ const TextMenu = () => {
       fontFamily: 'Arial',
       text: 'Sample Text',
       align: 'center',
+      scaleX: 1,
+      scaleY: 1,
       x: -75,
       y: -50
     };
