@@ -5,7 +5,7 @@ import Element from '../element/element';
 import './main.css';
 import SideMenu from '../SideMenu/SideMenu';
 import { useDispatch, useSelector } from 'react-redux';
-import { getStageElements, setStageElements } from '../shared/store/stage.reducer';
+import { getDrawableZone, getStageElements, setDrawableZone, setStageElements } from '../shared/store/stage.reducer';
 import AttrsMenu from '../AttrsMenu/AttrsMenu';
 
 const Main = () => {
@@ -17,6 +17,12 @@ const Main = () => {
   const layerRef = useRef(null);
   const dispatch = useDispatch();
   const storeElements = useSelector(getStageElements);
+  const drawableZone = useSelector(getDrawableZone);
+
+  const drawableZoneSize = {
+    width: 400,
+    height: 400
+  }
 
   useEffect(() => {
     initEventsListeners();
@@ -25,7 +31,7 @@ const Main = () => {
     }
     // Update canvas size on window resize
     const updateCanvasSize = () => {
-
+      syncElementsWithCanvas();
       const canvasWrapper = document.querySelector('.canvas-wrapper');
       if (canvasWrapper) {
         const width = canvasWrapper.offsetWidth;
@@ -34,10 +40,17 @@ const Main = () => {
           width,
           height,
         });
+        dispatch(setDrawableZone({
+          drawableZone: {
+            x: (width - drawableZoneSize.width) / 2,
+            y: (height - drawableZoneSize.height) / 2,
+            width: drawableZoneSize.width,
+            height: drawableZoneSize.height
+          }
+        }))
       }
     };
 
-    updateCanvasSize();
     window.addEventListener('resize', updateCanvasSize);
     return () => {
       removeEventsListeners();
@@ -54,6 +67,11 @@ const Main = () => {
       elements
     }))
   }, [elements])
+
+  const syncElementsWithCanvas = () => {
+    const elms = layerRef?.current.getChildren().map(e => e.attrs);
+    setElements(JSON.parse(JSON.stringify(elms)));
+  }
 
   const checkDeselect = (e) => {
     // deselect when clicked on empty area
@@ -82,7 +100,7 @@ const Main = () => {
   const initEventsListeners = () => {
     document.addEventListener('addElement', handleAddElement);
     document.addEventListener('getElementById', getElementById);
-    document.addEventListener('deleteElementById', deleteElementById);
+    document.addEventListener('deleteElementById', deleteElementById.bind(canvasSize));
   }
 
   const removeEventsListeners = () => {
@@ -99,7 +117,7 @@ const Main = () => {
 
         <MDBContainer fluid style={{ flex: '1', overflow: 'hidden', position: 'relative' }}
                       className="canvas-wrapper p-0">
-          <AttrsMenu node={layerRef} id={selectedElementId} />
+          <AttrsMenu el={elements.filter(e => e.id === selectedElementId)[0]} node={layerRef} id={selectedElementId} />
 
           <Stage
             className="h-100 w-100 d-flex"
@@ -116,10 +134,10 @@ const Main = () => {
               {/* Brighter square shape representing the drawable zone */}
               <Rect
                 name="stage"
-                x={(canvasSize.width - 400) / 2} // Adjust the square position as needed
-                y={(canvasSize.height - 400) / 2} // Adjust the square position as needed
-                width={400} // Adjust the square size as needed
-                height={400} // Adjust the square size as needed
+                x={drawableZone?.x} // Adjust the square position as needed
+                y={drawableZone?.y} // Adjust the square position as needed
+                width={drawableZone?.width} // Adjust the square size as needed
+                height={drawableZone?.height} // Adjust the square size as needed
                 fill="#fff" // Adjust the square color as needed
                 stroke="#999" // Adjust the stroke color as needed
                 strokeWidth={2} // Adjust the stroke width as needed
@@ -128,7 +146,7 @@ const Main = () => {
               {/* Render Elements */}
               <Group
                 ref={layerRef}
-                clipFunc={(ctx) => ctx.rect((canvasSize.width - 400) / 2, (canvasSize.height - 400) / 2, 400, 400)}
+                clipFunc={(ctx) => ctx.rect(drawableZone?.x, drawableZone?.y, drawableZone?.width, drawableZone?.height)}
               >
                 {elements.map((element, i) => {
                   return (
@@ -137,8 +155,8 @@ const Main = () => {
                         id={element.id}
                         shapeProps={{
                           ...element,
-                          x: element.x + canvasSize.width / 2,
-                          y: element.y + canvasSize.height / 2
+                          x: element.relativeX + drawableZone?.x,
+                          y: element.relativeY + drawableZone?.y
                         }}
                         isSelected={element.id === selectedElementId}
                         canvasSize={canvasSize}

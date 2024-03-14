@@ -19,8 +19,8 @@ const TextMenu = () => {
       scaleX: 1,
       scaleY: 1,
       width:200,
-      x: -75,
-      y: -50
+      relativeX: 75,
+      relativeY: 50
     };
     document.dispatchEvent(new CustomEvent('addElement', {detail: {elem: newElement}}));
   };

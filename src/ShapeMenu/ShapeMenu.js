@@ -1,8 +1,11 @@
 import React  from 'react';
-import { MDBBtn, MDBCol, MDBIcon, MDBRow, } from 'mdb-react-ui-kit';
+import { MDBCol, MDBIcon, MDBRow, } from 'mdb-react-ui-kit';
 import './ShapeMenu.css';
+import { useSelector } from 'react-redux';
+import { getDrawableZone } from '../shared/store/stage.reducer';
 
 const ShapeMenu = () => {
+  const drawableZone = useSelector(getDrawableZone);
 
   const handleAddElement = (shape) => {
     const id = crypto.randomUUID();
@@ -20,8 +23,8 @@ const ShapeMenu = () => {
           opacity: 1,
           scaleX: 1,
           scaleY: 1,
-          x: 50,
-          y: 50,
+          relativeX: 150,
+          relativeY: 150,
           width: 100,
           height: 100
         };
@@ -31,8 +34,8 @@ const ShapeMenu = () => {
           id,
           type: 'circle',
           fill: `#${Math.floor(Math.random() * 16777215).toString(16)}`,
-          x: 50,
-          y: 50,
+          relativeX: 150,
+          relativeY: 150,
           radius: {
             x: 50,
             y: 50
