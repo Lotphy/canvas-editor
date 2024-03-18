@@ -180,6 +180,18 @@ const Main = () => {
               {selectedElementId && (
                 <Transformer
                   ref={transformerRef}
+                  rotationSnaps={[0, 45, 90, 180]}
+                  rotateAnchorCursor="all-scroll"
+                  anchorStyleFunc={(anchor) => {
+                    if (anchor.name() === 'rotater _anchor') {
+                      // make rotater anchor filled black and looks like a circle
+                      anchor.fill("#ffffe5");
+                      anchor.cornerRadius(anchor.width() / 2);
+                    } else {
+                      anchor.cornerRadius(2);
+                      anchor.stroke("red");
+                    }
+                  }}
                   nodes={stageRef.current.findOne(`#${selectedElementId}`) && [stageRef.current.findOne(`#${selectedElementId}`)]} // Assuming elements have unique IDs
                   boundBoxFunc={(oldBox, newBox) => {
                     // limit resize
