@@ -3,24 +3,23 @@ import { Ellipse, Rect, Text } from 'react-konva';
 import { useSelector } from 'react-redux';
 import { getDrawableZone } from '../shared/store/stage.reducer';
 
-const Element = ({ shapeProps, onSelect, onChange, stage }) => {
+const Element = ({ shapeProps, onSelect, onChange, stage, transformer }) => {
   const shapeRef = React.useRef();
   const drawableZone = useSelector(getDrawableZone);
 
   const handleTextDbClick = (e) => {
-    // TODO instead of shapeProps, use textNode.attrs as a state
     const textNode = shapeRef?.current;
+    const tr = transformer?.current;
+
+    let lastLineMargin = 0;
+
     // hide text node and transformer:
     textNode.hide();
-    shapeProps = {...shapeProps, visible: false};
+    tr.hide();
 
-    const textPosition = textNode.absolutePosition();
-
-    // so position of textarea will be the sum of positions above:
-    const areaPosition = {
-      x: stage.container().offsetLeft + textPosition.x,
-      y: stage.container().offsetTop + textPosition.y,
-    };
+    // create textarea over canvas with absolute position
+    // first we need to find position for textarea
+    // how to find it?
 
     // create textarea and style it
     let textarea = document.getElementById('text-editor');
@@ -30,15 +29,17 @@ const Element = ({ shapeProps, onSelect, onChange, stage }) => {
       const canvas = document.getElementsByClassName('konvajs-content')[0];
       canvas.appendChild(textarea);
     }
+
+    setTextAreaPosition();
+
     // apply many styles to match text on canvas as close as possible
     // remember that text rendering on canvas and on the textarea can be different
     // and sometimes it is hard to make it 100% the same. But we will try...
     textarea.value = textNode.text();
     textarea.style.position = 'absolute';
-    textarea.style.top = areaPosition.y + 'px';
-    textarea.style.left = areaPosition.x + 'px';
     textarea.style.width = textNode.width() - textNode.padding() * 2 + 'px';
-    textarea.style.height = textNode.height() - textNode.padding() * 2 + 5 + 'px';
+    textarea.style.height =
+      textNode.height() - textNode.padding() * 2 + 5 + 'px';
     textarea.style.fontSize = textNode.fontSize() + 'px';
     textarea.style.border = 'none';
     textarea.style.padding = '0px';
@@ -52,7 +53,6 @@ const Element = ({ shapeProps, onSelect, onChange, stage }) => {
     textarea.style.transformOrigin = 'left top';
     textarea.style.textAlign = textNode.align();
     textarea.style.color = textNode.fill();
-    textarea.style.zIndex = '20';
     const rotation = textNode.rotation();
     let transform = '';
     if (rotation) {
@@ -69,24 +69,29 @@ const Element = ({ shapeProps, onSelect, onChange, stage }) => {
     }
     transform += 'translateY(-' + px + 'px)';
 
-    // textarea.style.transform = transform;
+    textarea.style.transform = transform;
 
     // reset height
     // textarea.style.height = 'auto';
     // after browsers resized it we can set actual value
-    // textarea.style.height = textarea.scrollHeight + 3 + 'px';
+    textarea.style.height = textarea.scrollHeight + 3 + 'px';
 
     textarea.focus();
 
     function removeTextarea() {
-      textNode.show();
-      textarea?.parentNode?.removeChild(textarea);
       onChange({
-        ...textNode.attrs,
         ...shapeProps,
-        visible: true
+        ...textNode.attrs,
+        visible: true,
+        width: +textarea.style.width.replace('px', ''),
+        height: +textarea.style.height.replace('px', '') - lastLineMargin,
       });
+      textarea.parentNode.removeChild(textarea);
       window.removeEventListener('click', handleOutsideClick);
+      window.removeEventListener('resize', setTextAreaPosition);
+      textNode.show();
+      tr.show();
+      lastLineMargin = 0;
     }
 
     function setTextareaWidth(newWidth) {
@@ -112,75 +117,60 @@ const Element = ({ shapeProps, onSelect, onChange, stage }) => {
       textarea.style.width = newWidth + 'px';
     }
 
-    // textarea.addEventListener('keyup', function (e) {
-    //   const scale = textNode.getAbsoluteScale().x;
-    //   setTextareaWidth(textNode.width() * scale);
-    //   textarea.style.height = textarea.scrollHeight + 'px';
-    // });
-
     textarea.addEventListener('keyup', function (e) {
-      const value = textarea.value;
-      const scale = textNode.getAbsoluteScale().x;
-      setTextareaWidth(textNode.width() * scale);
-      textarea.style.height = textarea.scrollHeight + 'px';
+      lastLineMargin = textNode.fontSize();
+    });
 
-      const height = textarea.scrollHeight;
-
+    textarea.addEventListener('keydown', function (e) {
       // hide on enter
       // but don't hide on shift + enter
       if (e.keyCode === 13 && !e.shiftKey) {
+        textNode.text(textarea.value);
         removeTextarea();
-        return;
       }
-
       // on esc do not set value back to node
       if (e.keyCode === 27) {
         removeTextarea();
-        return;
       }
+    });
 
-      onChange({
-        ...shapeProps,
-        text: value.trim(),
-        height
-      });
-
+    textarea.addEventListener('keydown', function (e) {
+      const scale = textNode.getAbsoluteScale().x;
+      setTextareaWidth(textNode.width() * scale);
+      textarea.style.height = 'auto';
+      textarea.style.height =
+        textarea.scrollHeight + lastLineMargin + 'px';
     });
 
     function handleOutsideClick(e) {
       if (e.target !== textarea) {
-        const node = shapeRef.current;
-        onChange({
-          ...shapeProps,
-          text: textarea.value,
-          height: textarea.scrollHeight,
-          x: node.x(),
-          y: node.y(),
-        })
-        textNode.show();
+        textNode.text(textarea.value);
+        textarea.style.height = 'auto';
+        textarea.style.height =
+          textarea.scrollHeight + textNode.fontSize() + 'px';
         removeTextarea();
       }
     }
     setTimeout(() => {
       window.addEventListener('click', handleOutsideClick);
+      window.addEventListener('resize', setTextAreaPosition);
     });
   }
 
   // TODO Reposition on window resize
   const setTextAreaPosition = () => {
     let textarea = document.getElementById('text-editor');
-    const textNode = shapeRef?.current;
-
-    const textPosition = textNode.absolutePosition();
-
-    // so position of textarea will be the sum of positions above:
-    const areaPosition = {
-      x: stage.container().offsetLeft + textPosition.x,
-      y: stage.container().offsetTop + textPosition.y,
-    };
-    textarea.style.top = areaPosition.y + 'px';
-    textarea.style.left = areaPosition.x + 'px';
-
+    if (textarea) {
+      const textNode = shapeRef?.current;
+      const textPosition = textNode.absolutePosition();
+      // so position of textarea will be the sum of positions above:
+      const areaPosition = {
+        x: stage.container().offsetLeft + textPosition.x,
+        y: stage.container().offsetTop + textPosition.y,
+      };
+      textarea.style.top = areaPosition.y + 'px';
+      textarea.style.left = areaPosition.x + 'px';
+    }
   }
 
   return (
@@ -188,7 +178,7 @@ const Element = ({ shapeProps, onSelect, onChange, stage }) => {
       {
         shapeProps.type === 'text' &&
         <Text
-          onDblClick={handleTextDbClick}
+          onDblClick={() => handleTextDbClick()}
           onClick={onSelect}
           onTap={onSelect}
           ref={shapeRef}
@@ -212,6 +202,7 @@ const Element = ({ shapeProps, onSelect, onChange, stage }) => {
 
             node.scaleX(1);
             node.scaleY(1);
+            console.log('TRANS')
             onChange({
               ...shapeProps,
               width: node.width() * scaleX,
@@ -219,6 +210,7 @@ const Element = ({ shapeProps, onSelect, onChange, stage }) => {
             });
           }}
           onTransformEnd={(e) => {
+            console.log('END')
             const node = shapeRef.current;
             const scaleX = node.scaleX();
             const scaleY = node.scaleY();
@@ -243,7 +235,6 @@ const Element = ({ shapeProps, onSelect, onChange, stage }) => {
           ref={shapeRef}
           {...shapeProps}
           draggable
-          onLostPointerCapture={() => console.log('lost')}
           onDragStart={(e) => {
             onSelect();
           }}

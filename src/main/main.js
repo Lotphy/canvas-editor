@@ -161,7 +161,7 @@ const Main = () => {
                         isSelected={element.id === selectedElementId}
                         canvasSize={canvasSize}
                         stage={stageRef.current.getStage()}
-                        trasnformer={transformerRef.current}
+                        transformer={transformerRef}
                         onSelect={() => {
                           setSelectedElementId(element.id);
                         }}
