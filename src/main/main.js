@@ -31,7 +31,6 @@ const Main = () => {
     }
     // Update canvas size on window resize
     const updateCanvasSize = () => {
-      syncElementsWithCanvas();
       const canvasWrapper = document.querySelector('.canvas-wrapper');
       if (canvasWrapper) {
         const width = canvasWrapper.offsetWidth;
@@ -59,6 +58,7 @@ const Main = () => {
   }, []);
 
   useEffect(() => {
+    syncElementsWithCanvas();
     window.dispatchEvent(new Event('resize'));
   }, [selectedElementId])
 
