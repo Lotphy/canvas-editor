@@ -185,11 +185,11 @@ const Main = () => {
                   anchorStyleFunc={(anchor) => {
                     if (anchor.name() === 'rotater _anchor') {
                       // make rotater anchor filled black and looks like a circle
-                      anchor.fill("#ffffe5");
+                      anchor.fill("#e8ffe5");
                       anchor.cornerRadius(anchor.width() / 2);
                     } else {
                       anchor.cornerRadius(2);
-                      anchor.stroke("red");
+                      anchor.stroke("#7a00ec");
                     }
                   }}
                   nodes={stageRef.current.findOne(`#${selectedElementId}`) && [stageRef.current.findOne(`#${selectedElementId}`)]} // Assuming elements have unique IDs
