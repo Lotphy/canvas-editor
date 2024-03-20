@@ -180,7 +180,7 @@ const Main = () => {
               {selectedElementId && (
                 <Transformer
                   ref={transformerRef}
-                  rotationSnaps={[0, 45, 90, 180]}
+                  rotationSnaps={[-45, -90, -180, -225, -270, -315, 0, 45, 90, 180, 225, 270, 315]}
                   rotateAnchorCursor="all-scroll"
                   anchorStyleFunc={(anchor) => {
                     if (anchor.name() === 'rotater _anchor') {

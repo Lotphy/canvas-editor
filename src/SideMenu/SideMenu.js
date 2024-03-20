@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import './SideMenu.css';
 import LayersMenu from '../LayersMenu/LayersMenu';
-import { MDBBtn, MDBCol, MDBIcon, MDBRow } from 'mdb-react-ui-kit';
+import { MDBBtn, MDBCol, MDBContainer, MDBIcon, MDBRow } from 'mdb-react-ui-kit';
 import ShapeMenu from '../ShapeMenu/ShapeMenu';
 import TextMenu from '../TextMenu/TextMenu';
+import ImageMenu from '../ImageMenu/ImageMenu';
 
 const SideMenu = () => {
-  const [toggledDrawer, setToggledDrawer] = useState('');
+  const [toggledDrawer, setToggledDrawer] = useState('image');
 
   useEffect(() => {
     window.dispatchEvent(new Event('resize'));
@@ -37,7 +38,7 @@ const SideMenu = () => {
         </MDBBtn>
       </div>
       {toggledDrawer !== '' &&
-        <div id="options-drawer" className="d-flex flex-column">
+        <MDBContainer id="options-drawer" className="d-flex flex-column">
           {toggledDrawer === 'layer' &&
             <LayersMenu />
           }
@@ -48,9 +49,9 @@ const SideMenu = () => {
             <ShapeMenu />
           }
           {toggledDrawer === 'image' &&
-            <div>IMG</div>
+            <ImageMenu />
           }
-        </div>
+        </MDBContainer>
       }
     </div>
   );

@@ -11,10 +11,15 @@
 }
 
 #options-drawer {
-  width: 300px;
+  width: 350px;
   box-shadow: 0 0 8px -4px #171717;
   position: relative;
   z-index: 5;
+  padding: 16px 8px;
+}
+
+#options-drawer .col {
+  padding: 0 8px;
 }
 
 #options-selector {

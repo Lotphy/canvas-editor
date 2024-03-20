@@ -6,6 +6,7 @@
   font-size: 32px;
   box-shadow: none;
   margin-bottom: 8px;
+  padding: 16px;
 }
 
 #options-drawer .element-btn:hover {

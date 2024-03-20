@@ -1,7 +1,8 @@
 import React from 'react';
-import { Ellipse, Rect, Text } from 'react-konva';
+import { Ellipse, Image, Rect, Text } from 'react-konva';
 import { useSelector } from 'react-redux';
 import { getDrawableZone } from '../shared/store/stage.reducer';
+import { useState, useEffect, useRef } from 'react';
 
 const Element = ({ shapeProps, onSelect, onChange, stage, transformer }) => {
   const shapeRef = React.useRef();
@@ -151,6 +152,7 @@ const Element = ({ shapeProps, onSelect, onChange, stage, transformer }) => {
         removeTextarea();
       }
     }
+
     setTimeout(() => {
       window.addEventListener('click', handleOutsideClick);
       window.addEventListener('resize', setTextAreaPosition);
@@ -171,6 +173,40 @@ const Element = ({ shapeProps, onSelect, onChange, stage, transformer }) => {
       textarea.style.top = areaPosition.y + 'px';
       textarea.style.left = areaPosition.x + 'px';
     }
+  }
+
+  const renderImage = () => {
+    const img = new window.Image();
+    img.src = shapeProps.src;
+    return (
+      <Image
+        onClick={onSelect}
+        onTap={onSelect}
+        ref={shapeRef}
+        {...shapeProps}
+        image={img}
+        draggable
+        onDragStart={(e) => {
+          onSelect();
+        }}
+        onDragEnd={e => {
+          onChange({
+            ...e.target.attrs,
+            ...shapeProps,
+            relativeX: e.target.attrs.x - drawableZone?.x,
+            relativeY: e.target.attrs.y - drawableZone?.y,
+          });
+        }}
+        onTransformEnd={(e) => {
+          onChange({
+            ...e.target.attrs,
+            ...shapeProps,
+            relativeX: e.target.attrs.x - drawableZone?.x,
+            relativeY: e.target.attrs.y - drawableZone?.y,
+          });
+        }}
+      />
+    )
   }
 
   return (
@@ -202,7 +238,6 @@ const Element = ({ shapeProps, onSelect, onChange, stage, transformer }) => {
 
             node.scaleX(1);
             node.scaleY(1);
-            console.log('TRANS')
             onChange({
               ...shapeProps,
               width: node.width() * scaleX,
@@ -210,7 +245,6 @@ const Element = ({ shapeProps, onSelect, onChange, stage, transformer }) => {
             });
           }}
           onTransformEnd={(e) => {
-            console.log('END')
             const node = shapeRef.current;
             const scaleX = node.scaleX();
             const scaleY = node.scaleY();
@@ -317,8 +351,12 @@ const Element = ({ shapeProps, onSelect, onChange, stage, transformer }) => {
           }}
         />
       }
+      {
+        shapeProps.type === 'image' && renderImage()
+      }
     </>
   );
 };
 
 export default Element;
+
