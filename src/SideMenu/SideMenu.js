@@ -19,38 +19,40 @@ const SideMenu = () => {
         <MDBBtn className={`p-3 ${toggledDrawer === 'layer' ? 'btn-active' : ''}`}
                 onClick={() => setToggledDrawer('layer')}
         >
-          <MDBIcon className="fs-2" fas icon="layer-group" />
+          <MDBIcon className="fs-2" fas icon="layer-group"/>
         </MDBBtn>
         <MDBBtn className={`p-3 ${toggledDrawer === 'text' ? 'btn-active' : ''}`}
                 onClick={() => setToggledDrawer('text')}
         >
-          <MDBIcon className="fs-2" fas icon="font" />
+          <MDBIcon className="fs-2" fas icon="font"/>
         </MDBBtn>
         <MDBBtn className={`p-3 ${toggledDrawer === 'shape' ? 'btn-active' : ''}`}
                 onClick={() => setToggledDrawer('shape')}
         >
-          <MDBIcon className="fs-2" fas icon="shapes" />
+          <MDBIcon className="fs-2" fas icon="shapes"/>
         </MDBBtn>
         <MDBBtn className={`p-3 ${toggledDrawer === 'image' ? 'btn-active' : ''}`}
                 onClick={() => setToggledDrawer('image')}
         >
-          <MDBIcon className="fs-2" fas icon="image" />
+          <MDBIcon className="fs-2" fas icon="image"/>
         </MDBBtn>
       </div>
       {toggledDrawer !== '' &&
         <MDBContainer id="options-drawer" className="d-flex flex-column">
-          {toggledDrawer === 'layer' &&
-            <LayersMenu />
-          }
-          {toggledDrawer === 'text' &&
-            <TextMenu />
-          }
-          {toggledDrawer === 'shape' &&
-            <ShapeMenu />
-          }
-          {toggledDrawer === 'image' &&
-            <ImageMenu />
-          }
+          <div className="h-100 overflow-auto">
+            {toggledDrawer === 'layer' &&
+              <LayersMenu/>
+            }
+            {toggledDrawer === 'text' &&
+              <TextMenu/>
+            }
+            {toggledDrawer === 'shape' &&
+              <ShapeMenu/>
+            }
+            {toggledDrawer === 'image' &&
+              <ImageMenu/>
+            }
+          </div>
         </MDBContainer>
       }
     </div>

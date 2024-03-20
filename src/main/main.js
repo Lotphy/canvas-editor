@@ -20,7 +20,7 @@ const Main = () => {
   const drawableZone = useSelector(getDrawableZone);
 
   const drawableZoneSize = {
-    width: 400,
+    width: 600,
     height: 400
   }
 

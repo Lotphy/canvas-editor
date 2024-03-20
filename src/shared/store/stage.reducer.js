@@ -2,7 +2,11 @@ import {createSlice} from '@reduxjs/toolkit';
 
 const stageSlice = createSlice({
   name: 'stage',
-  initialState: {},
+  initialState: {
+    elements: [],
+    drawableZone: {},
+    uploadedImages: []
+  },
   reducers: {
     setStageElements(state, action) {
       state = {
@@ -17,13 +21,24 @@ const stageSlice = createSlice({
         drawableZone: action.payload.drawableZone
       }
       return state;
+    },
+    storeUploadedImage(state, action) {
+      state= {
+        ...state,
+        uploadedImages: [...state.uploadedImages, {
+          id: action.payload.id,
+          data: action.payload.data
+        }]
+      }
+      return state;
     }
   }
 })
 
-export const { setStageElements, setDrawableZone } = stageSlice.actions;
+export const { setStageElements, setDrawableZone, storeUploadedImage } = stageSlice.actions;
 
 export const getStageElements = ((state) => state.stage.elements);
 export const getDrawableZone = ((state) => state.stage.drawableZone);
+export const getUploadedImages = ((state) => state.stage.uploadedImages);
 
 export default stageSlice.reducer;
