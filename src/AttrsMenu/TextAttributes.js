@@ -49,22 +49,16 @@ const TextAttributes = ({ element, updateAttribute }) => {
         <label className="me-2">Color:</label>
         <MDBIcon fas icon="square" size="lg" className="d-inline-block" style={{color: element?.attrs?.fill}}/>
       </MDBBtn>
-      <MDBBtn className="text-white d-flex align-items-center bg-transparent shadow-0 px-3">
-        <label className="me-2">Outline:</label>
-        <MDBIcon fas icon="square" size="lg" className="d-inline-block" style={{color: element?.attrs?.stroke}}/>
-      </MDBBtn>
-      <div className="text-white d-flex align-items-center bg-transparent shadow-0 px-3">
-        <label className="me-2">Outline width:</label>
-        <MDBInput
-          className="text-white"
-          type="number"
-          value={strokeWidth}
-          onChange={(e) => {
-            const value = parseInt(e.target.value);
-            setStrokeWidth(value);
-            updateAttribute('strokeWidth', value);
-          }}
-        />
+      <div className="d-flex p-2 switch-group">
+        <MDBBtn className="shadow-0 active">
+          <MDBIcon fas icon="align-left" size="lg" className="d-inline-block" />
+        </MDBBtn>
+        <MDBBtn className="shadow-0">
+          <MDBIcon fas icon="align-center" size="lg" className="d-inline-block" />
+        </MDBBtn>
+        <MDBBtn className="shadow-0">
+          <MDBIcon fas icon="align-right" size="lg" className="d-inline-block" />
+        </MDBBtn>
       </div>
     </>
   )

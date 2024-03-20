@@ -3,7 +3,7 @@
 }
 
 #drawer {
-  background: #332d2d;
+  background: #171717;
   left: 0;
   top: 0;
   height: 100%;
@@ -25,17 +25,18 @@
 #options-selector {
   position: relative;
   z-index: 15;
-  background: var(--mdb-dark);
+  background: #131217;
 }
 
 #options-selector .btn {
   background: none;
   box-shadow: none;
+  color: #AAA;
 }
 
 #options-selector .btn-active,
 #options-selector .btn:hover {
-  background: var(--mdb-primary);
+  background: #1c1b26;
   color: white;
 }
 
@@ -45,5 +46,4 @@
 
 .element-selector:hover {
   color: white;
-  background: var(--mdb-primary);
 }

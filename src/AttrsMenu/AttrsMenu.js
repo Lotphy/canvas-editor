@@ -17,7 +17,7 @@ const AttrsMenu = ({ node, id }) => {
 
 
 	return (
-		<div id="attrs-menu" className="bg-dark px-3 d-flex align-items-center">
+		<div id="attrs-menu" className="px-3 d-flex align-items-center">
 			{id && (
 				<div className="d-flex">
 					{element?.attrs.type === 'text' && <TextAttributes element={element} updateAttribute={updateAttribute} />}

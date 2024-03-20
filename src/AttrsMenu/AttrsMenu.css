@@ -5,6 +5,7 @@
     left: 0;
     top: 0;
     z-index: 10;
+    background: #131217;
 }
 
 #attrs-menu label {
@@ -21,4 +22,17 @@
     left: 50px;
     top: 50%;
     z-index: 15;
+}
+
+.switch-group .btn {
+    padding: 8px 12px;
+    background: transparent;
+}
+
+.switch-group .btn:focus,
+.switch-group .btn:active,
+.switch-group .btn:hover,
+.switch-group .btn.active {
+    background: #272533;
+    color: white;
 }
