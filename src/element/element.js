@@ -175,6 +175,139 @@ const Element = ({ shapeProps, onSelect, onChange, stage, transformer }) => {
     }
   }
 
+  const renderText = () => {
+    return (
+      <Text
+        onDblClick={() => handleTextDbClick()}
+        onClick={onSelect}
+        onTap={onSelect}
+        ref={shapeRef}
+        {...shapeProps}
+        draggable
+        onDragStart={(e) => {
+          onSelect();
+        }}
+        onDragEnd={e => {
+          const node = shapeRef.current;
+          onChange({
+            ...shapeProps,
+            relativeX: node.x() - drawableZone?.x,
+            relativeY: node.y() - drawableZone?.y,
+          });
+        }}
+        onTransform={(e) => {
+          const node = shapeRef.current;
+          const scaleX = node.scaleX();
+          const scaleY = node.scaleY();
+
+          node.scaleX(1);
+          node.scaleY(1);
+          onChange({
+            ...shapeProps,
+            width: node.width() * scaleX,
+            height: node.height() * scaleY,
+          });
+        }}
+        onTransformEnd={(e) => {
+          const node = shapeRef.current;
+          const scaleX = node.scaleX();
+          const scaleY = node.scaleY();
+
+          node.scaleX(1);
+          node.scaleY(1);
+          onChange({
+            ...shapeProps,
+            width: node.width() * scaleX,
+            height: node.height() * scaleY,
+            relativeX: node.x() - drawableZone?.x,
+            relativeY: node.y() - drawableZone?.y,
+          });
+        }}
+      />
+    )
+  }
+
+  const renderRect = () => {
+    return (
+      <Rect
+        onClick={onSelect}
+        onTap={onSelect}
+        ref={shapeRef}
+        {...shapeProps}
+        draggable
+        onDragStart={(e) => {
+          onSelect();
+        }}
+        onDragEnd={e => {
+          const node = shapeRef.current;
+          onChange({
+            ...shapeProps,
+            relativeX: node.x() - drawableZone?.x,
+            relativeY: node.y() - drawableZone?.y,
+          });
+        }}
+        onTransformEnd={(e) => {
+          const node = shapeRef.current;
+          const scaleX = node.scaleX();
+          const scaleY = node.scaleY();
+
+          // we will reset it back
+          node.scaleX(1);
+          node.scaleY(1);
+
+          onChange({
+            ...shapeProps,
+            // set minimal value
+            width: Math.max(5, node.width() * scaleX),
+            height: Math.max(5, node.height() * scaleY),
+            relativeX: node.x() - drawableZone?.x,
+            relativeY: node.y() - drawableZone?.y,
+          });
+        }}
+      />
+    )
+  }
+
+  const renderEclipse = () => {
+    return (
+      <Ellipse
+        onClick={onSelect}
+        onTap={onSelect}
+        ref={shapeRef}
+        {...shapeProps}
+        draggable
+        onDragStart={(e) => {
+          onSelect();
+        }}
+        onDragEnd={e => {
+          const node = shapeRef.current;
+          onChange({
+            ...shapeProps,
+            relativeX: node.x() - drawableZone?.x,
+            relativeY: node.y() - drawableZone?.y,
+          });
+        }}
+        onTransformEnd={(e) => {
+          const node = shapeRef.current;
+          const scaleX = node.scaleX();
+          const scaleY = node.scaleY();
+
+          // we will reset it back
+          node.scaleX(1);
+          node.scaleY(1);
+
+          onChange({
+            ...shapeProps,
+            radiusX: Math.max(2.5, node.radiusX() * scaleX), // Assuming radiusX for width
+            radiusY: Math.max(2.5, node.radiusY() * scaleY), // Assuming radiusY for height
+            relativeX: node.x() - drawableZone?.x,
+            relativeY: node.y() - drawableZone?.y,
+          });
+        }}
+      />
+    )
+  }
+
   const renderImage = () => {
     const img = new window.Image();
     img.src = shapeProps.src;
@@ -212,144 +345,13 @@ const Element = ({ shapeProps, onSelect, onChange, stage, transformer }) => {
   return (
     <>
       {
-        shapeProps.type === 'text' &&
-        <Text
-          onDblClick={() => handleTextDbClick()}
-          onClick={onSelect}
-          onTap={onSelect}
-          ref={shapeRef}
-          {...shapeProps}
-          draggable
-          onDragStart={(e) => {
-            onSelect();
-          }}
-          onDragEnd={e => {
-            const node = shapeRef.current;
-            onChange({
-              ...shapeProps,
-              relativeX: node.x() - drawableZone?.x,
-              relativeY: node.y() - drawableZone?.y,
-            });
-          }}
-          onTransform={(e) => {
-            const node = shapeRef.current;
-            const scaleX = node.scaleX();
-            const scaleY = node.scaleY();
-
-            node.scaleX(1);
-            node.scaleY(1);
-            onChange({
-              ...shapeProps,
-              width: node.width() * scaleX,
-              height: node.height() * scaleY,
-            });
-          }}
-          onTransformEnd={(e) => {
-            const node = shapeRef.current;
-            const scaleX = node.scaleX();
-            const scaleY = node.scaleY();
-
-            node.scaleX(1);
-            node.scaleY(1);
-            onChange({
-              ...shapeProps,
-              width: node.width() * scaleX,
-              height: node.height() * scaleY,
-              relativeX: node.x() - drawableZone?.x,
-              relativeY: node.y() - drawableZone?.y,
-            });
-          }}
-        />
+        shapeProps.type === 'text' && renderText()
       }
       {
-        shapeProps.type === 'rectangle' &&
-        <Rect
-          onClick={onSelect}
-          onTap={onSelect}
-          ref={shapeRef}
-          {...shapeProps}
-          draggable
-          onDragStart={(e) => {
-            onSelect();
-          }}
-          onDragEnd={e => {
-            const node = shapeRef.current;
-            onChange({
-              ...shapeProps,
-              relativeX: node.x() - drawableZone?.x,
-              relativeY: node.y() - drawableZone?.y,
-            });
-          }}
-          onTransform={(e) => {
-            const node = shapeRef.current;
-            const scaleX = node.scaleX();
-            const scaleY = node.scaleY();
-            // we will reset it back
-            node.scaleX(1);
-            node.scaleY(1);
-            onChange({
-              ...shapeProps,
-              width: Math.max(5, node.width() * scaleX),
-              height: Math.max(5, node.height() * scaleY),
-            });
-          }}
-          onTransformEnd={(e) => {
-            const node = shapeRef.current;
-            const scaleX = node.scaleX();
-            const scaleY = node.scaleY();
-
-            // we will reset it back
-            node.scaleX(1);
-            node.scaleY(1);
-
-            onChange({
-              ...shapeProps,
-              // set minimal value
-              width: Math.max(5, node.width() * scaleX),
-              height: Math.max(5, node.height() * scaleY),
-              relativeX: node.x() - drawableZone?.x,
-              relativeY: node.y() - drawableZone?.y,
-            });
-          }}
-        />
+        shapeProps.type === 'rectangle' && renderRect()
       }
       {
-        shapeProps.type === 'circle' &&
-        <Ellipse
-          onClick={onSelect}
-          onTap={onSelect}
-          ref={shapeRef}
-          {...shapeProps}
-          draggable
-          onDragStart={(e) => {
-            onSelect();
-          }}
-          onDragEnd={e => {
-            const node = shapeRef.current;
-            onChange({
-              ...shapeProps,
-              relativeX: node.x() - drawableZone?.x,
-              relativeY: node.y() - drawableZone?.y,
-            });
-          }}
-          onTransformEnd={(e) => {
-            const node = shapeRef.current;
-            const scaleX = node.scaleX();
-            const scaleY = node.scaleY();
-
-            // we will reset it back
-            node.scaleX(1);
-            node.scaleY(1);
-
-            onChange({
-              ...shapeProps,
-              radiusX: Math.max(2.5, node.radiusX() * scaleX), // Assuming radiusX for width
-              radiusY: Math.max(2.5, node.radiusY() * scaleY), // Assuming radiusY for height
-              relativeX: node.x() - drawableZone?.x,
-              relativeY: node.y() - drawableZone?.y,
-            });
-          }}
-        />
+        shapeProps.type === 'circle' && renderEclipse()
       }
       {
         shapeProps.type === 'image' && renderImage()
