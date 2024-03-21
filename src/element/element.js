@@ -12,11 +12,9 @@ const Element = ({ shapeProps, onSelect, onChange, stage, transformer }) => {
     const textNode = shapeRef?.current;
     const tr = transformer?.current;
 
-    let lastLineMargin = 0;
-
     // hide text node and transformer:
     textNode.hide();
-    tr.hide();
+    tr?.hide();
 
     // create textarea over canvas with absolute position
     // first we need to find position for textarea
@@ -72,9 +70,9 @@ const Element = ({ shapeProps, onSelect, onChange, stage, transformer }) => {
 
     textarea.style.transform = transform;
 
-    // reset height
+    // // reset height
     // textarea.style.height = 'auto';
-    // after browsers resized it we can set actual value
+    // // after browsers resized it we can set actual value
     textarea.style.height = textarea.scrollHeight + 3 + 'px';
 
     textarea.focus();
@@ -85,14 +83,12 @@ const Element = ({ shapeProps, onSelect, onChange, stage, transformer }) => {
         ...textNode.attrs,
         visible: true,
         width: +textarea.style.width.replace('px', ''),
-        height: +textarea.style.height.replace('px', '') - lastLineMargin,
       });
       textarea.parentNode.removeChild(textarea);
       window.removeEventListener('click', handleOutsideClick);
       window.removeEventListener('resize', setTextAreaPosition);
       textNode.show();
-      tr.show();
-      lastLineMargin = 0;
+      tr?.show();
     }
 
     function setTextareaWidth(newWidth) {
@@ -118,14 +114,11 @@ const Element = ({ shapeProps, onSelect, onChange, stage, transformer }) => {
       textarea.style.width = newWidth + 'px';
     }
 
-    textarea.addEventListener('keyup', function (e) {
-      lastLineMargin = textNode.fontSize();
-    });
-
     textarea.addEventListener('keydown', function (e) {
       // hide on enter
       // but don't hide on shift + enter
-      if (e.keyCode === 13 && !e.shiftKey) {
+      if (e.keyCode === 13 && e.shiftKey) {
+        textarea.value = textarea.value.trim();
         textNode.text(textarea.value);
         removeTextarea();
       }
@@ -140,11 +133,12 @@ const Element = ({ shapeProps, onSelect, onChange, stage, transformer }) => {
       setTextareaWidth(textNode.width() * scale);
       textarea.style.height = 'auto';
       textarea.style.height =
-        textarea.scrollHeight + lastLineMargin + 'px';
+        textarea.scrollHeight + textNode.fontSize() + 'px';
     });
 
     function handleOutsideClick(e) {
       if (e.target !== textarea) {
+        textarea.value = textarea.value.trim();
         textNode.text(textarea.value);
         textarea.style.height = 'auto';
         textarea.style.height =
@@ -205,7 +199,6 @@ const Element = ({ shapeProps, onSelect, onChange, stage, transformer }) => {
           onChange({
             ...shapeProps,
             width: node.width() * scaleX,
-            height: node.height() * scaleY,
           });
         }}
         onTransformEnd={(e) => {
@@ -218,7 +211,6 @@ const Element = ({ shapeProps, onSelect, onChange, stage, transformer }) => {
           onChange({
             ...shapeProps,
             width: node.width() * scaleX,
-            height: node.height() * scaleY,
             relativeX: node.x() - drawableZone?.x,
             relativeY: node.y() - drawableZone?.y,
           });
