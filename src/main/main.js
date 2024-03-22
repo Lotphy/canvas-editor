@@ -13,6 +13,7 @@ const Main = () => {
   const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
   const [elements, setElements] = useState([]);
   const [selectedElementId, setSelectedElementId] = useState(null);
+  const [selectedElement, setSelectedElement] = useState(null);
   const transformerRef = useRef(null);
   const layerRef = useRef(null);
   const dispatch = useDispatch();
@@ -78,6 +79,7 @@ const Main = () => {
     const clickedOnEmpty = e.target.attrs?.name === 'stage';
     if (clickedOnEmpty) {
       setSelectedElementId(null);
+      setSelectedElement(null);
     }
   };
 
@@ -90,11 +92,13 @@ const Main = () => {
     const id = event.detail.id;
     setElements(elems => elems.filter((elem) => elem.id !== id));
     setSelectedElementId(null);
+    setSelectedElement(null);
   };
 
   const getElementById = (event) => {
     const id = event.detail.id;
     setSelectedElementId(id);
+    setSelectedElement(elements.filter(e => e.id === id)[0]);
   };
 
   const initEventsListeners = () => {
@@ -164,6 +168,7 @@ const Main = () => {
                         transformer={transformerRef}
                         onSelect={() => {
                           setSelectedElementId(element.id);
+                          setSelectedElement(elements.filter(e => e.id === element.id)[0]);
                         }}
                         onChange={(newAttrs) => {
                           const elems = elements.slice();
@@ -183,7 +188,19 @@ const Main = () => {
                   rotationSnaps={[-45, -90, -180, -225, -270, -315, 0, 45, 90, 180, 225, 270, 315]}
                   rotateAnchorCursor="all-scroll"
                   anchorStyleFunc={(anchor) => {
+                    if (selectedElement.type === 'text') {
+                      if (anchor.name().includes('middle-right') || anchor.name().includes('middle-left')) {
+                        anchor.height(24);
+                        const pos = anchor.position();
+                        const trHeight = stageRef.current.findOne(`#${selectedElementId}`).height();
+                        anchor.x(pos.x);
+                        anchor.y((trHeight - anchor.height()) / 2 + 4);
+                      } else {
+                        anchor.visible(false);
+                      }
+                    }
                     if (anchor.name() === 'rotater _anchor') {
+                      anchor.visible(true);
                       // make rotater anchor filled black and looks like a circle
                       anchor.fill("#e8ffe5");
                       anchor.cornerRadius(anchor.width() / 2);

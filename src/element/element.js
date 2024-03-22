@@ -2,7 +2,6 @@ import React from 'react';
 import { Ellipse, Image, Rect, Text } from 'react-konva';
 import { useSelector } from 'react-redux';
 import { getDrawableZone } from '../shared/store/stage.reducer';
-import { useState, useEffect, useRef } from 'react';
 
 const Element = ({ shapeProps, onSelect, onChange, stage, transformer }) => {
   const shapeRef = React.useRef();
@@ -49,6 +48,8 @@ const Element = ({ shapeProps, onSelect, onChange, stage, transformer }) => {
     textarea.style.resize = 'none';
     textarea.style.lineHeight = textNode.lineHeight();
     textarea.style.fontFamily = textNode.fontFamily();
+    textarea.style.fontWeight = textNode.fontStyle().includes('bold') ? 'bold' : '';
+    textarea.style.fontStyle = textNode.fontStyle().includes('italic') ? 'italic' : '';
     textarea.style.transformOrigin = 'left top';
     textarea.style.textAlign = textNode.align();
     textarea.style.color = textNode.fill();
@@ -164,7 +165,9 @@ const Element = ({ shapeProps, onSelect, onChange, stage, transformer }) => {
         x: stage.container().offsetLeft + textPosition.x,
         y: stage.container().offsetTop + textPosition.y,
       };
-      textarea.style.top = areaPosition.y + 'px';
+      const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+      const margin = isFirefox ? 2 : -3;
+      textarea.style.top = areaPosition.y + margin + 'px';
       textarea.style.left = areaPosition.x + 'px';
     }
   }
