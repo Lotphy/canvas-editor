@@ -79,7 +79,6 @@ const Main = () => {
     const clickedOnEmpty = e.target.attrs?.name === 'stage';
     if (clickedOnEmpty) {
       setSelectedElementId(null);
-      setSelectedElement(null);
     }
   };
 
@@ -92,7 +91,6 @@ const Main = () => {
     const id = event.detail.id;
     setElements(elems => elems.filter((elem) => elem.id !== id));
     setSelectedElementId(null);
-    setSelectedElement(null);
   };
 
   const getElementById = (event) => {
@@ -100,6 +98,14 @@ const Main = () => {
     setSelectedElementId(id);
     setSelectedElement(elements.filter(e => e.id === id)[0]);
   };
+
+  useEffect(() => {
+    if (selectedElementId) {
+      setSelectedElement(elements.filter(e => e.id === selectedElementId)[0]);
+    } else {
+      setSelectedElementId(null);
+    }
+  }, [selectedElementId])
 
   const initEventsListeners = () => {
     document.addEventListener('addElement', handleAddElement);
@@ -168,7 +174,6 @@ const Main = () => {
                         transformer={transformerRef}
                         onSelect={() => {
                           setSelectedElementId(element.id);
-                          setSelectedElement(elements.filter(e => e.id === element.id)[0]);
                         }}
                         onChange={(newAttrs) => {
                           const elems = elements.slice();
@@ -188,7 +193,7 @@ const Main = () => {
                   rotationSnaps={[-45, -90, -180, -225, -270, -315, 0, 45, 90, 180, 225, 270, 315]}
                   rotateAnchorCursor="all-scroll"
                   anchorStyleFunc={(anchor) => {
-                    if (selectedElement.type === 'text') {
+                    if (selectedElement?.type === 'text') {
                       if (anchor.name().includes('middle-right') || anchor.name().includes('middle-left')) {
                         anchor.height(24);
                         const pos = anchor.position();

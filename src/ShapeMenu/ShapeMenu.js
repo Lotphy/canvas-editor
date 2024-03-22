@@ -34,6 +34,8 @@ const ShapeMenu = () => {
           id,
           type: 'circle',
           fill: `#${Math.floor(Math.random() * 16777215).toString(16)}`,
+          stroke: 'black',
+          strokeWidth: 2,
           relativeX: 150,
           relativeY: 150,
           radius: {

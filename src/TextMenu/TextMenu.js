@@ -9,6 +9,7 @@ const TextMenu = () => {
     const newElement = {
       id,
       type: 'text',
+      fillAfterStrokeEnabled: true,
       fill: `#${Math.floor(Math.random() * 16777215).toString(16)}`,
       strokeWidth: 0,
       stroke: 'black',

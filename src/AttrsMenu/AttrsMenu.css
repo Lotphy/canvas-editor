@@ -36,3 +36,15 @@
     background: #272533;
     color: white;
 }
+
+.color-picker-wrapper {
+    position: absolute;
+    top: 110%;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
+
+.btn label {
+    cursor: pointer;
+}

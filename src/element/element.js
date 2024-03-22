@@ -195,7 +195,6 @@ const Element = ({ shapeProps, onSelect, onChange, stage, transformer }) => {
         onTransform={(e) => {
           const node = shapeRef.current;
           const scaleX = node.scaleX();
-          const scaleY = node.scaleY();
 
           node.scaleX(1);
           node.scaleY(1);
@@ -241,6 +240,20 @@ const Element = ({ shapeProps, onSelect, onChange, stage, transformer }) => {
             relativeY: node.y() - drawableZone?.y,
           });
         }}
+        // Maintain the scale of outlines while transforming
+        onTransform={(e) => {
+          const node = shapeRef.current;
+          const scaleX = node.scaleX();
+          const scaleY = node.scaleY();
+          // we will reset it back
+          node.scaleX(1);
+          node.scaleY(1);
+          onChange({
+            ...shapeProps,
+            width: Math.max(5, node.width() * scaleX),
+            height: Math.max(5, node.height() * scaleY),
+          });
+        }}
         onTransformEnd={(e) => {
           const node = shapeRef.current;
           const scaleX = node.scaleX();
@@ -249,7 +262,6 @@ const Element = ({ shapeProps, onSelect, onChange, stage, transformer }) => {
           // we will reset it back
           node.scaleX(1);
           node.scaleY(1);
-
           onChange({
             ...shapeProps,
             // set minimal value
