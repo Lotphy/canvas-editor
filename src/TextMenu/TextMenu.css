@@ -1,0 +1,9 @@
+#options-drawer .text-btn {
+  font-size: 48px;
+  border: none;
+  padding: 0 16px;
+}
+
+#options-drawer .text-btn:hover {
+  background: none;
+}

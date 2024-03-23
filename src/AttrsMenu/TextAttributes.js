@@ -57,9 +57,22 @@ const TextAttributes = ({ element, updateAttribute }) => {
             updateAttribute('fontFamily', value);
           }}>
           <option disabled value="">Pick one</option>
-          <option value="Arial" style={{ fontFamily: 'Arial' }}>Arial</option>
-          <option value="Roboto" style={{ fontFamily: 'Roboto' }}>Roboto</option>
-          <option value="Verdana" style={{ fontFamily: 'Verdana' }}>Verdana</option>
+          <option value="Arial, sans-serif" style={{ fontFamily: 'Arial, sans-serif' }}>Arial</option>
+          <option value="Arial Black, sans-serif" style={{ fontFamily: 'Arial Black, sans-serif' }}>Arial Black</option>
+          <option value="Comic Sans MS, sans-serif" style={{ fontFamily: 'Comic Sans MS, sans-serif' }}>Comic Sans MS</option>
+          <option value="Courier New, monospace" style={{ fontFamily: 'Courier New, monospace' }}>Courier New</option>
+          <option value="Georgia, serif" style={{ fontFamily: 'Georgia, serif' }}>Georgia</option>
+          <option value="Impact, sans-serif" style={{ fontFamily: 'Impact, sans-serif' }}>Impact</option>
+          <option value="Lato, sans-serif" style={{ fontFamily: 'Lato, sans-serif' }}>Lato</option>
+          <option value="Lucida Console, monospace" style={{ fontFamily: 'Lucida Console, monospace' }}>Lucida Console</option>
+          <option value="Lucida Sans Unicode, sans-serif" style={{ fontFamily: 'Lucida Sans Unicode, sans-serif' }}>Lucida Sans Unicode</option>
+          <option value="Palatino Linotype, serif" style={{ fontFamily: 'Palatino Linotype, serif' }}>Palatino Linotype</option>
+          <option value="Tahoma, sans-serif" style={{ fontFamily: 'Tahoma, sans-serif' }}>Tahoma</option>
+          <option value="Times New Roman, serif" style={{ fontFamily: 'Times New Roman, serif' }}>Times New Roman</option>
+          <option value="Trebuchet MS, sans-serif" style={{ fontFamily: 'Trebuchet MS, sans-serif' }}>Trebuchet MS</option>
+          <option value="Verdana, sans-serif" style={{ fontFamily: 'Verdana, sans-serif' }}>Verdana</option>
+          <option value="Open Sans, sans-serif" style={{ fontFamily: 'Open Sans, sans-serif' }}>Open Sans</option>
+          <option value="Roboto, sans-serif" style={{ fontFamily: 'Roboto, sans-serif' }}>Roboto</option>
         </select>
       </div>
       <div className="text-white d-flex align-items-center bg-transparent shadow-0 px-3">
@@ -95,19 +108,6 @@ const TextAttributes = ({ element, updateAttribute }) => {
           </div>
         }
       </div>
-      <div className="text-white d-flex align-items-center bg-transparent shadow-0 px-3">
-        <label className="me-2">Stroke:</label>
-        <MDBInput
-          className="text-white"
-          type="number"
-          value={strokeSize}
-          onChange={(e) => {
-            const value = parseInt(e.target.value) || 0;
-            setStrokeSize(value);
-            updateAttribute('strokeWidth', value);
-          }}
-        />
-      </div>
       <div className="d-flex">
         <MDBBtn className="text-white d-flex align-items-center bg-transparent shadow-0 px-3"
                 onClick={() => setDisplayStrokeColor(!displayStrokeColor)}>
@@ -127,6 +127,19 @@ const TextAttributes = ({ element, updateAttribute }) => {
             />
           </div>
         }
+      </div>
+      <div className="text-white d-flex align-items-center bg-transparent shadow-0 px-3">
+        <label className="me-2">Stroke:</label>
+        <MDBInput
+          className="text-white"
+          type="number"
+          value={strokeSize}
+          onChange={(e) => {
+            const value = parseInt(e.target.value) || 0;
+            setStrokeSize(value);
+            updateAttribute('strokeWidth', value);
+          }}
+        />
       </div>
       <div className="d-flex p-2 switch-group">
         <MDBBtn className={`shadow-0 ${textAlign === 'left' && 'active'}`} onClick={() => updateTextAlign('left')}>

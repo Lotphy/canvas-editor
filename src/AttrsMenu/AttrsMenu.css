@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
 #attrs-menu {
     height: 50px;
     width: 100%;
@@ -47,4 +49,172 @@
 
 .btn label {
     cursor: pointer;
+}
+/* Arial Black */
+@font-face {
+    font-family: 'Arial Black';
+    src: local('Arial Black'), url('https://fonts.gstatic.com/s/arialblack/v15/HCiO7OvG8JzRjBs63NO6JfesZW2xOQ-xsNqO47m55DA.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Courier New */
+@font-face {
+    font-family: 'Courier New';
+    src: local('Courier New'), url('https://fonts.gstatic.com/s/couriernew/v15/SLXGc1na-mM4xIM2LWIir3IhFcK4PA.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Courier New';
+    src: local('Courier New'), url('https://fonts.gstatic.com/s/couriernew/v15/SLXHc1na-mM4xIMugA9PduI9HA.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* Georgia */
+@font-face {
+    font-family: 'Georgia';
+    src: local('Georgia'), url('https://fonts.gstatic.com/s/georgia/v15/SLXGc1na-mM4xIM2LWIERVIhFcK4PA.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Georgia';
+    src: local('Georgia'), url('https://fonts.gstatic.com/s/georgia/v15/SLXHc1na-mM4xIMugA9P2uI9HA.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* Impact */
+@font-face {
+    font-family: 'Impact';
+    src: local('Impact'), url('https://fonts.gstatic.com/s/impact/v12/1cX3aULHBpDMsHYWzpF7-M-hFSnmt1Ljiw.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Lucida Console */
+@font-face {
+    font-family: 'Lucida Console';
+    src: local('Lucida Console'), url('https://fonts.gstatic.com/s/lucon/v17/9k-RPmcnxYEPm8CNFsH2gg.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Lucida Sans Unicode */
+@font-face {
+    font-family: 'Lucida Sans Unicode';
+    src: local('Lucida Sans Unicode'), url('https://fonts.gstatic.com/s/lucidasansunicode/v13/6ae84K--SKgCzbM2Gr6aTA.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Palatino Linotype */
+@font-face {
+    font-family: 'Palatino Linotype';
+    src: local('Palatino Linotype'), url('https://fonts.gstatic.com/s/palatinolinotype/v12/xn7iYHOfN8Gk32kG9NXz3veS0gnO.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Palatino Linotype';
+    src: local('Palatino Linotype'), url('https://fonts.gstatic.com/s/palatinolinotype/v12/xn7iYHOfN8Gk32kG9NXz3veS0gnK.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* Tahoma */
+@font-face {
+    font-family: 'Tahoma';
+    src: local('Tahoma'), url('https://fonts.gstatic.com/s/tahoma/v12/Iurg6Y5j_oScZZow4VOBDpxNhLBG4RNYFQ.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Tahoma';
+    src: local('Tahoma'), url('https://fonts.gstatic.com/s/tahoma/v12/Iurg6Y5j_oScZZow4VO3DpN2QPB7WrpoDqw.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Times New Roman';
+    src: local('Times New Roman'), url('https://fonts.gstatic.com/s/timesnewroman/v15/6xK3dSBYKcSV-LCoe9_w0ABZ5F_u.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* Trebuchet MS */
+@font-face {
+    font-family: 'Trebuchet MS';
+    src: local('Trebuchet MS'), url('https://fonts.gstatic.com/s/trebuchetms/v15/0ybhB6n--6BxUfC1UcVViAM2K8xWCQ.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Trebuchet MS';
+    src: local('Trebuchet MS'), url('https://fonts.gstatic.com/s/trebuchetms/v15/0ybhB6n--6BxUfC1UcVViE8eq5e5.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* Verdana */
+@font-face {
+    font-family: 'Verdana';
+    src: local('Verdana'), url('https://fonts.gstatic.com/s/verdana/v15/1Ptug8zYS_SKggPNyCMIT4ttDfCmxA.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Verdana';
+    src: local('Verdana'), url('https://fonts.gstatic.com/s/verdana/v15/1Ptug8zYS_SKggPNyC0IT4ttDfCmxA.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* Open Sans */
+@font-face {
+    font-family: 'Open Sans';
+    src: local('Open Sans'), url('https://fonts.gstatic.com/s/opensans/v18/mem8YaGs126MiZpBA-UFVZ0b.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    src: local('Open Sans'), url('https://fonts.gstatic.com/s/opensans/v18/mem5YaGs126MiZpBA-UN7rgOUuhpKKSTjw.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* Roboto */
+@font-face {
+    font-family: 'Roboto';
+    src: local('Roboto'), url('https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu4mxK.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: local('Roboto'), url('https://fonts.gstatic.com/s/roboto/v20/KFOlCnqEu92Fr1MmEU9fBBc4.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Bolota';
+    src: local('Bolota'), url('/public/assets/fonts/Bolota.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Renovate';
+    src: local('Renovate'), url('/public/assets/fonts/LTRenovate.otf') format('opentype');
 }
