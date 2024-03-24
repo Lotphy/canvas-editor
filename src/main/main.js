@@ -22,7 +22,7 @@ const Main = () => {
 
   const drawableZoneSize = {
     width: 600,
-    height: 400
+    height: 600
   }
 
   useEffect(() => {
@@ -131,8 +131,8 @@ const Main = () => {
 
           <Stage
             className="h-100 w-100 d-flex"
-            width={canvasSize.width}
-            height={canvasSize.height}
+            width={canvasSize.width * 2}
+            height={canvasSize.height *2 }
             ref={stageRef}
             onMouseDown={checkDeselect}
             onTouchStart={checkDeselect}

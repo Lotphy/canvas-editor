@@ -18,8 +18,8 @@ const ImageMenu = () => {
     const id = crypto.randomUUID();
     const image = new Image();
     image.src = imageBase64;
-    const ratio = 200 / image.width;
-    const displayWidth = 200;
+    const displayWidth = 100;
+    const ratio = displayWidth / image.width;
     const displayHeight = image.height * ratio;
     const newElement = {
       id,

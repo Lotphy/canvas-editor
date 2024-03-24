@@ -28,17 +28,16 @@ const TextMenu = () => {
 
   const textList = [
     {
-      name: 'Superstar',
+      name: 'Voyage',
       style: {
-        color: 'red',
-        fontStyle: 'italic',
-        fontFamily: 'Impact, sans-serif',
+        color: 'rgba(255, 255, 255, 1)',
+        fontFamily: 'Voye, sans-serif',
       },
       canvasStyle: {
-        fill: 'red',
-        fontStyle: 'italic',
-        fontSize: 56,
-        fontFamily: 'Impact, sans-serif'
+        fill: 'rgba(0, 0, 0, 1)',
+        fontSize: 48,
+        fontStyle: 'bold',
+        fontFamily: 'Voye, sans-serif',
       }
     },
     {
@@ -55,18 +54,135 @@ const TextMenu = () => {
       }
     },
     {
-      name: 'DUMPER',
+      name: 'Wonder',
+      style: {
+        color: 'rgba(255, 255, 255, 1)',
+        fontFamily: 'Wave, sans-serif',
+      },
+      canvasStyle: {
+        fill: 'rgba(0, 0, 0, 1)',
+        fontSize: 48,
+        fontStyle: 'bold',
+        fontFamily: 'Wave, sans-serif',
+      }
+    },
+    {
+      name: 'Pixel',
+      style: {
+        color: 'rgba(255, 255, 255, 1)',
+        fontFamily: 'Quadriana, sans-serif',
+      },
+      canvasStyle: {
+        fill: 'rgba(0, 0, 0, 1)',
+        fontSize: 48,
+        fontStyle: 'bold',
+        fontFamily: 'Quadriana, sans-serif',
+      }
+    },
+    {
+      name: 'Mou mou',
+      style: {
+        color: 'rgba(255, 255, 255, 1)',
+        fontFamily: 'MadimiOne, sans-serif',
+      },
+      canvasStyle: {
+        fill: 'rgba(0, 0, 0, 1)',
+        fontSize: 48,
+        fontStyle: 'bold',
+        fontFamily: 'MadimiOne, sans-serif',
+      }
+    },
+    {
+      name: 'BigBang',
+      style: {
+        color: 'rgba(255, 255, 255, 1)',
+        fontFamily: 'Bolota, sans-serif',
+      },
+      canvasStyle: {
+        fill: 'rgba(0, 0, 0, 1)',
+        fontSize: 48,
+        fontStyle: 'bold',
+        fontFamily: 'Bolota, sans-serif',
+      }
+    },
+    {
+      name: 'Beverly hills',
+      style: {
+        color: 'rgba(255, 255, 255, 1)',
+        fontFamily: 'Beverage, sans-serif',
+      },
+      canvasStyle: {
+        fill: 'rgba(0, 0, 0, 1)',
+        fontSize: 48,
+        fontStyle: 'normal',
+        fontFamily: 'Beverage, sans-serif',
+      }
+    },
+    {
+      name: 'Oakland',
+      style: {
+        color: 'rgba(255, 255, 255, 1)',
+        fontFamily: 'OakSans, sans-serif',
+      },
+      canvasStyle: {
+        fill: 'rgba(0, 0, 0, 1)',
+        fontSize: 48,
+        fontStyle: 'bold',
+        fontFamily: 'OakSans, sans-serif',
+      }
+    },
+    {
+      name: 'Aegis',
+      style: {
+        color: 'rgba(255, 255, 255, 1)',
+        fontFamily: 'RampartOne, sans-serif',
+      },
+      canvasStyle: {
+        fill: 'rgba(0, 0, 0, 1)',
+        fontSize: 48,
+        fontStyle: 'bold',
+        fontFamily: 'RampartOne, sans-serif',
+      }
+    },
+    {
+      name: 'Tokyo Zoo',
+      style: {
+        color: 'rgba(255, 255, 255, 1)',
+        fontFamily: 'TokyoZoo, sans-serif',
+      },
+      canvasStyle: {
+        fill: 'rgba(0, 0, 0, 1)',
+        fontSize: 48,
+        fontStyle: 'normal',
+        fontFamily: 'TokyoZoo, sans-serif',
+      }
+    },
+    {
+      name: 'Superstar',
+      style: {
+        color: 'red',
+        fontStyle: 'italic',
+        fontFamily: 'Impact, sans-serif',
+      },
+      canvasStyle: {
+        fill: 'red',
+        fontStyle: 'italic',
+        fontSize: 56,
+        fontFamily: 'Impact, sans-serif'
+      }
+    },
+    {
+      name: 'Stardust',
       style: {
         color: 'rgba(255, 167, 0, 1)',
-        textShadow: 'rgb(255, 179, 0) 0px 0px 24px',
-        WebkitTextStroke: '3px rgb(0, 0, 0)',
+        textShadow: 'rgb(255, 179, 0) 0px 0px 16px',
+        WebkitTextStroke: '1px rgb(0, 0, 0)',
         fontWeight: 'normal',
-        fontSize: '60px',
         fontFamily: 'Impact, sans-serif'
       },
       canvasStyle: {
         fill: 'rgba(255, 167, 0, 1)',
-        strokeWidth: 8,
+        strokeWidth: 4,
         stroke: 'black',
         fontSize: 90,
         fontFamily: 'Impact, sans-serif',
@@ -75,11 +191,32 @@ const TextMenu = () => {
         shadowBlur: 32,
         shadowOffset: { x: 0, y: 0 },
       }
-    },{
+    },
+    {
+      name: 'GAME OVER',
+      style: {
+        color: 'rgba(110, 0, 255, 0.5)',
+        WebkitTextStroke: '1px rgb(0, 255, 234)',
+        fontFamily: 'Quadriana, sans-serif',
+        textShadow: '0 0 16px rgb(0,255,234)'
+      },
+      canvasStyle: {
+        fill: 'rgba(110, 0, 255, 0.5)',
+        strokeWidth: 2,
+        stroke: 'rgb(0, 255, 234)',
+        fontSize: 48,
+        fontFamily: 'Quadriana, sans-serif',
+        shadowColor: 'rgb(0,255,234)',
+        shadowOpacity: 10,
+        shadowBlur: 32,
+        shadowOffset: { x: 0, y: 0 },
+      }
+    },
+    {
       name: 'Glimmer',
       style: {
         color: 'rgba(221,97,255,0.7)',
-        textShadow: 'rgb(221,97,255) 0px 0px 24px',
+        textShadow: 'rgb(221,97,255) 0px 0px 16px',
         fontWeight: 'normal',
         fontFamily: 'Impact, sans-serif'
       },
@@ -94,48 +231,30 @@ const TextMenu = () => {
         shadowOffset: { x: 0, y: 0 },
       }
     },
-    {
-      name: 'GAME OVER',
-      style: {
-        color: 'rgba(255, 0, 0, 0.28)',
-        WebkitTextStroke: '2px rgb(0, 255, 234)',
-        fontFamily: 'Bolota, sans-serif',
-        textShadow: '0 0 24px rgb(0,255,234)'
-      },
-      canvasStyle: {
-        fill: 'rgba(255, 0, 0, 0.28)',
-        strokeWidth: 4,
-        stroke: 'rgb(0, 255, 234)',
-        fontSize: 48,
-        fontFamily: 'Bolota, sans-serif',
-        shadowColor: 'rgb(0,255,234)',
-        shadowOpacity: 10,
-        shadowBlur: 32,
-        shadowOffset: { x: 0, y: 0 },
-      }
-    },
   ];
 
 
   const renderAssetsList = () => {
     return textList.map((textParam, index) => {
       return (
-        <MDBBtn onClick={() => handleAddElement(index)} className="element-btn text-btn text-capitalize w-100" style={{ ...textParam.style }}>
-          {textParam.name}
-        </MDBBtn>
+        <MDBCol className="col-6 mb-3">
+          <MDBBtn onClick={() => handleAddElement(index)} className="element-btn text-btn text-capitalize w-100"
+                  style={{ ...textParam.style }}>
+            {textParam.name}
+          </MDBBtn>
+        </MDBCol>
       )
     })
   }
 
   return (
     <>
-      <MDBRow className="image-menu d-flex m-0">
-        <MDBCol className="col-12 mb-3" >
-          {renderAssetsList()}
-        </MDBCol>
-      </MDBRow>
-    </>
-  );
+    <MDBRow className="image-menu d-flex m-0">
+      {renderAssetsList()}
+    </MDBRow>
+</>
+)
+  ;
 };
 
 export default TextMenu;
