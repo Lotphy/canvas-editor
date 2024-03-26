@@ -26,12 +26,14 @@
   position: relative;
   z-index: 15;
   background: #131217;
+  padding-left: 8px;
 }
 
 #options-selector .btn {
   background: none;
   box-shadow: none;
   color: #AAA;
+  border-radius: 16px 0 0 16px;
 }
 
 #options-selector .btn-active,
@@ -46,4 +48,31 @@
 
 .element-selector:hover {
   color: white;
+}
+
+.drawer-toggler {
+  position: absolute;
+  right: 1px;
+  transform: translate(100%,-50%);
+  top: 50%;
+  padding: 0;
+  background: none;
+}
+
+.btn.drawer-toggler:focus,
+.drawer-toggler:active,
+.drawer-toggler:hover {
+  background: none;
+}
+
+.drawer-toggler svg {
+  fill: #1c1b26;
+}
+
+.drawer-toggler i {
+  color: white;
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  font-size: 12px;
 }

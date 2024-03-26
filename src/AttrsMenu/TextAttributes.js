@@ -73,6 +73,8 @@ const TextAttributes = ({ element, updateAttribute }) => {
           <option value="Verdana, sans-serif" style={{ fontFamily: 'Verdana, sans-serif' }}>Verdana</option>
           <option value="Open Sans, sans-serif" style={{ fontFamily: 'Open Sans, sans-serif' }}>Open Sans</option>
           <option value="Roboto, sans-serif" style={{ fontFamily: 'Roboto, sans-serif' }}>Roboto</option>
+          <option value="Renovate, sans-serif" style={{ fontFamily: 'Renovate' }}>Renovate</option>
+          <option value="Bolota, sans-serif" style={{ fontFamily: 'Bolota' }}>Bolota</option>
           <option value="MadimiOne, cursive" style={{ fontFamily: 'MadimiOne' }}>MadimiOne</option>
           <option value="Quadriana, sans-serif" style={{ fontFamily: 'Quadriana' }}>Quadriana</option>
           <option value="Voye, cursive" style={{ fontFamily: 'Voye' }}>Voye</option>
@@ -80,7 +82,7 @@ const TextAttributes = ({ element, updateAttribute }) => {
           <option value="Wave, cursive" style={{ fontFamily: 'Wave' }}>Wave</option>
           <option value="OakSans, sans-serif" style={{ fontFamily: 'OakSans' }}>OakSans</option>
           <option value="TokyoZoo, sans-serif" style={{ fontFamily: 'TokyoZoo' }}>TokyoZoo</option>
-          <option value="RampartOne, serif" style={{ fontFamily: 'RampartOne' }}>Rampart One</option>
+          <option value="RampartOne, sans-serif" style={{ fontFamily: 'RampartOne' }}>Rampart One</option>
         </select>
       </div>
       <div className="text-white d-flex align-items-center bg-transparent shadow-0 px-3">

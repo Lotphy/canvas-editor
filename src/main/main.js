@@ -21,8 +21,8 @@ const Main = () => {
   const drawableZone = useSelector(getDrawableZone);
 
   const drawableZoneSize = {
-    width: 600,
-    height: 600
+    width: 400,
+    height: 400
   }
 
   useEffect(() => {
@@ -75,8 +75,9 @@ const Main = () => {
   }
 
   const checkDeselect = (e) => {
+    console.log(e.target.attrs)
     // deselect when clicked on empty area
-    const clickedOnEmpty = e.target.attrs?.name === 'stage';
+    const clickedOnEmpty = e.target.attrs?.name === 'stage' || e.target.attrs?.id === 'stage-canvas';
     if (clickedOnEmpty) {
       setSelectedElementId(null);
     }
@@ -130,7 +131,9 @@ const Main = () => {
           <AttrsMenu el={elements.filter(e => e.id === selectedElementId)[0]} node={layerRef} id={selectedElementId} />
 
           <Stage
+            id="stage-canvas"
             className="h-100 w-100 d-flex"
+            draggable={true}
             width={canvasSize.width * 2}
             height={canvasSize.height *2 }
             ref={stageRef}
@@ -138,8 +141,6 @@ const Main = () => {
             onTouchStart={checkDeselect}
           >
             <Layer>
-              {/* Gray background */}
-              <Rect name="stage" width={canvasSize.width} height={canvasSize.height} fill="#ccc"/>
 
               {/* Brighter square shape representing the drawable zone */}
               <Rect

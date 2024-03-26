@@ -31,13 +31,13 @@ const TextMenu = () => {
       name: 'Voyage',
       style: {
         color: 'rgba(255, 255, 255, 1)',
-        fontFamily: 'Voye, sans-serif',
+        fontFamily: 'Voye, cursive',
       },
       canvasStyle: {
         fill: 'rgba(0, 0, 0, 1)',
         fontSize: 48,
         fontStyle: 'bold',
-        fontFamily: 'Voye, sans-serif',
+        fontFamily: 'Voye, cursive',
       }
     },
     {
@@ -57,13 +57,13 @@ const TextMenu = () => {
       name: 'Wonder',
       style: {
         color: 'rgba(255, 255, 255, 1)',
-        fontFamily: 'Wave, sans-serif',
+        fontFamily: 'Wave, cursive',
       },
       canvasStyle: {
         fill: 'rgba(0, 0, 0, 1)',
         fontSize: 48,
         fontStyle: 'bold',
-        fontFamily: 'Wave, sans-serif',
+        fontFamily: 'Wave, cursive',
       }
     },
     {
@@ -83,13 +83,13 @@ const TextMenu = () => {
       name: 'Mou mou',
       style: {
         color: 'rgba(255, 255, 255, 1)',
-        fontFamily: 'MadimiOne, sans-serif',
+        fontFamily: 'MadimiOne, cursive',
       },
       canvasStyle: {
         fill: 'rgba(0, 0, 0, 1)',
         fontSize: 48,
         fontStyle: 'bold',
-        fontFamily: 'MadimiOne, sans-serif',
+        fontFamily: 'MadimiOne, cursive',
       }
     },
     {
@@ -109,13 +109,13 @@ const TextMenu = () => {
       name: 'Beverly hills',
       style: {
         color: 'rgba(255, 255, 255, 1)',
-        fontFamily: 'Beverage, sans-serif',
+        fontFamily: 'Beverage, cursive',
       },
       canvasStyle: {
         fill: 'rgba(0, 0, 0, 1)',
         fontSize: 48,
         fontStyle: 'normal',
-        fontFamily: 'Beverage, sans-serif',
+        fontFamily: 'Beverage, cursive',
       }
     },
     {
@@ -237,7 +237,7 @@ const TextMenu = () => {
   const renderAssetsList = () => {
     return textList.map((textParam, index) => {
       return (
-        <MDBCol className="col-6 mb-3">
+        <MDBCol className="col-6 mb-3" key={index}>
           <MDBBtn onClick={() => handleAddElement(index)} className="element-btn text-btn text-capitalize w-100"
                   style={{ ...textParam.style }}>
             {textParam.name}
