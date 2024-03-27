@@ -7,6 +7,7 @@ import SideMenu from '../SideMenu/SideMenu';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDrawableZone, getStageElements, setDrawableZone, setStageElements } from '../shared/store/stage.reducer';
 import AttrsMenu from '../AttrsMenu/AttrsMenu';
+import Konva from 'konva';
 
 const Main = () => {
   const stageRef = useRef(null);
@@ -27,6 +28,7 @@ const Main = () => {
 
   useEffect(() => {
     initEventsListeners();
+    enableZooming();
     if (storeElements?.length > 0) {
       setElements(storeElements);
     }
@@ -75,7 +77,6 @@ const Main = () => {
   }
 
   const checkDeselect = (e) => {
-    console.log(e.target.attrs)
     // deselect when clicked on empty area
     const clickedOnEmpty = e.target.attrs?.name === 'stage' || e.target.attrs?.id === 'stage-canvas';
     if (clickedOnEmpty) {
@@ -120,6 +121,42 @@ const Main = () => {
     document.addEventListener('deleteElementById', deleteElementById);
   }
 
+  const enableZooming = () => {
+    const stage = stageRef.current;
+    const scaleBy = 1.1;
+    stage.on('wheel', (e) => {
+      // stop default scrolling
+      e.evt.preventDefault();
+
+      const oldScale = stage.scaleX();
+      const pointer = stage.getPointerPosition();
+
+      const mousePointTo = {
+        x: (pointer.x - stage.x()) / oldScale,
+        y: (pointer.y - stage.y()) / oldScale,
+      };
+
+      // how to scale? Zoom in? Or zoom out?
+      let direction = e.evt.deltaY < 0 ? 1 : -1;
+
+      // when we zoom on trackpad, e.evt.ctrlKey is true
+      // in that case lets revert direction
+      if (e.evt.ctrlKey) {
+        direction = -direction;
+      }
+
+      const newScale = direction > 0 ? oldScale * scaleBy : oldScale / scaleBy;
+
+      stage.scale({ x: newScale, y: newScale });
+
+      const newPos = {
+        x: pointer.x - mousePointTo.x * newScale,
+        y: pointer.y - mousePointTo.y * newScale,
+      };
+      stage.position(newPos);
+    });
+  }
+
   return (
     <div className="d-flex vh-100 flex-column">
 
@@ -133,11 +170,21 @@ const Main = () => {
           <Stage
             id="stage-canvas"
             className="h-100 w-100 d-flex"
-            draggable={true}
             width={canvasSize.width * 2}
             height={canvasSize.height *2 }
             ref={stageRef}
-            onMouseDown={checkDeselect}
+            onMouseDown={(e) => {
+              if (e.evt.button === 1) {
+                // Use mouse wheel button as drag button
+                stageRef.current.setAttr('draggable', true);
+              } else {
+                checkDeselect(e);
+              }
+            }}
+            onMouseUp={(e) => {
+              console.log('up')
+              stageRef.current.setAttr('draggable', false);
+            }}
             onTouchStart={checkDeselect}
           >
             <Layer>
@@ -173,6 +220,18 @@ const Main = () => {
                         canvasSize={canvasSize}
                         stage={stageRef.current.getStage()}
                         transformer={transformerRef}
+                        onMouseDown={(e) => {
+                          if (e.evt.button === 1) {
+                            // Use mouse wheel button as drag button
+                            e.target.setAttr('draggable', false);
+                          }
+                        }}
+                        onMouseUp={(e) => {
+                          if (e.evt.button === 1) {
+                            // Use mouse wheel button as drag button
+                            e.target.setAttr('draggable', true);
+                          }
+                        }}
                         onSelect={() => {
                           setSelectedElementId(element.id);
                         }}

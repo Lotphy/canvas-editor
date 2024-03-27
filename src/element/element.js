@@ -3,7 +3,7 @@ import { Ellipse, Image, Rect, Text } from 'react-konva';
 import { useSelector } from 'react-redux';
 import { getDrawableZone } from '../shared/store/stage.reducer';
 
-const Element = ({ shapeProps, onSelect, onChange, stage, transformer }) => {
+const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage, transformer }) => {
   const shapeRef = React.useRef();
   const drawableZone = useSelector(getDrawableZone);
 
@@ -87,6 +87,7 @@ const Element = ({ shapeProps, onSelect, onChange, stage, transformer }) => {
       });
       textarea.parentNode.removeChild(textarea);
       window.removeEventListener('click', handleOutsideClick);
+      window.removeEventListener('mousedown', handleOutsideClick);
       window.removeEventListener('resize', setTextAreaPosition);
       textNode.show();
       tr?.show();
@@ -138,7 +139,8 @@ const Element = ({ shapeProps, onSelect, onChange, stage, transformer }) => {
     });
 
     function handleOutsideClick(e) {
-      if (e.target !== textarea) {
+      // disable edit mode on click outside textarea or with mouse middle click
+      if (e.target !== textarea || e.button === 1) {
         textarea.value = textarea.value.trim();
         textNode.text(textarea.value);
         textarea.style.height = 'auto';
@@ -150,6 +152,7 @@ const Element = ({ shapeProps, onSelect, onChange, stage, transformer }) => {
 
     setTimeout(() => {
       window.addEventListener('click', handleOutsideClick);
+      window.addEventListener('mousedown', handleOutsideClick);
       window.addEventListener('resize', setTextAreaPosition);
     });
   }
@@ -181,6 +184,8 @@ const Element = ({ shapeProps, onSelect, onChange, stage, transformer }) => {
         ref={shapeRef}
         {...shapeProps}
         draggable
+        onMouseUp={onMouseUp}
+        onMouseDown={onMouseDown}
         onDragStart={(e) => {
           onSelect();
         }}
@@ -229,6 +234,8 @@ const Element = ({ shapeProps, onSelect, onChange, stage, transformer }) => {
         ref={shapeRef}
         {...shapeProps}
         draggable
+        onMouseUp={onMouseUp}
+        onMouseDown={onMouseDown}
         onDragStart={(e) => {
           onSelect();
         }}
@@ -283,6 +290,8 @@ const Element = ({ shapeProps, onSelect, onChange, stage, transformer }) => {
         ref={shapeRef}
         {...shapeProps}
         draggable
+        onMouseUp={onMouseUp}
+        onMouseDown={onMouseDown}
         onDragStart={(e) => {
           onSelect();
         }}
@@ -326,6 +335,8 @@ const Element = ({ shapeProps, onSelect, onChange, stage, transformer }) => {
         {...shapeProps}
         image={img}
         draggable
+        onMouseUp={onMouseUp}
+        onMouseDown={onMouseDown}
         onDragStart={(e) => {
           onSelect();
         }}
