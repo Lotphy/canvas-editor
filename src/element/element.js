@@ -11,6 +11,8 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
     const textNode = shapeRef?.current;
     const tr = transformer?.current;
 
+    const scaledFontSize = textNode.fontSize() * stage.scale().x
+
     // hide text node and transformer:
     textNode.hide();
     tr?.hide();
@@ -35,10 +37,9 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
     // and sometimes it is hard to make it 100% the same. But we will try...
     textarea.value = textNode.text();
     textarea.style.position = 'absolute';
-    textarea.style.width = textNode.width() - textNode.padding() * 2 + 'px';
-    textarea.style.height =
-      textNode.height() - textNode.padding() * 2 + 5 + 'px';
-    textarea.style.fontSize = textNode.fontSize() + 'px';
+    textarea.style.width = textNode.width() * stage.scale().x - textNode.padding() * 2 + 'px';
+    textarea.style.height = textNode.height() - textNode.padding() * 2 + 5 + 'px';
+    textarea.style.fontSize = scaledFontSize + 'px';
     textarea.style.border = 'none';
     textarea.style.padding = '0px';
     textarea.style.margin = '0px';
@@ -65,7 +66,7 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
     const isFirefox =
       navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
     if (isFirefox) {
-      px += 2 + Math.round(textNode.fontSize() / 20);
+      px += 2 + Math.round(scaledFontSize / 20);
     }
     transform += 'translateY(-' + px + 'px)';
 
@@ -83,11 +84,12 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
         ...shapeProps,
         ...textNode.attrs,
         visible: true,
-        width: +textarea.style.width.replace('px', ''),
+        width: +textarea.style.width.replace('px', '') / stage.scale().x,
       });
       textarea.parentNode.removeChild(textarea);
       window.removeEventListener('click', handleOutsideClick);
       window.removeEventListener('mousedown', handleOutsideClick);
+      window.removeEventListener('wheel', handleOutsideClick);
       window.removeEventListener('resize', setTextAreaPosition);
       textNode.show();
       tr?.show();
@@ -96,7 +98,7 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
     function setTextareaWidth(newWidth) {
       if (!newWidth) {
         // set width for placeholder
-        newWidth = textNode.placeholder.length * textNode.fontSize();
+        newWidth = textNode.placeholder.length * scaledFontSize;
       }
       // some extra fixes on different browsers
       const isSafari = /^((?!chrome|android).)*safari/i.test(
@@ -135,7 +137,7 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
       setTextareaWidth(textNode.width() * scale);
       textarea.style.height = 'auto';
       textarea.style.height =
-        textarea.scrollHeight + textNode.fontSize() + 'px';
+        textarea.scrollHeight + scaledFontSize + 'px';
     });
 
     function handleOutsideClick(e) {
@@ -145,7 +147,7 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
         textNode.text(textarea.value);
         textarea.style.height = 'auto';
         textarea.style.height =
-          textarea.scrollHeight + textNode.fontSize() + 'px';
+          textarea.scrollHeight + scaledFontSize + 'px';
         removeTextarea();
       }
     }
@@ -153,6 +155,7 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
     setTimeout(() => {
       window.addEventListener('click', handleOutsideClick);
       window.addEventListener('mousedown', handleOutsideClick);
+      window.addEventListener('wheel', handleOutsideClick);
       window.addEventListener('resize', setTextAreaPosition);
     });
   }

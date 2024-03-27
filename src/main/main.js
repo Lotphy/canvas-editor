@@ -259,7 +259,7 @@ const Main = () => {
                         const pos = anchor.position();
                         const trHeight = stageRef.current.findOne(`#${selectedElementId}`).height();
                         anchor.x(pos.x);
-                        anchor.y((trHeight - anchor.height()) / 2 + 4);
+                        anchor.y(((trHeight - anchor.height()) / 2 + 4) * stageRef.current.scale().x);
                       } else {
                         anchor.visible(false);
                       }
