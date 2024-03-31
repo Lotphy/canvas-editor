@@ -15,6 +15,10 @@ const Main = () => {
   const [elements, setElements] = useState([]);
   const [selectedElementId, setSelectedElementId] = useState(null);
   const [selectedElement, setSelectedElement] = useState(null);
+  // const [onKeyPress, setOnKeyPress] = useState(null);
+
+  const selectedElementIdRef = useRef(null);
+
   const transformerRef = useRef(null);
   const layerRef = useRef(null);
   const dispatch = useDispatch();
@@ -27,7 +31,6 @@ const Main = () => {
   }
 
   useEffect(() => {
-    initEventsListeners();
     enableZooming();
     if (storeElements?.length > 0) {
       setElements(storeElements);
@@ -53,16 +56,45 @@ const Main = () => {
       }
     };
 
-    window.addEventListener('resize', updateCanvasSize);
+    const onKeyPress = (e) => {
+      switch(e.key) {
+        case 'Delete':
+          if (selectedElementIdRef.current) {
+            deleteElementById(selectedElementIdRef.current);
+          }
+          break;
+        default:
+          return;
+      }
+    }
+
+    const initEventsListeners = () => {
+      window.addEventListener('resize', updateCanvasSize);
+      document.addEventListener('addElement', handleAddElement);
+      document.addEventListener('getElementById', getElementById);
+      document.addEventListener('deleteElementById', onDeleteElementById);
+      document.addEventListener('keyup', onKeyPress);
+    }
+
+    const removeEventsListeners = () => {
+      window.removeEventListener('resize', updateCanvasSize);
+      document.removeEventListener('addElement', handleAddElement);
+      document.removeEventListener('getElementById', getElementById);
+      document.removeEventListener('deleteElementById', deleteElementById);
+      document.removeEventListener('keyup', onKeyPress);
+    }
+
+    initEventsListeners();
+
     return () => {
       removeEventsListeners();
-      window.removeEventListener('resize', updateCanvasSize);
     };
   }, []);
 
   useEffect(() => {
     syncElementsWithCanvas();
     window.dispatchEvent(new Event('resize'));
+    selectedElementIdRef.current = selectedElementId;
   }, [selectedElementId])
 
   useEffect(() => {
@@ -89,11 +121,14 @@ const Main = () => {
     setElements(prevElements => [...prevElements, newElement]);
   };
 
-  const deleteElementById = (event) => {
-    const id = event.detail.id;
+  const deleteElementById = (id) => {
     setElements(elems => elems.filter((elem) => elem.id !== id));
     setSelectedElementId(null);
   };
+  const onDeleteElementById = (event) => {
+    const id = event.detail.id;
+    deleteElementById(id);
+  }
 
   const getElementById = (event) => {
     const id = event.detail.id;
@@ -109,17 +144,6 @@ const Main = () => {
     }
   }, [selectedElementId])
 
-  const initEventsListeners = () => {
-    document.addEventListener('addElement', handleAddElement);
-    document.addEventListener('getElementById', getElementById);
-    document.addEventListener('deleteElementById', deleteElementById.bind(canvasSize));
-  }
-
-  const removeEventsListeners = () => {
-    document.addEventListener('addElement', handleAddElement);
-    document.addEventListener('getElementById', getElementById);
-    document.addEventListener('deleteElementById', deleteElementById);
-  }
 
   const enableZooming = () => {
     const stage = stageRef.current;
@@ -182,7 +206,6 @@ const Main = () => {
               }
             }}
             onMouseUp={(e) => {
-              console.log('up')
               stageRef.current.setAttr('draggable', false);
             }}
             onTouchStart={checkDeselect}

@@ -37,7 +37,7 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
     // and sometimes it is hard to make it 100% the same. But we will try...
     textarea.value = textNode.text();
     textarea.style.position = 'absolute';
-    textarea.style.width = textNode.width() * stage.scale().x - textNode.padding() * 2 + 'px';
+    textarea.style.width = textNode.width() * stage.scale().x - textNode.padding() * 4 + 'px';
     textarea.style.height = textNode.height() - textNode.padding() * 2 + 5 + 'px';
     textarea.style.fontSize = scaledFontSize + 'px';
     textarea.style.border = 'none';
