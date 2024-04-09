@@ -47,7 +47,7 @@ const TextAttributes = ({ element, updateAttribute }) => {
 
   return (
     <>
-      <div className="text-white d-flex align-items-center bg-transparent shadow-0 px-3">
+      <div className="text-white d-flex align-items-center bg-transparent shadow-0 px-0 me-3">
         <label className="me-2">Font:</label>
         <select
           value={fontFamily}
@@ -85,7 +85,7 @@ const TextAttributes = ({ element, updateAttribute }) => {
           <option value="RampartOne, sans-serif" style={{ fontFamily: 'RampartOne' }}>Rampart One</option>
         </select>
       </div>
-      <div className="text-white d-flex align-items-center bg-transparent shadow-0 px-3">
+      <div className="text-white d-flex align-items-center bg-transparent shadow-0 px-0 me-3">
         <label className="me-2">Size:</label>
         <MDBInput
           className="text-white"
@@ -99,10 +99,12 @@ const TextAttributes = ({ element, updateAttribute }) => {
         />
       </div>
       <div className="d-flex">
-        <MDBBtn className="text-white d-flex align-items-center bg-transparent shadow-0 px-3"
+        <MDBBtn className="d-flex align-items-center bg-transparent shadow-0 px-0 me-3"
+                noRipple
                 onClick={() => setDisplayTextColor(!displayTextColor)}>
-          <label className="me-2">Color:</label>
-          <MDBIcon fas icon="square" size="lg" className="d-inline-block" style={{ color: element?.attrs?.fill }}/>
+          <div className="color-selector transparent-canvas">
+            <div className="selected-color" style={{ backgroundColor: element?.attrs?.fill }} />
+          </div>
         </MDBBtn>
         {
           displayTextColor &&
@@ -119,10 +121,11 @@ const TextAttributes = ({ element, updateAttribute }) => {
         }
       </div>
       <div className="d-flex">
-        <MDBBtn className="text-white d-flex align-items-center bg-transparent shadow-0 px-3"
+        <MDBBtn className="d-flex align-items-center bg-transparent shadow-0 px-0 me-3"
                 onClick={() => setDisplayStrokeColor(!displayStrokeColor)}>
-          <label className="me-2">Outline:</label>
-          <MDBIcon fas icon="square" size="lg" className="d-inline-block" style={{ color: element?.attrs?.stroke }}/>
+          <div className="color-selector transparent-canvas outline" style={{ borderColor: element?.attrs?.stroke }}>
+            <div className="outline-inner" />
+          </div>
         </MDBBtn>
         {
           displayStrokeColor &&
@@ -138,7 +141,7 @@ const TextAttributes = ({ element, updateAttribute }) => {
           </div>
         }
       </div>
-      <div className="text-white d-flex align-items-center bg-transparent shadow-0 px-3">
+      <div className="text-white d-flex align-items-center bg-transparent shadow-0 px-0 me-3">
         <label className="me-2">Stroke:</label>
         <MDBInput
           className="text-white"

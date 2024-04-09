@@ -12,7 +12,7 @@ const TextMenu = () => {
       fillAfterStrokeEnabled: true,
       fill: `#${Math.floor(Math.random() * 16777215).toString(16)}`,
       strokeWidth: 0,
-      stroke: 'black',
+      stroke: 'white',
       fontSize: 32,
       fontFamily: 'Arial',
       align: 'left',

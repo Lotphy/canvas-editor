@@ -23,13 +23,15 @@ const SquareAttributes = ({ element, updateAttribute }) => {
   return (
     <>
       <div className="d-flex">
-        <MDBBtn className="text-white d-flex align-items-center bg-transparent shadow-0 px-3"
+        <MDBBtn className="text-white d-flex align-items-center bg-transparent shadow-0 ps-0 pe-3"
+                noRipple
                 onClick={() => {
                   setDisplayBackgroundPalette(!displayBackgroundPalette);
                   setDisplayOutlinePalette(false);
                 }}>
-          <label className="me-2">Background:</label>
-          <MDBIcon fas icon="square" size="lg" className="d-inline-block" style={{ color: element?.attrs?.fill }}/>
+          <div className="color-selector transparent-canvas">
+            <div className="selected-color" style={{ backgroundColor: element?.attrs?.fill }} />
+          </div>
         </MDBBtn>
         {
           displayBackgroundPalette &&
@@ -46,13 +48,15 @@ const SquareAttributes = ({ element, updateAttribute }) => {
         }
       </div>
       <div className="d-flex">
-        <MDBBtn className="text-white d-flex align-items-center bg-transparent shadow-0 px-3"
+        <MDBBtn className="text-white d-flex align-items-center bg-transparent shadow-0 ps-0 pe-3"
+                noRipple
                 onClick={() => {
                   setDisplayOutlinePalette(!displayOutlinePalette);
                   setDisplayBackgroundPalette(false);
                 }}>
-          <label className="me-2">Outline:</label>
-          <MDBIcon fas icon="square" size="lg" className="d-inline-block" style={{ color: element?.attrs?.stroke }}/>
+          <div className="color-selector transparent-canvas outline" style={{ borderColor: element?.attrs?.stroke }}>
+            <div className="outline-inner" />
+          </div>
         </MDBBtn>
         {
           displayOutlinePalette &&
@@ -72,8 +76,8 @@ const SquareAttributes = ({ element, updateAttribute }) => {
           </div>
         }
       </div>
-      <div className="text-white d-flex align-items-center bg-transparent shadow-0 px-3">
-        <label className="me-2">Outline width:</label>
+      <div className="text-white d-flex align-items-center bg-transparent shadow-0 ps-0 pe-3">
+        <label className="me-2">Outline:</label>
         <MDBInput
           className="text-white"
           type="number"
@@ -85,7 +89,7 @@ const SquareAttributes = ({ element, updateAttribute }) => {
           }}
         />
       </div>
-      <div className="text-white d-flex align-items-center bg-transparent shadow-0 px-3">
+      <div className="text-white d-flex align-items-center bg-transparent shadow-0 ps-0 pe-3">
         <label className="me-2">Corner:</label>
         <MDBInput
           className="text-white"
