@@ -57,20 +57,8 @@ const ShapeMenu = () => {
       },
       canvasStyle: {
         stroke: 'black',
-        strokeWidth: 2,
+        strokeWidth: 4,
         fill: `rgba(0, 0, 0, 0)`,
-      }
-    },
-    {
-      shapeType: 'circle',
-      style: {
-        icon: 'circle',
-        iconType: 'fas'
-      },
-      canvasStyle: {
-        stroke: 'rgb(113,97,220)',
-        strokeWidth: 2,
-        fill: `rgb(170, 200, 255)`,
       }
     },
     {
@@ -81,9 +69,34 @@ const ShapeMenu = () => {
       },
       canvasStyle: {
         stroke: 'rgb(113,97,220)',
-        strokeWidth: 2,
+        strokeWidth: 4,
         fill: `rgba(0, 0, 0, 0)`,
         cornerRadius: 16
+      }
+    },
+    {
+      shapeType: 'rect',
+      style: {
+        icon: 'square-full',
+        iconType: 'far'
+      },
+      canvasStyle: {
+        stroke: 'rgb(113,97,220)',
+        strokeWidth: 4,
+        fill: `rgb(0, 0, 0, 0)`,
+        cornerRadius: 0
+      }
+    },
+    {
+      shapeType: 'circle',
+      style: {
+        icon: 'circle',
+        iconType: 'fas'
+      },
+      canvasStyle: {
+        stroke: 'rgb(220,115,97)',
+        strokeWidth: 0,
+        fill: `rgb(255, 213, 170)`,
       }
     },
     {
@@ -93,10 +106,23 @@ const ShapeMenu = () => {
         iconType: 'fas'
       },
       canvasStyle: {
-        stroke: 'rgb(113,97,220)',
-        strokeWidth: 2,
-        fill: `rgb(170, 200, 255)`,
+        stroke: 'rgb(189,97,220)',
+        strokeWidth: 0,
+        fill: `rgb(255, 170, 248)`,
         cornerRadius: 16
+      }
+    },
+    {
+      shapeType: 'rect',
+      style: {
+        icon: 'square-full',
+        iconType: 'fas'
+      },
+      canvasStyle: {
+        stroke: 'rgb(97,146,220)',
+        strokeWidth: 0,
+        fill: `rgb(170, 255, 225)`,
+        cornerRadius: 0
       }
     }
   ];

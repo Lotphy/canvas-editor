@@ -233,6 +233,7 @@ const Main = () => {
                   return (
                     <React.Fragment key={i}>
                       <Element
+                        fillAfterStrokeEnabled={true}
                         id={element.id}
                         shapeProps={{
                           ...element,

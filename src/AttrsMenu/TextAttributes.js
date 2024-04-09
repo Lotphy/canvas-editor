@@ -101,7 +101,10 @@ const TextAttributes = ({ element, updateAttribute }) => {
       <div className="d-flex">
         <MDBBtn className="d-flex align-items-center bg-transparent shadow-0 px-0 me-3"
                 noRipple
-                onClick={() => setDisplayTextColor(!displayTextColor)}>
+                onClick={() => {
+                  setDisplayStrokeColor(false);
+                  setDisplayTextColor(!displayTextColor)
+                }}>
           <div className="color-selector transparent-canvas">
             <div className="selected-color" style={{ backgroundColor: element?.attrs?.fill }} />
           </div>
@@ -122,7 +125,10 @@ const TextAttributes = ({ element, updateAttribute }) => {
       </div>
       <div className="d-flex">
         <MDBBtn className="d-flex align-items-center bg-transparent shadow-0 px-0 me-3"
-                onClick={() => setDisplayStrokeColor(!displayStrokeColor)}>
+                onClick={() => {
+                  setDisplayTextColor(false);
+                  setDisplayStrokeColor(!displayStrokeColor);
+                }}>
           <div className="color-selector transparent-canvas outline" style={{ borderColor: element?.attrs?.stroke }}>
             <div className="outline-inner" />
           </div>

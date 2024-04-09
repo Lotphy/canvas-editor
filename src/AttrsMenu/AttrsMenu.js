@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './AttrsMenu.css';
 import TextAttributes from './TextAttributes';
 import SquareAttributes from './SquareAttributes';
+import CircleAttributes from './CircleAttributes';
 
 const AttrsMenu = ({ node, id }) => {
 	const [element, setElement] = useState(null);
@@ -22,6 +23,7 @@ const AttrsMenu = ({ node, id }) => {
 				<div className="d-flex">
 					{element?.attrs.type === 'text' && <TextAttributes element={element} updateAttribute={updateAttribute} />}
 					{element?.attrs.type === 'rectangle' && <SquareAttributes  element={element} updateAttribute={updateAttribute} />}
+					{element?.attrs.type === 'circle' && <CircleAttributes  element={element} updateAttribute={updateAttribute} />}
 				</div>
 			)}
 		</div>

@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { MDBBtn, MDBInput } from "mdb-react-ui-kit";
 import { SketchPicker } from 'react-color';
 
-const SquareAttributes = ({ element, updateAttribute }) => {
+const CircleAttributes = ({ element, updateAttribute }) => {
   const [strokeWidth, setStrokeWidth] = useState(0);
-  const [cornerRadius, setCornerRadius] = useState(0);
   const [displayBackgroundPalette, setDisplayBackgroundPalette] = useState(false);
   const [backgroundColor, setBackgroundColor] = useState('transparent');
   const [displayOutlinePalette, setDisplayOutlinePalette] = useState(false);
@@ -14,7 +13,6 @@ const SquareAttributes = ({ element, updateAttribute }) => {
     if (element) {
       // Update input values whenever element attributes change
       setStrokeWidth(element.attrs.strokeWidth || 0);
-      setCornerRadius(element.attrs.cornerRadius || 0);
       setOutlineColor(element.attrs.stroke || 'transparent');
       setBackgroundColor(element.attrs.fill || 'transparent');
     }
@@ -89,21 +87,8 @@ const SquareAttributes = ({ element, updateAttribute }) => {
           }}
         />
       </div>
-      <div className="text-white d-flex align-items-center bg-transparent shadow-0 px-0 me-3">
-        <label className="me-2">Corner:</label>
-        <MDBInput
-          className="text-white"
-          type="number"
-          value={cornerRadius}
-          onChange={(e) => {
-            const value = parseInt(e.target.value) || 0;
-            setCornerRadius(value);
-            updateAttribute('cornerRadius', value);
-          }}
-        />
-      </div>
     </>
   )
 }
 
-export default SquareAttributes;
+export default CircleAttributes;

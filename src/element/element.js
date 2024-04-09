@@ -230,7 +230,6 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
   }
 
   const renderRect = () => {
-    console.log(shapeProps)
     return (
       <Rect
         onClick={onSelect}
