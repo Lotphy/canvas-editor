@@ -59,7 +59,9 @@ const Main = () => {
     const onKeyPress = (e) => {
       switch(e.key) {
         case 'Delete':
-          if (selectedElementIdRef.current) {
+          let textarea = document.getElementById('text-editor');
+          // Check if an element is selected and text editor is not toggled
+          if (selectedElementIdRef.current && !textarea) {
             deleteElementById(selectedElementIdRef.current);
           }
           break;
