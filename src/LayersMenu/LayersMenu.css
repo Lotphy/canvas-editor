@@ -16,7 +16,35 @@
 }
 
 .layer-row {
+  height: 40px;
   border: 1px solid #ccc;
   border-radius: 4px;
   cursor: pointer;
+  color: #ccc;
+}
+
+.layer-row .btn {
+  color: #aaa;
+  border-radius: 3px;
+}
+
+.layer-row .btn:hover {
+  color: #fff;
+  background: #666;
+}
+
+.depth-setters {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-right: 1px solid #ccc;
+}
+
+.depth-setters .btn:first-child {
+  border-bottom: 1px solid #ccc;
+  border-radius: 3px 0 0 0;
+}
+
+.depth-setters .btn:last-child {
+  border-radius: 0 0 0 3px;
 }
