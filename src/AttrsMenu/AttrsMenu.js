@@ -3,9 +3,12 @@ import './AttrsMenu.css';
 import TextAttributes from './TextAttributes';
 import SquareAttributes from './SquareAttributes';
 import CircleAttributes from './CircleAttributes';
+import { useDispatch } from 'react-redux';
+import { updateElement } from '../shared/store/stage.reducer';
 
-const AttrsMenu = ({ node, id }) => {
+const AttrsMenu = ({ node, id, onChange }) => {
 	const [element, setElement] = useState(null);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		const elm = node.current?.findOne(`#${id}`);
@@ -14,6 +17,12 @@ const AttrsMenu = ({ node, id }) => {
 
 	const updateAttribute = (type, value) => {
 		element.setAttr(type, value);
+		onChange({
+			[type]: value
+		})
+		// dispatch(updateElement({
+		// 	element
+		// }))
 	};
 
 

@@ -1,20 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import { MDBBtn, MDBCol, MDBIcon, MDBRow } from 'mdb-react-ui-kit';
 import './LayersMenu.css';
-import { useSelector } from 'react-redux';
-import { getStageElements } from '../shared/store/stage.reducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { addElementAtIndex, getStageElements, setStageElements } from '../shared/store/stage.reducer';
 
 const LayersMenu = () => {
   const [elements, setElements] = useState([]);
   const storeElements = useSelector(getStageElements);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setElements(storeElements);
-  }, [storeElements])
+  }, [storeElements]);
 
   const onDeleteLayer = (e, id) => {
     e.stopPropagation();
     document.dispatchEvent(new CustomEvent('deleteElementById', { detail: { id } }));
+  }
+
+  const cloneLayer = (e, index) => {
+    e.stopPropagation();
+    const cloneData = {
+      id: crypto.randomUUID(),
+      relativeX: elements[index].relativeX + 20,
+      relativeY: elements[index].relativeY + 20,
+    };
+    dispatch(addElementAtIndex({
+      index,
+      cloneData
+    }));
   }
 
   const renderLayers = () => {
@@ -25,25 +39,6 @@ const LayersMenu = () => {
         <MDBRow className="layer-row mb-2 mx-0" key={elem.id} onClick={() => {
           document.dispatchEvent(new CustomEvent('getElementById', { detail: { id: elem.id } }));
         }}>
-
-          <MDBCol className="layer-cell col-1 p-0">
-            <div className="depth-setters h-100">
-              <MDBBtn className="p-0 icon-btn h-50" color="tertiary"
-                      onClick={(e) => {
-                      }}
-                      noRipple
-              >
-                <MDBIcon fas icon="caret-up" size="1x"/>
-              </MDBBtn>
-              <MDBBtn className="p-0 icon-btn h-50" color="tertiary"
-                      onClick={(e) => {
-                      }}
-                      noRipple
-              >
-                <MDBIcon fas icon="caret-down" size="1x"/>
-              </MDBBtn>
-            </div>
-          </MDBCol>
           <MDBCol className="layer-cell col-3">
             <span className="d-inline-block">
               {
@@ -67,17 +62,44 @@ const LayersMenu = () => {
           </MDBCol>
           <MDBCol className="layer-cell col-4 align-items-end flex-column pe-1 py-1 h-100">
             <div className="d-flex align-items-center h-100">
-              <MDBBtn className="h-100 px-2 py-0 icon-btn" color="tertiary" onClick={(e) => {
-              }} noRipple>
-                <MDBIcon fas icon="lock" size="1x"/>
+              <MDBBtn className="h-100 px-2 py-0 icon-btn"
+                      color="tertiary"
+                      onClick={(e) => {
+                        onDeleteLayer(e, elem.id);
+                      }}
+                      noRipple>
+                <MDBIcon fas icon="trash" size="1x"/>
+              </MDBBtn>
+              <MDBBtn className="h-100 px-2 py-0 icon-btn"
+                      color="tertiary"
+                      onClick={(e) => {
+                        cloneLayer(e, i);
+                      }}
+                      noRipple
+              >
+                <MDBIcon fas icon="clone" size="1x"/>
               </MDBBtn>
               <MDBBtn className="h-100 px-2 py-0 icon-btn" color="tertiary" onClick={(e) => {
               }} noRipple>
                 <MDBIcon fas icon="eye" size="1x"/>
               </MDBBtn>
-              <MDBBtn className="h-100 px-2 py-0 icon-btn" color="tertiary" onClick={(e) => {
-              }} noRipple>
-                <MDBIcon fas icon="trash" size="1x"/>
+            </div>
+          </MDBCol>
+          <MDBCol className="layer-cell col-1 p-0">
+            <div className="depth-setters h-100">
+              <MDBBtn className="p-0 icon-btn h-50" color="tertiary"
+                      onClick={(e) => {
+                      }}
+                      noRipple
+              >
+                <MDBIcon fas icon="caret-up" size="1x"/>
+              </MDBBtn>
+              <MDBBtn className="p-0 icon-btn h-50" color="tertiary"
+                      onClick={(e) => {
+                      }}
+                      noRipple
+              >
+                <MDBIcon fas icon="caret-down" size="1x"/>
               </MDBBtn>
             </div>
           </MDBCol>

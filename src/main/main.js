@@ -5,7 +5,14 @@ import Element from '../element/element';
 import './main.css';
 import SideMenu from '../SideMenu/SideMenu';
 import { useDispatch, useSelector } from 'react-redux';
-import { getDrawableZone, getStageElements, setDrawableZone, setStageElements } from '../shared/store/stage.reducer';
+import {
+  addElement,
+  deleteElement,
+  getDrawableZone,
+  getStageElements,
+  setDrawableZone,
+  setStageElements
+} from '../shared/store/stage.reducer';
 import AttrsMenu from '../AttrsMenu/AttrsMenu';
 import Konva from 'konva';
 
@@ -105,9 +112,15 @@ const Main = () => {
     }))
   }, [elements])
 
+  useEffect(() => {
+    setElements(storeElements);
+  }, [storeElements]);
+
   const syncElementsWithCanvas = () => {
     const elms = layerRef?.current.getChildren().map(e => e.attrs);
-    setElements(JSON.parse(JSON.stringify(elms)));
+    dispatch(setStageElements({
+      elements: JSON.parse(JSON.stringify(elms))
+    }));
   }
 
   const checkDeselect = (e) => {
@@ -120,13 +133,20 @@ const Main = () => {
 
   const handleAddElement = (event) => {
     const newElement = event.detail.elem;
-    setElements(prevElements => [...prevElements, newElement]);
+    dispatch(addElement({
+      element: newElement
+    }));
   };
 
   const deleteElementById = (id) => {
-    setElements(elems => elems.filter((elem) => elem.id !== id));
-    setSelectedElementId(null);
+    dispatch(deleteElement({
+      id
+    }));
+    setTimeout(() => {
+      setSelectedElementId(null)
+    }, 1);
   };
+
   const onDeleteElementById = (event) => {
     const id = event.detail.id;
     deleteElementById(id);
@@ -137,6 +157,12 @@ const Main = () => {
     setSelectedElementId(id);
     setSelectedElement(elements.filter(e => e.id === id)[0]);
   };
+  //
+  // const updateElementsState = (elems) => {
+  //   dispatch(setStageElements({
+  //     elements: elems
+  //   }));
+  // }
 
   useEffect(() => {
     if (selectedElementId) {
@@ -191,7 +217,19 @@ const Main = () => {
 
         <MDBContainer fluid style={{ flex: '1', overflow: 'hidden', position: 'relative' }}
                       className="canvas-wrapper p-0">
-          <AttrsMenu el={elements.filter(e => e.id === selectedElementId)[0]} node={layerRef} id={selectedElementId} />
+          <AttrsMenu el={selectedElement}
+                     node={layerRef}
+                     id={selectedElementId}
+                     onChange={(newAttrs) => {
+                       const elems = elements.slice().map(e => {
+                         if (e.id === selectedElementId) {
+                           return {...e, ...newAttrs};
+                         }
+                         return e;
+                       })
+                       setElements([...elems]);
+                     }}
+          />
 
           <Stage
             id="stage-canvas"
@@ -283,7 +321,7 @@ const Main = () => {
                       if (anchor.name().includes('middle-right') || anchor.name().includes('middle-left')) {
                         anchor.height(24);
                         const pos = anchor.position();
-                        const trHeight = stageRef.current.findOne(`#${selectedElementId}`).height();
+                        const trHeight = stageRef.current.findOne(`#${selectedElementId}`)?.height();
                         anchor.x(pos.x);
                         anchor.y(((trHeight - anchor.height()) / 2 + 4) * stageRef.current.scale().x);
                       } else {

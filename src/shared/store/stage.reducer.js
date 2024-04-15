@@ -4,6 +4,7 @@ const stageSlice = createSlice({
   name: 'stage',
   initialState: {
     elements: [],
+    selectedElementId: null,
     drawableZone: {},
     uploadedImages: []
   },
@@ -12,6 +13,55 @@ const stageSlice = createSlice({
       state = {
         ...state,
         elements: action.payload.elements
+      }
+      return state;
+    },
+    addElement(state, action) {
+      state = {
+        ...state,
+        elements: [...state.elements, action.payload.element]
+      }
+      return state;
+    },
+    addElementAtIndex(state, action) {
+      const clone = {
+        ...state.elements[action.payload.index],
+        ...action.payload.cloneData
+      };
+      const elemsCopy = Array.from(state.elements);
+      elemsCopy.splice(action.payload.index, 0, clone);
+      state = {
+        ...state,
+        elements: elemsCopy
+      }
+      return state;
+    },
+    updateElement(state, action) {
+      const elemToUpdate = action.payload.element;
+      const newElems = state.elements.map(elem => {
+        if (elem.id === elemToUpdate.id) {
+          return elemToUpdate;
+        }
+        return elem;
+      });
+      state = {
+        ...state,
+        elements: newElems
+      }
+      return state;
+    },
+    deleteElement(state, action) {
+      const elemCopy = Array.from(state.elements.filter((elem) => elem.id !== action.payload.id));
+      state = {
+        ...state,
+        elements: elemCopy
+      }
+      return state;
+    },
+    setSelectedElementId(state, action) {
+      state = {
+        ...state,
+        elements: state.elements.filter((elem) => elem.id !== action.payload.id)
       }
       return state;
     },
@@ -35,7 +85,7 @@ const stageSlice = createSlice({
   }
 })
 
-export const { setStageElements, setDrawableZone, storeUploadedImage } = stageSlice.actions;
+export const { setStageElements, addElement, addElementAtIndex, updateElement, deleteElement, setDrawableZone, storeUploadedImage } = stageSlice.actions;
 
 export const getStageElements = ((state) => state.stage.elements);
 export const getDrawableZone = ((state) => state.stage.drawableZone);
