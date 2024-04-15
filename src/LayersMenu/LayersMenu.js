@@ -33,9 +33,6 @@ const LayersMenu = () => {
       index,
       cloneData
     }));
-    setTimeout(() => {
-      document.dispatchEvent(new CustomEvent('getElementById', { detail: { id: cloneId } }));
-    }, 1)
   }
 
   const renderLayers = () => {
@@ -43,9 +40,12 @@ const LayersMenu = () => {
     for (let i = elements?.length - 1; i >= 0; i--) {
       const elem = elements[i];
       const layer = (
-        <MDBRow className={`layer-row mb-2 mx-0 ${editorContext?.selectedElement?.id === elem.id && 'selected'}`} key={elem.id} onClick={() => {
-          document.dispatchEvent(new CustomEvent('getElementById', { detail: { id: elem.id } }));
-        }}>
+        <MDBRow className={`layer-row mb-2 mx-0 ${editorContext?.selectedElement?.id === elem.id && 'selected'}`}
+                key={elem.id}
+                onClick={() => {
+                  editorContext.setSelectedElement(elem);
+                }}
+        >
           <MDBCol className="layer-cell col-3">
             <span className="d-inline-block">
               {

@@ -22,7 +22,7 @@ const Main = () => {
   const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
   const [elements, setElements] = useState([]);
   const [selectedElementId, setSelectedElementId] = useState(null);
-  const [selectedElement, setSelectedElement] = useState(null);
+  // const [selectedElement, setSelectedElement] = useState(null);
   const editorContext = useContext(EditorContext);
 
   const selectedElementIdRef = useRef(null);
@@ -60,7 +60,7 @@ const Main = () => {
             width: drawableZoneSize.width,
             height: drawableZoneSize.height
           }
-        }))
+        }));
       }
     };
 
@@ -81,7 +81,6 @@ const Main = () => {
     const initEventsListeners = () => {
       window.addEventListener('resize', updateCanvasSize);
       document.addEventListener('addElement', handleAddElement);
-      document.addEventListener('getElementById', getElementById);
       document.addEventListener('deleteElementById', onDeleteElementById);
       document.addEventListener('keyup', onKeyPress);
     }
@@ -89,7 +88,6 @@ const Main = () => {
     const removeEventsListeners = () => {
       window.removeEventListener('resize', updateCanvasSize);
       document.removeEventListener('addElement', handleAddElement);
-      document.removeEventListener('getElementById', getElementById);
       document.removeEventListener('deleteElementById', deleteElementById);
       document.removeEventListener('keyup', onKeyPress);
     }
@@ -104,22 +102,14 @@ const Main = () => {
   useEffect(() => {
     syncElementsWithCanvas();
     window.dispatchEvent(new Event('resize'));
-    selectedElementIdRef.current = selectedElementId;
-    if (selectedElementId) {
-      const element = elements.filter(e => e.id === selectedElementId)[0];
-      editorContext.selectedElement = element;
-      setSelectedElement(element);
-    } else {
-      setSelectedElementId(null);
-      editorContext.selectedElement = null;
-    }
-  }, [selectedElementId])
+    selectedElementIdRef.current = editorContext.selectedElement?.id;
+  }, [editorContext.selectedElement]);
 
   useEffect(() => {
     dispatch(setStageElements({
       elements
-    }))
-  }, [elements])
+    }));
+  }, [elements]);
 
   useEffect(() => {
     setElements(storeElements);
@@ -136,7 +126,7 @@ const Main = () => {
     // deselect when clicked on empty area
     const clickedOnEmpty = e.target.attrs?.name === 'stage' || e.target.attrs?.id === 'stage-canvas';
     if (clickedOnEmpty) {
-      setSelectedElementId(null);
+      editorContext.setSelectedElement(null);
     }
   };
 
@@ -152,7 +142,7 @@ const Main = () => {
       id
     }));
     setTimeout(() => {
-      setSelectedElementId(null)
+      editorContext.setSelectedElement(null);
     }, 1);
   };
 
@@ -160,13 +150,6 @@ const Main = () => {
     const id = event.detail.id;
     deleteElementById(id);
   }
-
-  // TODO Replace with contextProvider
-  const getElementById = (event) => {
-    const id = event.detail.id;
-    setSelectedElementId(id);
-    setSelectedElement(elements.filter(e => e.id === id)[0]);
-  };
 
   const enableZooming = () => {
     const stage = stageRef.current;
@@ -210,14 +193,15 @@ const Main = () => {
       <div className="d-flex w-100 h-100">
         <SideMenu/>
 
-        <MDBContainer fluid style={{ flex: '1', overflow: 'hidden', position: 'relative' }}
+        <MDBContainer fluid
+                      style={{ flex: '1', overflow: 'hidden', position: 'relative' }}
                       className="canvas-wrapper p-0">
-          <AttrsMenu el={selectedElement}
+          <AttrsMenu el={editorContext.selectedElement}
                      node={layerRef}
-                     id={selectedElementId}
+                     id={editorContext.selectedElement?.id}
                      onChange={(newAttrs) => {
                        const elems = elements.slice().map(e => {
-                         if (e.id === selectedElementId) {
+                         if (e.id === editorContext.selectedElement?.id) {
                            return {...e, ...newAttrs};
                          }
                          return e;
@@ -275,7 +259,7 @@ const Main = () => {
                           x: element.relativeX + drawableZone?.x,
                           y: element.relativeY + drawableZone?.y
                         }}
-                        isSelected={element.id === selectedElementId}
+                        isSelected={element.id === editorContext.selectedElement?.id}
                         canvasSize={canvasSize}
                         stage={stageRef.current.getStage()}
                         transformer={transformerRef}
@@ -292,7 +276,7 @@ const Main = () => {
                           }
                         }}
                         onSelect={() => {
-                          setSelectedElementId(element.id);
+                          editorContext.setSelectedElement(element);
                         }}
                         onChange={(newAttrs) => {
                           const elems = elements.slice();
@@ -306,17 +290,17 @@ const Main = () => {
               </Group>
 
               {/* Transformer for the selected element */}
-              {selectedElementId && (
+              {editorContext.selectedElement?.id && (
                 <Transformer
                   ref={transformerRef}
                   rotationSnaps={[-45, -90, -180, -225, -270, -315, 0, 45, 90, 180, 225, 270, 315]}
                   rotateAnchorCursor="all-scroll"
                   anchorStyleFunc={(anchor) => {
-                    if (selectedElement?.type === 'text') {
+                    if (editorContext.selectedElement?.type === 'text') {
                       if (anchor.name().includes('middle-right') || anchor.name().includes('middle-left')) {
                         anchor.height(24);
                         const pos = anchor.position();
-                        const trHeight = stageRef.current.findOne(`#${selectedElementId}`)?.height();
+                        const trHeight = stageRef.current.findOne(`#${editorContext.selectedElement?.id}`)?.height();
                         anchor.x(pos.x);
                         anchor.y(((trHeight - anchor.height()) / 2 + 4) * stageRef.current.scale().x);
                       } else {
@@ -333,7 +317,7 @@ const Main = () => {
                       anchor.stroke("#7a00ec");
                     }
                   }}
-                  nodes={stageRef.current.findOne(`#${selectedElementId}`) && [stageRef.current.findOne(`#${selectedElementId}`)]} // Assuming elements have unique IDs
+                  nodes={stageRef.current.findOne(`#${editorContext.selectedElement?.id}`) && [stageRef.current.findOne(`#${editorContext.selectedElement?.id}`)]} // Assuming elements have unique IDs
                   boundBoxFunc={(oldBox, newBox) => {
                     // limit resize
                     if (Math.abs(newBox.width) < 5 || Math.abs(newBox.height) < 5) {
