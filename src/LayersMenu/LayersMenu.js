@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { MDBBtn, MDBCol, MDBIcon, MDBRow } from 'mdb-react-ui-kit';
 import './LayersMenu.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { addElementAtIndex, getStageElements, setStageElements } from '../shared/store/stage.reducer';
+import { cloneElementAtIndex, getStageElements } from '../shared/store/stage.reducer';
 
 const LayersMenu = () => {
   const [elements, setElements] = useState([]);
@@ -20,15 +20,19 @@ const LayersMenu = () => {
 
   const cloneLayer = (e, index) => {
     e.stopPropagation();
+    const cloneId = crypto.randomUUID();
     const cloneData = {
-      id: crypto.randomUUID(),
+      id: cloneId,
       relativeX: elements[index].relativeX + 20,
       relativeY: elements[index].relativeY + 20,
     };
-    dispatch(addElementAtIndex({
+    dispatch(cloneElementAtIndex({
       index,
       cloneData
     }));
+    setTimeout(() => {
+      document.dispatchEvent(new CustomEvent('getElementById', { detail: { id: cloneId } }));
+    }, 1)
   }
 
   const renderLayers = () => {

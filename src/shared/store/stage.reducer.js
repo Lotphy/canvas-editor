@@ -23,13 +23,13 @@ const stageSlice = createSlice({
       }
       return state;
     },
-    addElementAtIndex(state, action) {
+    cloneElementAtIndex(state, action) {
       const clone = {
         ...state.elements[action.payload.index],
         ...action.payload.cloneData
       };
       const elemsCopy = Array.from(state.elements);
-      elemsCopy.splice(action.payload.index, 0, clone);
+      elemsCopy.splice(action.payload.index + 1, 0, clone);
       state = {
         ...state,
         elements: elemsCopy
@@ -85,7 +85,7 @@ const stageSlice = createSlice({
   }
 })
 
-export const { setStageElements, addElement, addElementAtIndex, updateElement, deleteElement, setDrawableZone, storeUploadedImage } = stageSlice.actions;
+export const { setStageElements, addElement, cloneElementAtIndex, updateElement, deleteElement, setDrawableZone, storeUploadedImage } = stageSlice.actions;
 
 export const getStageElements = ((state) => state.stage.elements);
 export const getDrawableZone = ((state) => state.stage.drawableZone);
