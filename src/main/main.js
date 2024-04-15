@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useContext } from 'react';
 import { MDBContainer } from 'mdb-react-ui-kit';
 import { Stage, Layer, Rect, Group, Transformer } from 'react-konva';
 import Element from '../element/element';
@@ -15,6 +15,7 @@ import {
 } from '../shared/store/stage.reducer';
 import AttrsMenu from '../AttrsMenu/AttrsMenu';
 import Konva from 'konva';
+import { EditorContext } from '../shared/context';
 
 const Main = () => {
   const stageRef = useRef(null);
@@ -22,7 +23,7 @@ const Main = () => {
   const [elements, setElements] = useState([]);
   const [selectedElementId, setSelectedElementId] = useState(null);
   const [selectedElement, setSelectedElement] = useState(null);
-  // const [onKeyPress, setOnKeyPress] = useState(null);
+  const editorContext = useContext(EditorContext);
 
   const selectedElementIdRef = useRef(null);
 
@@ -104,6 +105,14 @@ const Main = () => {
     syncElementsWithCanvas();
     window.dispatchEvent(new Event('resize'));
     selectedElementIdRef.current = selectedElementId;
+    if (selectedElementId) {
+      const element = elements.filter(e => e.id === selectedElementId)[0];
+      editorContext.selectedElement = element;
+      setSelectedElement(element);
+    } else {
+      setSelectedElementId(null);
+      editorContext.selectedElement = null;
+    }
   }, [selectedElementId])
 
   useEffect(() => {
@@ -152,26 +161,12 @@ const Main = () => {
     deleteElementById(id);
   }
 
+  // TODO Replace with contextProvider
   const getElementById = (event) => {
     const id = event.detail.id;
     setSelectedElementId(id);
     setSelectedElement(elements.filter(e => e.id === id)[0]);
   };
-  //
-  // const updateElementsState = (elems) => {
-  //   dispatch(setStageElements({
-  //     elements: elems
-  //   }));
-  // }
-
-  useEffect(() => {
-    if (selectedElementId) {
-      setSelectedElement(elements.filter(e => e.id === selectedElementId)[0]);
-    } else {
-      setSelectedElementId(null);
-    }
-  }, [selectedElementId])
-
 
   const enableZooming = () => {
     const stage = stageRef.current;

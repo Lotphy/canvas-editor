@@ -3,11 +3,14 @@ import { MDBBtn, MDBCol, MDBIcon, MDBRow } from 'mdb-react-ui-kit';
 import './LayersMenu.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { cloneElementAtIndex, getStageElements } from '../shared/store/stage.reducer';
+import { useContext } from 'react';
+import { EditorContext } from '../shared/context';
 
 const LayersMenu = () => {
   const [elements, setElements] = useState([]);
   const storeElements = useSelector(getStageElements);
   const dispatch = useDispatch();
+  const editorContext = useContext(EditorContext);
 
   useEffect(() => {
     setElements(storeElements);
@@ -40,7 +43,7 @@ const LayersMenu = () => {
     for (let i = elements?.length - 1; i >= 0; i--) {
       const elem = elements[i];
       const layer = (
-        <MDBRow className="layer-row mb-2 mx-0" key={elem.id} onClick={() => {
+        <MDBRow className={`layer-row mb-2 mx-0 ${editorContext?.selectedElement?.id === elem.id && 'selected'}`} key={elem.id} onClick={() => {
           document.dispatchEvent(new CustomEvent('getElementById', { detail: { id: elem.id } }));
         }}>
           <MDBCol className="layer-cell col-3">
