@@ -37,7 +37,6 @@ const Main = () => {
 
   useEffect(() => {
     enableZooming();
-    console.log('ZOOM')
     if (storeElements?.length > 0) {
       editorContext.setElements(storeElements);
     }
@@ -107,7 +106,6 @@ const Main = () => {
     dispatch(setStageElements({
       elements: editorContext.elements
     }));
-    console.log('UPDATE', editorContext.elements)
   }, [editorContext.elements]);
 
   useEffect(() => {
@@ -296,10 +294,13 @@ const Main = () => {
                     if (editorContext.selectedElement?.type === 'text') {
                       if (anchor.name().includes('middle-right') || anchor.name().includes('middle-left')) {
                         anchor.height(24);
-                        const pos = anchor.position();
-                        const trHeight = stageRef.current.findOne(`#${editorContext.selectedElement?.id}`)?.height();
-                        anchor.x(pos.x);
-                        anchor.y(((trHeight - anchor.height()) / 2 + 4) * stageRef.current.scale().x);
+                        const selectedNode = stageRef.current.findOne(`#${editorContext.selectedElement?.id}`);
+                        if (selectedNode) {
+                          const pos = anchor.position();
+                          const trHeight = selectedNode.height();
+                          anchor.x(pos.x);
+                          anchor.y(((trHeight - anchor.height()) / 2 + 4) * stageRef.current.scale().x);
+                        }
                       } else {
                         anchor.visible(false);
                       }
