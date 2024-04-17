@@ -14,15 +14,12 @@ import {
   setStageElements
 } from '../shared/store/stage.reducer';
 import AttrsMenu from '../AttrsMenu/AttrsMenu';
-import Konva from 'konva';
 import { EditorContext } from '../shared/context';
+import Konva from 'konva';
 
 const Main = () => {
   const stageRef = useRef(null);
   const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
-  const [elements, setElements] = useState([]);
-  const [selectedElementId, setSelectedElementId] = useState(null);
-  // const [selectedElement, setSelectedElement] = useState(null);
   const editorContext = useContext(EditorContext);
 
   const selectedElementIdRef = useRef(null);
@@ -40,8 +37,9 @@ const Main = () => {
 
   useEffect(() => {
     enableZooming();
+    console.log('ZOOM')
     if (storeElements?.length > 0) {
-      setElements(storeElements);
+      editorContext.setElements(storeElements);
     }
     // Update canvas size on window resize
     const updateCanvasSize = () => {
@@ -107,12 +105,13 @@ const Main = () => {
 
   useEffect(() => {
     dispatch(setStageElements({
-      elements
+      elements: editorContext.elements
     }));
-  }, [elements]);
+    console.log('UPDATE', editorContext.elements)
+  }, [editorContext.elements]);
 
   useEffect(() => {
-    setElements(storeElements);
+    editorContext.setElements(storeElements);
   }, [storeElements]);
 
   const syncElementsWithCanvas = () => {
@@ -200,13 +199,13 @@ const Main = () => {
                      node={layerRef}
                      id={editorContext.selectedElement?.id}
                      onChange={(newAttrs) => {
-                       const elems = elements.slice().map(e => {
+                       const elems = editorContext.elements.slice().map(e => {
                          if (e.id === editorContext.selectedElement?.id) {
                            return {...e, ...newAttrs};
                          }
                          return e;
                        })
-                       setElements([...elems]);
+                       editorContext.setElements([...elems]);
                      }}
           />
 
@@ -214,7 +213,7 @@ const Main = () => {
             id="stage-canvas"
             className="h-100 w-100 d-flex"
             width={canvasSize.width * 2}
-            height={canvasSize.height *2 }
+            height={canvasSize.height * 2}
             ref={stageRef}
             onMouseDown={(e) => {
               if (e.evt.button === 1) {
@@ -248,20 +247,18 @@ const Main = () => {
                 ref={layerRef}
                 clipFunc={(ctx) => ctx.rect(drawableZone?.x, drawableZone?.y, drawableZone?.width, drawableZone?.height)}
               >
-                {elements.map((element, i) => {
+                {editorContext.elements.map((element, i) => {
                   return (
                     <React.Fragment key={i}>
                       <Element
-                        fillAfterStrokeEnabled={true}
-                        id={element.id}
                         shapeProps={{
                           ...element,
-                          x: element.relativeX + drawableZone?.x,
-                          y: element.relativeY + drawableZone?.y
+                          name: 'element',
+                          x: (element.relativeX + drawableZone?.x) || 0,
+                          y: (element.relativeY + drawableZone?.y) || 0
                         }}
                         isSelected={element.id === editorContext.selectedElement?.id}
-                        canvasSize={canvasSize}
-                        stage={stageRef.current.getStage()}
+                        stage={stageRef?.current?.getStage()}
                         transformer={transformerRef}
                         onMouseDown={(e) => {
                           if (e.evt.button === 1) {
@@ -279,9 +276,9 @@ const Main = () => {
                           editorContext.setSelectedElement(element);
                         }}
                         onChange={(newAttrs) => {
-                          const elems = elements.slice();
+                          const elems = editorContext.elements.slice();
                           elems[i] = newAttrs;
-                          setElements(elems);
+                          editorContext.setElements(elems);
                         }}
                       />
                     </React.Fragment>

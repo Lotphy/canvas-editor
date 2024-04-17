@@ -17,10 +17,6 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
     textNode.hide();
     tr?.hide();
 
-    // create textarea over canvas with absolute position
-    // first we need to find position for textarea
-    // how to find it?
-
     // create textarea and style it
     let textarea = document.getElementById('text-editor');
     if (!textarea) {
@@ -32,9 +28,6 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
 
     setTextAreaPosition();
 
-    // apply many styles to match text on canvas as close as possible
-    // remember that text rendering on canvas and on the textarea can be different
-    // and sometimes it is hard to make it 100% the same. But we will try...
     textarea.value = textNode.text();
     textarea.style.position = 'absolute';
     textarea.style.width = textNode.width() * stage.scale().x - textNode.padding() * 4 + 'px';
@@ -61,7 +54,7 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
     }
 
     let px = 0;
-    // also we need to slightly move textarea on firefox
+    // we need to slightly move textarea on firefox
     // because it jumps a bit
     const isFirefox =
       navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
@@ -72,9 +65,6 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
 
     textarea.style.transform = transform;
 
-    // // reset height
-    // textarea.style.height = 'auto';
-    // // after browsers resized it we can set actual value
     textarea.style.height = textarea.scrollHeight + 3 + 'px';
 
     textarea.focus();

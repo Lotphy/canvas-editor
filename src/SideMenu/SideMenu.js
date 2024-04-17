@@ -7,7 +7,7 @@ import TextMenu from '../TextMenu/TextMenu';
 import ImageMenu from '../ImageMenu/ImageMenu';
 
 const SideMenu = () => {
-  const [toggledDrawer, setToggledDrawer] = useState('shape');
+  const [toggledDrawer, setToggledDrawer] = useState('layer');
 
   useEffect(() => {
     window.dispatchEvent(new Event('resize'));

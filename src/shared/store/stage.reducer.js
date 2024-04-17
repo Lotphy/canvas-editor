@@ -5,7 +5,10 @@ const stageSlice = createSlice({
   initialState: {
     elements: [],
     selectedElementId: null,
-    drawableZone: {},
+    drawableZone: {
+      x: 0,
+      y: 0
+    },
     uploadedImages: []
   },
   reducers: {
