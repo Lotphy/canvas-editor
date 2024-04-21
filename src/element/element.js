@@ -1,5 +1,5 @@
 import React from 'react';
-import { Ellipse, Image, Rect, Text } from 'react-konva';
+import { Ellipse, Group, Image, Rect, Text } from 'react-konva';
 import { useSelector } from 'react-redux';
 import { getDrawableZone } from '../shared/store/stage.reducer';
 
@@ -150,7 +150,6 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
     });
   }
 
-  // TODO Reposition on window resize
   const setTextAreaPosition = () => {
     let textarea = document.getElementById('text-editor');
     if (textarea) {
@@ -321,12 +320,11 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
     const img = new window.Image();
     img.src = shapeProps.src;
     return (
-      <Image
+      <Group
         onClick={onSelect}
         onTap={onSelect}
         ref={shapeRef}
         {...shapeProps}
-        image={img}
         draggable
         onMouseUp={onMouseUp}
         onMouseDown={onMouseDown}
@@ -349,7 +347,23 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
             relativeY: e.target.attrs.y - drawableZone?.y,
           });
         }}
-      />
+        clipFunc={(ctx) => {
+          // Begin path for clipping
+          ctx.beginPath();
+          // Define the clipping region as a circle with radius equal to the width/height of the Group
+          ctx.ellipse(shapeProps.width / 2, shapeProps.height / 2, shapeProps.width / 2, shapeProps.height / 2, 0, 0, Math.PI * 2);
+          // Close the path
+          ctx.closePath();
+          // Clip to the defined region
+          ctx.clip();
+        }}
+      >
+        <Image
+          width={shapeProps.width}
+          height={shapeProps.height}
+          image={img}
+        />
+      </Group>
     )
   }
 

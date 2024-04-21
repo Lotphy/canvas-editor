@@ -1,24 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { MDBBtn, MDBCol, MDBIcon, MDBRow } from 'mdb-react-ui-kit';
 import './LayersMenu.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { cloneElementAtIndex, getStageElements } from '../shared/store/stage.reducer';
 import { useContext } from 'react';
 import { EditorContext } from '../shared/context';
-import element from '../element/element';
 
 const LayersMenu = () => {
-  const storeElements = useSelector(getStageElements);
-  const dispatch = useDispatch();
   const editorContext = useContext(EditorContext);
-
-  useEffect(() => {
-    editorContext.setElements(storeElements);
-  }, [storeElements]);
 
   const onDeleteLayer = (e, id) => {
     e.stopPropagation();
-    document.dispatchEvent(new CustomEvent('deleteElementById', { detail: { id } }));
+    editorContext.deleteElementById(id);
   }
 
   const cloneLayer = (e, index) => {
@@ -29,17 +20,15 @@ const LayersMenu = () => {
       relativeX: editorContext.elements[index].relativeX + 20,
       relativeY: editorContext.elements[index].relativeY + 20,
     };
-    dispatch(cloneElementAtIndex({
-      index,
-      cloneData
-    }));
+    editorContext.cloneElementAtIndex(index, cloneData);
   }
 
   const raiseZIndex = (e, index) => {
     e.stopPropagation();
-    if (index + 1 <= editorContext.elements.length) {
-      const elemsToSwap = editorContext.elements.slice(index, index + 2).reverse();
-      const elems = Array.from(editorContext.elements);
+    if (index < editorContext.elements.length) {
+      const elems = JSON.parse(JSON.stringify(editorContext.elements));
+      const elemsToSwap = editorContext.elements.slice(index, index + 2);
+      elemsToSwap.reverse();
       elems.splice(index, 2, ...elemsToSwap);
       editorContext.setElements(elems);
     }
@@ -57,11 +46,11 @@ const LayersMenu = () => {
 
   const renderLayers = () => {
     const layers = [];
-    for (let i = editorContext.elements?.length - 1; i >= 0; i--) {
-      const elem = editorContext.elements[i];
+    for (let index = editorContext.elements?.length - 1; index >= 0; index--) {
+      const elem = editorContext.elements[index];
       const layer = (
         <MDBRow className={`layer-row mb-2 mx-0 ${editorContext?.selectedElement?.id === elem.id && 'selected'}`}
-                key={i}
+                key={index}
                 onClick={() => {
                   editorContext.setSelectedElement(elem);
                 }}
@@ -100,7 +89,7 @@ const LayersMenu = () => {
               <MDBBtn className="h-100 px-2 py-0 icon-btn"
                       color="tertiary"
                       onClick={(e) => {
-                        cloneLayer(e, i);
+                        cloneLayer(e, index);
                       }}
                       noRipple
               >
@@ -115,18 +104,18 @@ const LayersMenu = () => {
           <MDBCol className="layer-cell col-1 p-0">
             <div className="depth-setters h-100">
               <MDBBtn className="p-0 icon-btn h-50" color="tertiary"
-                      disabled={i + 2 > editorContext.elements.length}
+                      disabled={index + 2 > editorContext.elements.length}
                       onClick={(e) => {
-                        raiseZIndex(e, i);
+                        raiseZIndex(e, index);
                       }}
                       noRipple
               >
                 <MDBIcon fas icon="caret-up" size="1x"/>
               </MDBBtn>
               <MDBBtn className="p-0 icon-btn h-50" color="tertiary"
-                      disabled={i <= 0}
+                      disabled={index <= 0}
                       onClick={(e) => {
-                        lowerZIndex(e, i);
+                        lowerZIndex(e, index);
                       }}
                       noRipple
               >

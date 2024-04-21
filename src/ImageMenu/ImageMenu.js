@@ -1,14 +1,16 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import { MDBBtn, MDBCol, MDBIcon, MDBRow } from 'mdb-react-ui-kit';
 import './ImageMenu.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUploadedImages, storeUploadedImage } from '../shared/store/stage.reducer';
+import { EditorContext } from '../shared/context';
 
 const ImageMenu = () => {
   const [uploadedImages, setUploadedImages] = useState([]);
   const fileInputRef = useRef(null);
   const storedImages = useSelector(getUploadedImages);
   const dispatch = useDispatch();
+  const editorContext = useContext(EditorContext);
 
   useEffect(() => {
     setUploadedImages(storedImages.map(img => img.data));
@@ -33,7 +35,7 @@ const ImageMenu = () => {
       relativeX: 75,
       relativeY: 50
     };
-    document.dispatchEvent(new CustomEvent('addElement', { detail: { elem: newElement } }));
+    editorContext.setElements(elems =>[...elems, newElement]);
   };
 
   const handleImageChange = (e) => {

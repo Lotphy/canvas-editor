@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext }  from 'react';
 import { MDBBtn, MDBCol, MDBRow } from 'mdb-react-ui-kit';
 import './TextMenu.css';
+import { EditorContext } from '../shared/context';
 
 const TextMenu = () => {
+  const editorContext = useContext(EditorContext);
 
   const handleAddElement = (index) => {
     const id = crypto.randomUUID();
@@ -23,7 +25,7 @@ const TextMenu = () => {
       text: textList[index].name,
       ...textList[index].canvasStyle,
     };
-    document.dispatchEvent(new CustomEvent('addElement', { detail: { elem: newElement } }));
+    editorContext.setElements(elems =>[...elems, newElement]);
   };
 
   const textList = [

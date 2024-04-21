@@ -6,12 +6,8 @@ import './main.css';
 import SideMenu from '../SideMenu/SideMenu';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  addElement,
-  deleteElement,
   getDrawableZone,
-  getStageElements,
   setDrawableZone,
-  setStageElements
 } from '../shared/store/stage.reducer';
 import AttrsMenu from '../AttrsMenu/AttrsMenu';
 import { EditorContext } from '../shared/context';
@@ -27,7 +23,6 @@ const Main = () => {
   const transformerRef = useRef(null);
   const layerRef = useRef(null);
   const dispatch = useDispatch();
-  const storeElements = useSelector(getStageElements);
   const drawableZone = useSelector(getDrawableZone);
 
   const drawableZoneSize = {
@@ -37,9 +32,6 @@ const Main = () => {
 
   useEffect(() => {
     enableZooming();
-    if (storeElements?.length > 0) {
-      editorContext.setElements(storeElements);
-    }
     // Update canvas size on window resize
     const updateCanvasSize = () => {
       const canvasWrapper = document.querySelector('.canvas-wrapper');
@@ -65,9 +57,9 @@ const Main = () => {
       switch(e.key) {
         case 'Delete':
           let textarea = document.getElementById('text-editor');
-          // Check if an element is selected and text editor is not toggled
-          if (selectedElementIdRef.current && !textarea) {
-            deleteElementById(selectedElementIdRef.current);
+          // Check if text editor is not toggled
+          if (!textarea) {
+            editorContext.deleteSelectedElement();
           }
           break;
         default:
@@ -77,18 +69,14 @@ const Main = () => {
 
     const initEventsListeners = () => {
       window.addEventListener('resize', updateCanvasSize);
-      document.addEventListener('addElement', handleAddElement);
-      document.addEventListener('deleteElementById', onDeleteElementById);
       document.addEventListener('keyup', onKeyPress);
     }
 
     const removeEventsListeners = () => {
       window.removeEventListener('resize', updateCanvasSize);
-      document.removeEventListener('addElement', handleAddElement);
-      document.removeEventListener('deleteElementById', deleteElementById);
       document.removeEventListener('keyup', onKeyPress);
     }
-
+    updateCanvasSize();
     initEventsListeners();
 
     return () => {
@@ -97,27 +85,12 @@ const Main = () => {
   }, []);
 
   useEffect(() => {
-    syncElementsWithCanvas();
-    window.dispatchEvent(new Event('resize'));
-    selectedElementIdRef.current = editorContext.selectedElement?.id;
+    // window.dispatchEvent(new Event('resize'));
   }, [editorContext.selectedElement]);
 
   useEffect(() => {
-    dispatch(setStageElements({
-      elements: editorContext.elements
-    }));
-  }, [editorContext.elements]);
-
-  useEffect(() => {
-    editorContext.setElements(storeElements);
-  }, [storeElements]);
-
-  const syncElementsWithCanvas = () => {
-    const elms = layerRef?.current.getChildren().map(e => e.attrs);
-    dispatch(setStageElements({
-      elements: JSON.parse(JSON.stringify(elms))
-    }));
-  }
+    console.log(editorContext?.elements[0]?.id)
+  }, [editorContext.elements])
 
   const checkDeselect = (e) => {
     // deselect when clicked on empty area
@@ -126,27 +99,6 @@ const Main = () => {
       editorContext.setSelectedElement(null);
     }
   };
-
-  const handleAddElement = (event) => {
-    const newElement = event.detail.elem;
-    dispatch(addElement({
-      element: newElement
-    }));
-  };
-
-  const deleteElementById = (id) => {
-    dispatch(deleteElement({
-      id
-    }));
-    setTimeout(() => {
-      editorContext.setSelectedElement(null);
-    }, 1);
-  };
-
-  const onDeleteElementById = (event) => {
-    const id = event.detail.id;
-    deleteElementById(id);
-  }
 
   const enableZooming = () => {
     const stage = stageRef.current;
@@ -186,7 +138,6 @@ const Main = () => {
 
   return (
     <div className="d-flex vh-100 flex-column">
-
       <div className="d-flex w-100 h-100">
         <SideMenu/>
 
@@ -315,7 +266,7 @@ const Main = () => {
                       anchor.stroke("#7a00ec");
                     }
                   }}
-                  nodes={stageRef.current.findOne(`#${editorContext.selectedElement?.id}`) && [stageRef.current.findOne(`#${editorContext.selectedElement?.id}`)]} // Assuming elements have unique IDs
+                  nodes={layerRef.current.findOne(`#${editorContext.selectedElement?.id}`) && [layerRef.current.findOne(`#${editorContext.selectedElement?.id}`)]} // Assuming elements have unique IDs
                   boundBoxFunc={(oldBox, newBox) => {
                     // limit resize
                     if (Math.abs(newBox.width) < 5 || Math.abs(newBox.height) < 5) {

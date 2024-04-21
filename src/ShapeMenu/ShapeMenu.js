@@ -1,8 +1,11 @@
-import React  from 'react';
+import React, { useContext }  from 'react';
 import { MDBCol, MDBIcon, MDBRow, } from 'mdb-react-ui-kit';
 import './ShapeMenu.css';
+import { EditorContext } from '../shared/context';
 
 const ShapeMenu = () => {
+  const editorContext = useContext(EditorContext);
+
   const handleAddElement = (index) => {
     const id = crypto.randomUUID();
     let newElement;
@@ -47,7 +50,7 @@ const ShapeMenu = () => {
       default:
         return;
     }
-    document.dispatchEvent(new CustomEvent('addElement', {detail: {elem: newElement}}));
+    editorContext.setElements(elems =>[...elems, newElement]);
   };
 
   const shapesList = [
