@@ -13,7 +13,8 @@ const ImageMenu = () => {
   const editorContext = useContext(EditorContext);
 
   useEffect(() => {
-    setUploadedImages(storedImages.map(img => img.data));
+    const presetImages = [`${process.env.PUBLIC_URL}/assets/samples/img/1.jpg`, `${process.env.PUBLIC_URL}/assets/samples/img/2.jpg`];
+    setUploadedImages([...storedImages.map(img => img.data), ...presetImages]);
   }, []);
 
   const handleAddElement = (imageBase64) => {
@@ -23,10 +24,10 @@ const ImageMenu = () => {
     const displayWidth = 100;
     const ratio = displayWidth / image.width;
     const displayHeight = image.height * ratio;
+
     const newElement = {
       id,
       type: 'image',
-      image: image.toString(),
       src: imageBase64,
       x: 75, // Adjust these values as needed
       y: 50,
@@ -61,8 +62,8 @@ const ImageMenu = () => {
     const renderer = [];
     uploadedImages.forEach((imageBase64, index) => {
       renderer.push(
-        <MDBCol className="col-6 mb-3" key={index} onClick={() => handleAddElement(imageBase64)}>
-          <img src={imageBase64} alt="Selected" className="mw-100"/>
+        <MDBCol className={`col-6 mb-3`} key={index} onClick={() => handleAddElement(imageBase64)}>
+          <img src={imageBase64} alt="Selected" className={`sample-${index} mw-100`} />
         </MDBCol>
       )
     })

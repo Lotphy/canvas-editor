@@ -88,10 +88,6 @@ const Main = () => {
     // window.dispatchEvent(new Event('resize'));
   }, [editorContext.selectedElement]);
 
-  useEffect(() => {
-    console.log(editorContext?.elements[0]?.id)
-  }, [editorContext.elements])
-
   const checkDeselect = (e) => {
     // deselect when clicked on empty area
     const clickedOnEmpty = e.target.attrs?.name === 'stage' || e.target.attrs?.id === 'stage-canvas';
