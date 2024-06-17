@@ -21,14 +21,16 @@ const ImageMenu = () => {
     const id = crypto.randomUUID();
     const image = new Image();
     image.src = imageBase64;
-    const displayWidth = 100;
+    const displayWidth = 200;
     const ratio = displayWidth / image.width;
     const displayHeight = image.height * ratio;
+	  const mask = new Path2D("m40.4 21.5-.7-.7.7-.7c2.3-2.5 2.2-6.4-.3-8.7L30.1 2c-2.5-2.3-6.4-2.2-8.7.3l-.7.7-.7-.7c-2.5-2.3-6.4-2.2-8.7.3l-9.4 10c-2.3 2.5-2.2 6.4.3 8.7l.7.7-.7.7c-2.3 2.5-2.2 6.4.3 8.7l10 9.4c2.5 2.3 6.4 2.2 8.7-.3l.7-.7.7.7c2.5 2.3 6.4 2.2 8.7-.3l9.4-10c2.3-2.5 2.2-6.4-.3-8.7Z");
 
     const newElement = {
       id,
       type: 'image',
       src: imageBase64,
+	    mask,
       x: 75, // Adjust these values as needed
       y: 50,
       width: displayWidth,
