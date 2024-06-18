@@ -360,12 +360,10 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
           // Begin path for clipping
           // Define the clipping region as a circle with radius equal to the width/height of the Group
           ctx.rect(0, 0, shapeProps.width, shapeProps.height);
-
+          console.log(shapeProps.mask)
 					if (shapeProps.mask) {
-						ctx.fill(shapeProps.mask);
-						// Close the path
-						// Clip to the defined region
-						ctx.clip(shapeProps.mask);
+            ctx.clip(shapeProps.mask);
+            ctx.fill(shapeProps.mask);
 					}
         }}
       >
