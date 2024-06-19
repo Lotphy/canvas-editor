@@ -344,14 +344,19 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
           const scaleY = node.scaleY();
 
           // we will reset it back
-          node.scaleX(1);
-          node.scaleY(1);
+          // node.scaleX(1);
+          // node.scaleY(1);
+
+          console.log(e)
+          console.log(shapeProps)
 
           onChange({
             ...e.target.attrs,
             ...shapeProps,
-            width: Math.max(5, node.width() * scaleX),
-            height: Math.max(5, node.height() * scaleY),
+            scaleX,
+            scaleY,
+            width: Math.max(5, node.width()),
+            height: Math.max(5, node.height()),
             relativeX: node.x() - drawableZone?.x,
             relativeY: node.y() - drawableZone?.y,
           });
@@ -359,12 +364,10 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
         clipFunc={(ctx) => {
           // Begin path for clipping
           // Define the clipping region as a circle with radius equal to the width/height of the Group
+          ctx.clip(shapeProps.mask);
+          ctx.fill(shapeProps.mask);
           ctx.rect(0, 0, shapeProps.width, shapeProps.height);
-          console.log(shapeProps.mask)
-					if (shapeProps.mask) {
-            ctx.clip(shapeProps.mask);
-            ctx.fill(shapeProps.mask);
-					}
+
         }}
       >
         <Image
