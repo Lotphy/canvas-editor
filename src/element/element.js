@@ -343,18 +343,11 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
           const scaleX = node.scaleX();
           const scaleY = node.scaleY();
 
-          // we will reset it back
-          // node.scaleX(1);
-          // node.scaleY(1);
-
-          console.log(e)
-          console.log(shapeProps)
-
           onChange({
             ...e.target.attrs,
-            ...shapeProps,
             scaleX,
             scaleY,
+	          rotation: node.attrs.rotation,
             width: Math.max(5, node.width()),
             height: Math.max(5, node.height()),
             relativeX: node.x() - drawableZone?.x,
