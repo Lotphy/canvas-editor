@@ -90,6 +90,11 @@
     top: 43px;
 }
 
+.mask-selector-wrapper span {
+    color: white;
+    align-items: center;
+}
+
 /* Arial Black */
 @font-face {
     font-family: 'Arial Black';
