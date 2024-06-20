@@ -357,10 +357,11 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
         clipFunc={(ctx) => {
           // Begin path for clipping
           // Define the clipping region as a circle with radius equal to the width/height of the Group
-          ctx.clip(shapeProps.mask);
-          ctx.fill(shapeProps.mask);
+          if (shapeProps.mask) {
+            ctx.clip(shapeProps.mask);
+            ctx.fill(shapeProps.mask);
+          }
           ctx.rect(0, 0, shapeProps.width, shapeProps.height);
-
         }}
       >
         <Image

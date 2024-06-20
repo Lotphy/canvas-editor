@@ -3,6 +3,7 @@ import './AttrsMenu.css';
 import TextAttributes from './TextAttributes';
 import SquareAttributes from './SquareAttributes';
 import CircleAttributes from './CircleAttributes';
+import ImageAttributes from './ImageAttributes';
 
 const AttrsMenu = ({ node, id, onChange }) => {
 	const [element, setElement] = useState(null);
@@ -27,6 +28,7 @@ const AttrsMenu = ({ node, id, onChange }) => {
 					{element?.attrs.type === 'text' && <TextAttributes element={element} updateAttribute={updateAttribute} />}
 					{element?.attrs.type === 'rectangle' && <SquareAttributes  element={element} updateAttribute={updateAttribute} />}
 					{element?.attrs.type === 'circle' && <CircleAttributes  element={element} updateAttribute={updateAttribute} />}
+					{element?.attrs.type === 'image' && <ImageAttributes  element={element} updateAttribute={updateAttribute} />}
 				</div>
 			)}
 		</div>

@@ -1,5 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="none" viewBox="0 0 43 43" version="1.1"
      xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs">
-    <path fill="rgba(0, 255, 255, 1)"
-          d="m40.4 21.5-.7-.7.7-.7c2.3-2.5 2.2-6.4-.3-8.7L30.1 2c-2.5-2.3-6.4-2.2-8.7.3l-.7.7-.7-.7c-2.5-2.3-6.4-2.2-8.7.3l-9.4 10c-2.3 2.5-2.2 6.4.3 8.7l.7.7-.7.7c-2.3 2.5-2.2 6.4.3 8.7l10 9.4c2.5 2.3 6.4 2.2 8.7-.3l.7-.7.7.7c2.5 2.3 6.4 2.2 8.7-.3l9.4-10c2.3-2.5 2.2-6.4-.3-8.7Z"></path>
+    <path
+          d="m40.4 21.5-.7-.7.7-.7c2.3-2.5 2.2-6.4-.3-8.7L30.1 2c-2.5-2.3-6.4-2.2-8.7.3l-.7.7-.7-.7c-2.5-2.3-6.4-2.2-8.7.3l-9.4 10c-2.3 2.5-2.2 6.4.3 8.7l.7.7-.7.7c-2.3 2.5-2.2 6.4.3 8.7l10 9.4c2.5 2.3 6.4 2.2 8.7-.3l.7-.7.7.7c2.5 2.3 6.4 2.2 8.7-.3l9.4-10c2.3-2.5 2.2-6.4-.3-8.7Z"
+          fill="url(&quot;#SvgjsLinearGradient1039&quot;)"></path>
+    <defs>
+        <linearGradient id="SvgjsLinearGradient1039">
+            <stop stop-color="#f98fbf" offset="0"></stop>
+            <stop stop-color="#fffccc" offset="1"></stop>
+        </linearGradient>
+    </defs>
 </svg>

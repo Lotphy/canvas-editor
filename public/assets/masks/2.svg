@@ -4,7 +4,7 @@
           fill="url(&quot;#SvgjsLinearGradient1039&quot;)"></path>
     <defs>
         <linearGradient id="SvgjsLinearGradient1039">
-            <stop stop-color="#c9ffbf" offset="0"></stop>
+            <stop stop-color="#f98fbf" offset="0"></stop>
             <stop stop-color="#fffccc" offset="1"></stop>
         </linearGradient>
     </defs>

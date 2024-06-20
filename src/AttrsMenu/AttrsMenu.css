@@ -81,6 +81,15 @@
     background-size: 12px 12px;
 }
 
+.mask-selector-wrapper {
+    position: absolute;
+    background: #1c1b26;
+    width: 210px;
+    padding: 12px 8px 0;
+    left: 8px;
+    top: 43px;
+}
+
 /* Arial Black */
 @font-face {
     font-family: 'Arial Black';
