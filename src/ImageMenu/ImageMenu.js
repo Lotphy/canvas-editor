@@ -13,11 +13,10 @@ const ImageMenu = () => {
   const editorContext = useContext(EditorContext);
 
   useEffect(() => {
-    const presetImages = [
-      `${process.env.PUBLIC_URL}/assets/samples/img/1.jpg`,
-      `${process.env.PUBLIC_URL}/assets/samples/img/2.jpg`,
-      `${process.env.PUBLIC_URL}/assets/samples/img/3.jpg`
-    ];
+    const presetImages = [];
+		for (let i = 1; i < 9; i++) {
+			presetImages.push(`${process.env.PUBLIC_URL}/assets/samples/img/${i}.jpg`)
+		}
     setUploadedImages([...storedImages.map(img => img.data), ...presetImages]);
   }, []);
 
@@ -25,9 +24,10 @@ const ImageMenu = () => {
     const id = crypto.randomUUID();
     const image = new Image();
     image.src = imageBase64;
-    const displayWidth = 200;
-    const ratio = displayWidth / image.width;
-    const displayHeight = image.height * ratio;
+    const displayHeight = 200;
+    const ratio = displayHeight / image.height;
+    const displayWidth = image.width * ratio;
+		console.log(displayWidth, displayHeight)
 	  const mask = null;
     const newElement = {
       id,
@@ -36,7 +36,9 @@ const ImageMenu = () => {
 	    mask,
       x: 75, // Adjust these values as needed
       y: 50,
-      width: 200,
+	    originalWidth: image.width,
+	    originalHeight: image.height,
+      width: displayWidth,
       height: displayHeight,
       relativeX: 75,
       relativeY: 50

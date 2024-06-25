@@ -318,6 +318,33 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
   const renderImage = () => {
     const img = new window.Image();
     img.src = shapeProps.src;
+
+		let cropParams = {}
+	  if (shapeProps.mask) {
+			let cropX = 0, cropY = 0, smallerSide;
+
+			if (shapeProps.originalHeight < shapeProps.originalWidth) {
+				smallerSide = shapeProps.originalHeight;
+				cropX = (shapeProps.originalWidth - smallerSide) / 2;
+			} else {
+				smallerSide = shapeProps.originalWidth;
+				cropY = (shapeProps.originalHeight - smallerSide) / 2;
+			}
+
+			const cropWidth = smallerSide;
+			const cropHeight = smallerSide;
+
+			cropParams = {
+				cropX,
+				cropY,
+				cropWidth,
+				cropHeight,
+				width: 200,
+				height: 200
+			}
+
+	  }
+
     return (
       <Group
         onClick={onSelect}
@@ -367,6 +394,7 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
         <Image
           width={shapeProps.width}
           height={shapeProps.height}
+          {...cropParams}
           image={img}
         />
       </Group>
