@@ -27,7 +27,6 @@ const ImageMenu = () => {
     const displayHeight = 200;
     const ratio = displayHeight / image.height;
     const displayWidth = image.width * ratio;
-		console.log(displayWidth, displayHeight)
 	  const mask = null;
     const newElement = {
       id,

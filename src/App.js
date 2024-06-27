@@ -36,7 +36,10 @@ function App() {
       setElements(elemsCopy);
       editorContext.setSelectedElement(clone);
     },
-    setElements
+    setElements: (elems) => {
+			console.log(elems)
+			setElements(elems);
+    }
   }
 
   return (
