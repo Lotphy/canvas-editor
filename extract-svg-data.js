@@ -2,7 +2,6 @@ const fs = require('fs');
 const path = require('path');
 const xml2js = require('xml2js');
 
-// Function to extract the 'd' attribute from SVG path elements
 function extractPathData(filePath) {
 	return new Promise((resolve, reject) => {
 		fs.readFile(filePath, 'utf8', (err, data) => {
@@ -16,7 +15,7 @@ function extractPathData(filePath) {
 				}
 
 				const paths = [];
-				const url = filePath.replace('public', '');
+				const url = filePath.replace('public', '').replaceAll('\\', '/');
 
 				if (result.svg) {
 					const path = result.svg.g ? result.svg.g[0].path : result.svg.path;
@@ -33,8 +32,7 @@ function extractPathData(filePath) {
 	});
 }
 
-// Function to scan the folder and process SVG files
-async function scanFolder(folderPath) {
+async function scanSvgFolder(folderPath) {
 	const files = fs.readdirSync(folderPath);
 	const svgFiles = files.filter(file => path.extname(file).toLowerCase() === '.svg');
 
@@ -53,13 +51,31 @@ async function scanFolder(folderPath) {
 	return result;
 }
 
-// Usage example
-const folderPath = './public/assets/masks'; // Replace with the path to your SVG folder
-scanFolder(folderPath)
-	.then(result => {
-		const output = `//Auto-generated file, do not edit it \nexport const svgPathData = ${JSON.stringify(result, null, 2)};`;
-		fs.writeFileSync('./src/shared/svg-masks.js', output, 'utf8');
-	})
-	.catch(err => {
-		console.error('Error scanning folder:', err);
+function scanImagesFolder(folderPath) {
+	const files = fs.readdirSync(folderPath);
+	const result = [];
+
+	files.forEach(file => {
+		const fileExtension = path.extname(file).toLowerCase().replace('.', '');
+		if (fileExtension === 'jpeg' || fileExtension === 'jpg' || fileExtension === 'png') {
+			const filePath = path.join(folderPath, file);
+			result.push(filePath.replace('public', '').replaceAll('\\', '/'));
+		}
 	});
+
+	return result;
+}
+
+const svgMasksFolder = './public/assets/masks';
+let svgExports;
+svgExports = scanSvgFolder(svgMasksFolder)
+
+const sampleImagesFolder = './public/assets/samples/img';
+let imagesExports;
+imagesExports = scanImagesFolder(sampleImagesFolder)
+
+Promise.all([imagesExports, svgExports]).then(result => {
+		const exportedVariables = `//Auto-generated file, do not edit it \nexport const sampleImagesUrls = ${JSON.stringify(result[0], null, 2)};
+		\nexport const svgPathData = ${JSON.stringify(result[1], null, 2)};`;
+		fs.writeFileSync('./src/shared/sample-resources.js', exportedVariables, 'utf8');
+});

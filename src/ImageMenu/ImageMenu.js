@@ -4,6 +4,7 @@ import './ImageMenu.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUploadedImages, storeUploadedImage } from '../shared/store/stage.reducer';
 import { EditorContext } from '../shared/context';
+import { sampleImagesUrls } from '../shared/sample-resources';
 
 const ImageMenu = () => {
   const [uploadedImages, setUploadedImages] = useState([]);
@@ -13,11 +14,11 @@ const ImageMenu = () => {
   const editorContext = useContext(EditorContext);
 
   useEffect(() => {
-    const presetImages = [];
-		for (let i = 1; i < 9; i++) {
-			presetImages.push(`${process.env.PUBLIC_URL}/assets/samples/img/${i}.jpg`)
-		}
-    setUploadedImages([...storedImages.map(img => img.data), ...presetImages]);
+    console.log(sampleImagesUrls)
+    sampleImagesUrls.map(file => {
+      return `${process.env.PUBLIC_URL}${file}`
+    })
+    setUploadedImages([...storedImages.map(img => img.data), ...sampleImagesUrls]);
   }, []);
 
   const handleAddElement = (imageBase64) => {

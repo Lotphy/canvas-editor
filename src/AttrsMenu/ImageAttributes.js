@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { MDBBtn, MDBCol } from 'mdb-react-ui-kit';
-import {svgPathData} from "../shared/svg-masks";
+import {svgPathData} from "../shared/sample-resources";
 
 const ImageAttributes = ({ element, updateAttribute }) => {
   const [mask, setMask] = useState(null);
