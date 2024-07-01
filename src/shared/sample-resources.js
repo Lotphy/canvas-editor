@@ -1,4 +1,6 @@
-//Auto-generated file, do not edit it 
+// Auto-generated file, do not edit it 
+// scan-sample-images-folder.js
+		
 export const sampleImagesUrls = [
   "/assets/samples/img/1.jpg",
   "/assets/samples/img/2.jpg",

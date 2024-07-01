@@ -75,7 +75,8 @@ let imagesExports;
 imagesExports = scanImagesFolder(sampleImagesFolder)
 
 Promise.all([imagesExports, svgExports]).then(result => {
-		const exportedVariables = `//Auto-generated file, do not edit it \nexport const sampleImagesUrls = ${JSON.stringify(result[0], null, 2)};
+		const exportedVariables = `// Auto-generated file, do not edit it \n// scan-sample-images-folder.js
+		\nexport const sampleImagesUrls = ${JSON.stringify(result[0], null, 2)};
 		\nexport const svgPathData = ${JSON.stringify(result[1], null, 2)};`;
 		fs.writeFileSync('./src/shared/sample-resources.js', exportedVariables, 'utf8');
 });
