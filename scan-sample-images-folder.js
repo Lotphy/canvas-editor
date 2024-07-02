@@ -36,7 +36,7 @@ function extractPathData(filePath) {
 async function extractImageData(filePath) {
 	return new Promise((resolve, reject) => {
 		const img = new Image();
-		img.onload = () => resolve({ url: filePath.replace('public', '').replaceAll('\\', '/'), width: img.width, height: img.height });
+		img.onload = () => resolve({ url: filePath.replace('public', '').replaceAll('\\', '/'), originalWidth: img.width, originalHeight: img.height });
 		img.onerror = reject;
 		img.src = filePath;
 	});

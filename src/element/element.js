@@ -342,7 +342,6 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
 				width: 200,
 				height: 200
 			}
-
 	  }
 
     return (

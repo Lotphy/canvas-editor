@@ -52,16 +52,35 @@ const ImageAttributes = ({ element, updateAttributes }) => {
         <MDBCol className={`col-6 mb-3 d-flex align-items-center`} key={index} onClick={() => {
           setImageSource(imageData.url);
           const displayHeight = 200;
-          const ratio = displayHeight / imageData.height;
-          const displayWidth = imageData.width * ratio;
+          const ratio = displayHeight / imageData.originalHeight;
+          const displayWidth = imageData.originalWidth * ratio;
+	        let cropX = 0, cropY = 0, smallerSide;
+	        if (imageData.originalHeight < imageData.originalWidth) {
+		        smallerSide = imageData.originalHeight;
+		        cropX = (imageData.originalWidth - smallerSide) / 2;
+	        } else {
+		        smallerSide = imageData.originalWidth;
+		        cropY = (imageData.originalHeight - smallerSide) / 2;
+	        }
+
+	        const cropWidth = smallerSide;
+	        const cropHeight = smallerSide;
+
+	        const cropParams = {
+		        cropX,
+		        cropY,
+		        cropWidth,
+		        cropHeight
+	        }
+					
           updateAttributes({
             src: imageData.url,
             originalHeight: imageData.originalHeight,
             originalWidth: imageData.originalWidth,
             width: displayWidth,
-            height: displayHeight
+            height: displayHeight,
+	          ...cropParams
           })
-          console.log(element)
         }}>
           <img src={imageData.url} alt="sample-image" className={`image-${index} mw-100`} />
         </MDBCol>
