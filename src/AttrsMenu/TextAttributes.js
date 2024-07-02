@@ -46,7 +46,7 @@ const TextAttributes = ({ element, updateAttribute }) => {
   }
 
   return (
-    <>
+    <div className="d-flex px-3">
       <div className="text-white d-flex align-items-center bg-transparent shadow-0 px-0 me-3">
         <label className="me-2">Font:</label>
         <select
@@ -182,7 +182,7 @@ const TextAttributes = ({ element, updateAttribute }) => {
           <MDBIcon fas icon="italic" size="lg" className="d-inline-block"/>
         </MDBBtn>
       </div>
-    </>
+    </div>
   )
 }
 

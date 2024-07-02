@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const xml2js = require('xml2js');
+const { Image } = require('canvas');
 
 function extractPathData(filePath) {
 	return new Promise((resolve, reject) => {
@@ -32,6 +33,15 @@ function extractPathData(filePath) {
 	});
 }
 
+async function extractImageData(filePath) {
+	return new Promise((resolve, reject) => {
+		const img = new Image();
+		img.onload = () => resolve({ url: filePath.replace('public', '').replaceAll('\\', '/'), width: img.width, height: img.height });
+		img.onerror = reject;
+		img.src = filePath;
+	});
+}
+
 async function scanSvgFolder(folderPath) {
 	const files = fs.readdirSync(folderPath);
 	const svgFiles = files.filter(file => path.extname(file).toLowerCase() === '.svg');
@@ -55,11 +65,12 @@ function scanImagesFolder(folderPath) {
 	const files = fs.readdirSync(folderPath);
 	const result = [];
 
-	files.forEach(file => {
+	files.forEach(async (file) => {
 		const fileExtension = path.extname(file).toLowerCase().replace('.', '');
 		if (fileExtension === 'jpeg' || fileExtension === 'jpg' || fileExtension === 'png') {
 			const filePath = path.join(folderPath, file);
-			result.push(filePath.replace('public', '').replaceAll('\\', '/'));
+			const imageData = await extractImageData(filePath);
+			result.push(imageData);
 		}
 	});
 

@@ -88,6 +88,9 @@
     padding: 12px 8px 0;
     left: 8px;
     top: 43px;
+    max-height: 300px;
+    min-height: 50vh;
+    overflow: auto;
 }
 
 .mask-selector-wrapper span {

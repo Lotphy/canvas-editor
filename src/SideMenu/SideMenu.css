@@ -73,6 +73,7 @@
   color: white;
   position: absolute;
   top: 50%;
+  left: 2px;
   transform: translate(0, -50%);
   font-size: 12px;
 }

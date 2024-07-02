@@ -177,7 +177,7 @@ const TextMenu = () => {
       name: 'Stardust',
       style: {
         color: 'rgba(255, 167, 0, 1)',
-        textShadow: 'rgb(255, 179, 0) 0px 0px 16px',
+        textShadow: 'rgba(255, 179, 0, 0.1) 0px 0px 8px',
         WebkitTextStroke: '1px rgb(0, 0, 0)',
         fontWeight: 'normal',
         fontFamily: 'Impact, sans-serif'
@@ -188,7 +188,7 @@ const TextMenu = () => {
         stroke: 'black',
         fontSize: 90,
         fontFamily: 'Impact, sans-serif',
-        shadowColor: 'rgb(255, 167, 0)',
+        shadowColor: 'rgba(255, 167, 0, 0.1)',
         shadowOpacity: 10,
         shadowBlur: 32,
         shadowOffset: { x: 0, y: 0 },

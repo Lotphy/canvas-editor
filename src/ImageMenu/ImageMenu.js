@@ -14,11 +14,8 @@ const ImageMenu = () => {
   const editorContext = useContext(EditorContext);
 
   useEffect(() => {
-    console.log(sampleImagesUrls)
-    sampleImagesUrls.map(file => {
-      return `${process.env.PUBLIC_URL}${file}`
-    })
-    setUploadedImages([...storedImages.map(img => img.data), ...sampleImagesUrls]);
+    const sampleFiles = sampleImagesUrls.map(imageData => `${process.env.PUBLIC_URL}${imageData.url}`);
+    setUploadedImages([...storedImages.map(img => img.data), ...sampleFiles]);
   }, []);
 
   const handleAddElement = (imageBase64) => {

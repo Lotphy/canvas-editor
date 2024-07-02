@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { MDBBtn, MDBCol } from 'mdb-react-ui-kit';
-import {svgPathData} from "../shared/sample-resources";
+import { sampleImagesUrls, svgPathData } from '../shared/sample-resources';
 
-const ImageAttributes = ({ element, updateAttribute }) => {
+const ImageAttributes = ({ element, updateAttributes }) => {
   const [mask, setMask] = useState(null);
-  const [displayMaskSelector, setDisplayMaskSelector] = useState(true);
+  const [maskSelector, setMaskSelector] = useState(false);
   const [imageSource, setImageSource] = useState('');
+  const [imageSelector, setImageSelector] = useState(false);
 
   useEffect(() => {
     if (element) {
@@ -17,9 +18,11 @@ const ImageAttributes = ({ element, updateAttribute }) => {
 
   const renderMasks = () => {
     const renderer = [
-	    <MDBCol className={`col-4 mb-3 d-flex align-items-center`} onClick={() => {
+	    <MDBCol className={`col-4 mb-3 d-flex align-items-center`} key={null} onClick={() => {
 		    setMask(null);
-		    updateAttribute('mask', null);
+		    updateAttributes({
+          mask: null
+        });
 	    }}>
 				    <span>None</span>
 	    </MDBCol>
@@ -28,11 +31,39 @@ const ImageAttributes = ({ element, updateAttribute }) => {
 	  svgPathData.forEach((maskData, index) => {
       renderer.push(
         <MDBCol className={`col-4 mb-3 d-flex align-items-center`} key={index} onClick={() => {
-          const m = new Path2D(maskData.path2D);
-          setMask(m);
-          updateAttribute('mask', m);
+          const maskPath = new Path2D(maskData.path2D);
+          setMask(maskPath);
+          updateAttributes({
+            mask: maskPath
+          });
         }}>
-            <img src={maskData.url} alt="mask" className={`mask-${index} mw-100`} />
+          <img src={maskData.url} alt="mask" className={`mask-${index} mw-100`} />
+        </MDBCol>
+      )
+    })
+    return renderer;
+  }
+
+  const renderImageSelector = () => {
+    const renderer = [];
+
+	  sampleImagesUrls.forEach((imageData, index) => {
+      renderer.push(
+        <MDBCol className={`col-6 mb-3 d-flex align-items-center`} key={index} onClick={() => {
+          setImageSource(imageData.url);
+          const displayHeight = 200;
+          const ratio = displayHeight / imageData.height;
+          const displayWidth = imageData.width * ratio;
+          updateAttributes({
+            src: imageData.url,
+            originalHeight: imageData.originalHeight,
+            originalWidth: imageData.originalWidth,
+            width: displayWidth,
+            height: displayHeight
+          })
+          console.log(element)
+        }}>
+          <img src={imageData.url} alt="sample-image" className={`image-${index} mw-100`} />
         </MDBCol>
       )
     })
@@ -45,12 +76,29 @@ const ImageAttributes = ({ element, updateAttribute }) => {
         <MDBBtn className="text-white d-flex align-items-center bg-transparent shadow-0 px-0 mx-3"
                 noRipple
                 onClick={() => {
-                  setDisplayMaskSelector(!displayMaskSelector);
+                  setMaskSelector(false);
+                  setImageSelector(!imageSelector);
+                }}>
+          Image
+        </MDBBtn>
+        {
+          imageSelector &&
+          <div className="mask-selector-wrapper row">
+            { renderImageSelector() }
+          </div>
+        }
+      </div>
+      <div className="d-flex position-relative">
+        <MDBBtn className="text-white d-flex align-items-center bg-transparent shadow-0 px-0 mx-3"
+                noRipple
+                onClick={() => {
+                  setMaskSelector(!maskSelector);
+                  setImageSelector(false);
                 }}>
           Mask
         </MDBBtn>
         {
-          displayMaskSelector &&
+          maskSelector &&
           <div className="mask-selector-wrapper row">
             { renderMasks() }
           </div>
