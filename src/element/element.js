@@ -342,7 +342,14 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
 				width: 200,
 				height: 200
 			}
-	  }
+	  } else {
+      const displayHeight = 200;
+      const ratio = displayHeight / shapeProps.originalHeight;
+      const displayWidth = shapeProps.originalWidth * ratio
+
+      shapeProps.width = displayWidth;
+      shapeProps.height = displayHeight;
+    }
 
     return (
       <Group
