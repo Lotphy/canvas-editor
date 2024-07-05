@@ -82,7 +82,7 @@ const ImageAttributes = ({ element, updateAttributes }) => {
         <MDBBtn className="text-white d-flex align-items-center bg-transparent shadow-0 px-2 me-3"
                 noRipple
                 onClick={() => {
-                  setMaskSelector(false);
+                  closeAllMenus();
                   setImageSelector(!imageSelector);
                 }}>
           Image
@@ -98,8 +98,8 @@ const ImageAttributes = ({ element, updateAttributes }) => {
         <MDBBtn className="text-white d-flex align-items-center bg-transparent shadow-0 px-2 me-3"
                 noRipple
                 onClick={() => {
+                  closeAllMenus();
                   setMaskSelector(!maskSelector);
-                  setImageSelector(false);
                 }}>
           Mask
         </MDBBtn>

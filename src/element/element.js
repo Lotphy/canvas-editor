@@ -76,7 +76,7 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
         visible: true,
         width: +textarea.style.width.replace('px', '') / stage.scale().x,
       });
-      textarea.parentNode.removeChild(textarea);
+      textarea?.parentNode?.removeChild(textarea);
       window.removeEventListener('click', handleOutsideClick);
       window.removeEventListener('mousedown', handleOutsideClick);
       window.removeEventListener('wheel', handleOutsideClick);
@@ -136,8 +136,7 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
         textarea.value = textarea.value.trim();
         textNode.text(textarea.value);
         textarea.style.height = 'auto';
-        textarea.style.height =
-          textarea.scrollHeight + scaledFontSize + 'px';
+        textarea.style.height = textarea.scrollHeight + scaledFontSize + 'px';
         removeTextarea();
       }
     }
@@ -345,9 +344,7 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
 	  } else {
       const displayHeight = 200;
       const ratio = displayHeight / shapeProps.originalHeight;
-      const displayWidth = shapeProps.originalWidth * ratio
-
-      shapeProps.width = displayWidth;
+      shapeProps.width = shapeProps.originalWidth * ratio;
       shapeProps.height = displayHeight;
     }
 
