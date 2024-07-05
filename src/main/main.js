@@ -207,6 +207,7 @@ const Main = () => {
                         transformer={transformerRef}
                         onMouseDown={(e) => {
                           if (e.evt.button === 1) {
+                            console.log('DRAG', e.target)
                             // Use mouse wheel button as drag button
                             e.target.setAttr('draggable', false);
                           }

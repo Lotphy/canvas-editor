@@ -1,5 +1,5 @@
 import React from 'react';
-import { Ellipse, Group, Image, Rect, Text } from 'react-konva';
+import { Ellipse, Group, Image, Rect, Shape, Text } from 'react-konva';
 import { useSelector } from 'react-redux';
 import { getDrawableZone } from '../shared/store/stage.reducer';
 
@@ -391,8 +391,7 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
           // Begin path for clipping
           // Define the clipping region as a circle with radius equal to the width/height of the Group
           if (shapeProps.mask) {
-            ctx.clip(shapeProps.mask);
-            ctx.fill(shapeProps.mask);
+            ctx.clip(new Path2D(shapeProps.mask));
           }
           ctx.rect(0, 0, shapeProps.width, shapeProps.height);
         }}
@@ -403,6 +402,21 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
           {...cropParams}
           image={img}
         />
+        {shapeProps.strokeWidth > 0 &&
+          <Shape
+            sceneFunc={(ctx, shape) => {
+              ctx.beginPath()
+              ctx.strokeStyle = shapeProps.stroke;
+              ctx.lineWidth = shapeProps.strokeWidth;
+              if (shapeProps.mask) {
+                ctx.stroke(new Path2D(shapeProps.mask))
+              } else {
+                ctx.strokeRect(0, 0, shapeProps.width, shapeProps.height)
+              }
+              ctx.fillStrokeShape(shape)
+            }}
+          />
+        }
       </Group>
     )
   }

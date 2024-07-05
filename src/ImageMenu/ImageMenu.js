@@ -38,7 +38,8 @@ const ImageMenu = () => {
       width: displayWidth,
       height: displayHeight,
       relativeX: 75,
-      relativeY: 50
+      relativeY: 50,
+      stroke: '#000'
     };
     editorContext.setElements(elems =>[...elems, newElement]);
   };

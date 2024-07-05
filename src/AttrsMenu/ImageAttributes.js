@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { MDBBtn, MDBCol } from 'mdb-react-ui-kit';
+import { MDBBtn, MDBCol, MDBInput } from 'mdb-react-ui-kit';
 import { sampleImagesUrls, svgPathData } from '../shared/sample-resources';
+import { SketchPicker } from 'react-color';
 
 const ImageAttributes = ({ element, updateAttributes }) => {
   const [mask, setMask] = useState(null);
   const [maskSelector, setMaskSelector] = useState(false);
   const [imageSource, setImageSource] = useState('');
   const [imageSelector, setImageSelector] = useState(false);
+  const [strokeWidth, setStrokeWidth] = useState(0);
+  const [outlineSelector, setOutlineSelector] = useState(false);
+  const [outlineColor, setOutlineColor] = useState('transparent');
 
   useEffect(() => {
     if (element) {
       // Update input values whenever element attributes change
       setMask(element.attrs.mask || '');
       setImageSource(element.attrs.src || '');
+      setStrokeWidth(element.attrs.strokeWidth || 0);
+      setOutlineColor(element.attrs.stroke || 'transparent');
     }
   }, [element]);
 
@@ -31,7 +37,7 @@ const ImageAttributes = ({ element, updateAttributes }) => {
 	  svgPathData.forEach((maskData, index) => {
       renderer.push(
         <MDBCol className={`col-4 mb-3 d-flex align-items-center`} key={index} onClick={() => {
-          const maskPath = new Path2D(maskData.path2D);
+          const maskPath = maskData.path2D;
           setMask(maskPath);
           updateAttributes({
             mask: maskPath
@@ -64,10 +70,16 @@ const ImageAttributes = ({ element, updateAttributes }) => {
     return renderer;
   }
 
+  const closeAllMenus = () => {
+    setOutlineSelector(false);
+    setImageSelector(false);
+    setMaskSelector(false);
+  }
+
   return (
-    <>
+    <div className="d-flex px-3">
       <div className="d-flex position-relative">
-        <MDBBtn className="text-white d-flex align-items-center bg-transparent shadow-0 px-0 mx-3"
+        <MDBBtn className="text-white d-flex align-items-center bg-transparent shadow-0 px-2 me-3"
                 noRipple
                 onClick={() => {
                   setMaskSelector(false);
@@ -83,7 +95,7 @@ const ImageAttributes = ({ element, updateAttributes }) => {
         }
       </div>
       <div className="d-flex position-relative">
-        <MDBBtn className="text-white d-flex align-items-center bg-transparent shadow-0 px-0 mx-3"
+        <MDBBtn className="text-white d-flex align-items-center bg-transparent shadow-0 px-2 me-3"
                 noRipple
                 onClick={() => {
                   setMaskSelector(!maskSelector);
@@ -98,7 +110,53 @@ const ImageAttributes = ({ element, updateAttributes }) => {
           </div>
         }
       </div>
-    </>
+      <div className="text-white d-flex align-items-center bg-transparent shadow-0 px-0 me-3">
+        <label className="me-2">Outline:</label>
+        <MDBInput
+          className="text-white"
+          type="number"
+          value={strokeWidth}
+          onChange={(e) => {
+            const value = parseInt(e.target.value) || 0;
+            setStrokeWidth(value);
+            updateAttributes({
+              strokeWidth: value
+            });
+          }}
+        />
+      </div>
+      <MDBBtn className="text-white d-flex align-items-center bg-transparent shadow-0 px-0 me-3"
+              noRipple
+              onClick={() => {
+                closeAllMenus();
+                setOutlineSelector(!outlineSelector);
+              }}>
+        <div className="color-selector transparent-canvas outline" style={{ borderColor: element?.attrs?.stroke }}>
+          <div className="outline-inner" />
+        </div>
+      </MDBBtn>
+      {
+        outlineSelector &&
+        <div className="color-picker-wrapper">
+          <SketchPicker
+            color={outlineColor}
+            onChange={(e) => {
+              const color = `rgba(${e.rgb.r},${e.rgb.g},${e.rgb.b},${e.rgb.a})`;
+              setOutlineColor(color);
+              updateAttributes({
+                stroke: color
+              });
+              if (strokeWidth === 0) {
+                setStrokeWidth(8);
+                updateAttributes({
+                  strokeWidth: 8
+                })
+              }
+            }}
+          />
+        </div>
+      }
+    </div>
   )
 }
 

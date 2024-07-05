@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import './SideMenu.css';
 import LayersMenu from '../LayersMenu/LayersMenu';
 import { MDBBtn, MDBCol, MDBContainer, MDBIcon, MDBRow } from 'mdb-react-ui-kit';
 import ShapeMenu from '../ShapeMenu/ShapeMenu';
 import TextMenu from '../TextMenu/TextMenu';
 import ImageMenu from '../ImageMenu/ImageMenu';
+import { EditorContext } from '../shared/context';
 
 const SideMenu = () => {
   const [toggledDrawer, setToggledDrawer] = useState('image');
+  const editorContext = useContext(EditorContext);
 
   useEffect(() => {
     window.dispatchEvent(new Event('resize'));
@@ -39,6 +41,12 @@ const SideMenu = () => {
                 noRipple
         >
           <MDBIcon className="fs-2" fas icon="image"/>
+        </MDBBtn>
+        <MDBBtn className={`p-3`}
+                onClick={() => console.log(editorContext.elements)}
+                noRipple
+        >
+          <MDBIcon className="fs-2" fas icon="download"/>
         </MDBBtn>
       </div>
       {toggledDrawer !== '' &&
