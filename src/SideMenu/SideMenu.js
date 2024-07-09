@@ -6,14 +6,58 @@ import ShapeMenu from '../ShapeMenu/ShapeMenu';
 import TextMenu from '../TextMenu/TextMenu';
 import ImageMenu from '../ImageMenu/ImageMenu';
 import { EditorContext } from '../shared/context';
+import { useSelector } from 'react-redux';
+import { getDrawableZone } from '../shared/store/stage.reducer';
 
-const SideMenu = () => {
+const SideMenu = ({stageRef}) => {
   const [toggledDrawer, setToggledDrawer] = useState('image');
   const editorContext = useContext(EditorContext);
+  const drawableZone = useSelector(getDrawableZone);
+
+  const exportRatio = 3;
 
   useEffect(() => {
     window.dispatchEvent(new Event('resize'));
-  }, [toggledDrawer])
+  }, [toggledDrawer]);
+
+  const handleExport = () => {
+    const stagePos = stageRef?.current?.position();
+    const scale = stageRef?.current?.scale();
+    const x = (drawableZone.x) * scale.x + stagePos.x; // Define the x position of the part to export
+    const y = (drawableZone.y) * scale.y + stagePos.y; // Define the y position of the part to export
+    const width = drawableZone.width * scale.x; // Define the width of the part to export
+    const height = drawableZone.height * scale.y; // Define the height of the part to export
+
+    // Create a new canvas to draw the specified part
+    const canvas = document.createElement('canvas');
+    canvas.width = width * exportRatio;
+    canvas.height = height * exportRatio;
+    const context = canvas.getContext('2d');
+
+    // Extract the part from the stage and draw it on the new canvas
+    context.drawImage(
+      stageRef?.current?.toCanvas({
+        x,
+        y,
+        width,
+        height,
+        pixelRatio: exportRatio
+      }),
+      0, 0, canvas.width, canvas.width,
+      0, 0, canvas.width, canvas.width
+    );
+
+    // Convert the new canvas to a data URL
+    const dataURL = canvas.toDataURL('image/jpeg');
+
+    // Create a link element to download the JPG file
+    const link = document.createElement('a');
+    link.href = dataURL;
+    link.download = 'exported-part.jpg';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <div className="d-flex">
@@ -42,8 +86,17 @@ const SideMenu = () => {
         >
           <MDBIcon className="fs-2" fas icon="image"/>
         </MDBBtn>
+        <MDBBtn className={`p-3 ${toggledDrawer === 'template' ? 'btn-active' : ''}`}
+                onClick={() => setToggledDrawer('template')}
+                noRipple
+        >
+          <MDBIcon className="fs-2" fas icon="list-alt"/>
+        </MDBBtn>
         <MDBBtn className={`p-3`}
-                onClick={() => console.log(editorContext.elements)}
+                onClick={() => {
+                  console.log(editorContext.elements)
+                  handleExport();
+                }}
                 noRipple
         >
           <MDBIcon className="fs-2" fas icon="download"/>

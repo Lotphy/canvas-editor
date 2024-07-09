@@ -135,7 +135,7 @@ const Main = () => {
   return (
     <div className="d-flex vh-100 flex-column">
       <div className="d-flex w-100 h-100">
-        <SideMenu/>
+        <SideMenu stageRef={stageRef}/>
 
         <MDBContainer fluid
                       style={{ flex: '1', overflow: 'hidden', position: 'relative' }}
