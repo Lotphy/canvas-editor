@@ -8,9 +8,10 @@ import ImageMenu from '../ImageMenu/ImageMenu';
 import { EditorContext } from '../shared/context';
 import { useSelector } from 'react-redux';
 import { getDrawableZone } from '../shared/store/stage.reducer';
+import TemplateMenu from '../TemplateMenu/TemplateMenu';
 
 const SideMenu = ({stageRef}) => {
-  const [toggledDrawer, setToggledDrawer] = useState('image');
+  const [toggledDrawer, setToggledDrawer] = useState('template');
   const editorContext = useContext(EditorContext);
   const drawableZone = useSelector(getDrawableZone);
 
@@ -21,6 +22,11 @@ const SideMenu = ({stageRef}) => {
   }, [toggledDrawer]);
 
   const handleExport = () => {
+    stageRef.current.position(0, 0);
+    stageRef.current.scale({
+      x: 1,
+      y: 1
+    });
     const stagePos = stageRef?.current?.position();
     const scale = stageRef?.current?.scale();
     const x = (drawableZone.x) * scale.x + stagePos.x; // Define the x position of the part to export
@@ -124,6 +130,9 @@ const SideMenu = ({stageRef}) => {
             }
             {toggledDrawer === 'image' &&
               <ImageMenu/>
+            }
+            {toggledDrawer === 'template' &&
+              <TemplateMenu/>
             }
           </div>
         </MDBContainer>

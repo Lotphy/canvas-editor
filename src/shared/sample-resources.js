@@ -193,7 +193,7 @@ export const sampleImagesUrls = [
     "originalHeight": 832
   }
 ];
-		
+
 export const svgPathData = [
   {
     "url": "/assets/masks/asset(00).svg",

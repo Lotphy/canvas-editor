@@ -78,12 +78,10 @@ function scanImagesFolder(folderPath) {
 }
 
 const svgMasksFolder = './public/assets/masks';
-let svgExports;
-svgExports = scanSvgFolder(svgMasksFolder)
+const svgExports = scanSvgFolder(svgMasksFolder)
 
 const sampleImagesFolder = './public/assets/samples/img';
-let imagesExports;
-imagesExports = scanImagesFolder(sampleImagesFolder)
+const imagesExports = scanImagesFolder(sampleImagesFolder)
 
 Promise.all([imagesExports, svgExports]).then(result => {
 		const exportedVariables = `// Auto-generated file, do not edit it \n// scan-sample-images-folder.js
