@@ -1,6 +1,11 @@
 export const TEMPLATES = [
   {
     src: 'template1.jpg',
+    canvas: {
+      width: 400,
+      height: 400,
+      background: 'white'
+    },
     elements: [
       {
         'id': '246174bc-406d-428f-8f55-3be02d89c620',

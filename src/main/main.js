@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState, useContext } from 'react';
-import { MDBContainer } from 'mdb-react-ui-kit';
+import { MDBBtn, MDBContainer, MDBInput } from 'mdb-react-ui-kit';
 import { Stage, Layer, Rect, Group, Transformer } from 'react-konva';
 import Element from '../element/element';
 import './main.css';
@@ -54,7 +54,7 @@ const Main = () => {
     };
 
     const onKeyPress = (e) => {
-      switch(e.key) {
+      switch (e.key) {
         case 'Delete':
           let textarea = document.getElementById('text-editor');
           // Check if text editor is not toggled
@@ -132,6 +132,34 @@ const Main = () => {
     });
   }
 
+  const renderCanvasParams = () => {
+    return <div className="canvas-params d-flex p-2 px-3 text-white">
+      <div className="text-white d-flex align-items-center bg-transparent shadow-0 px-0 me-3">
+        <label className="me-2">Width</label>
+        <MDBInput
+          className="text-white"
+          type="number"
+          value={drawableZone.width || 0}
+          onChange={(e) => {
+            dispatch(setDrawableZone({ drawableZone: { ...drawableZone, width: +e.target.value } }));
+          }}
+        />
+      </div>
+      <div className="text-white d-flex align-items-center bg-transparent shadow-0 px-0 me-3">
+        <label className="me-2">Height</label>
+        <MDBInput
+          className="text-white"
+          type="number"
+          value={drawableZone.height || 0}
+          onChange={(e) => {
+            dispatch(setDrawableZone({ drawableZone: { ...drawableZone, height: +e.target.value } }));
+          }}
+        />
+      </div>
+      <MDBBtn outline>Center</MDBBtn>
+    </div>
+  }
+
   return (
     <div className="d-flex vh-100 flex-column">
       <div className="d-flex w-100 h-100">
@@ -146,13 +174,15 @@ const Main = () => {
                      onChange={(newAttrs) => {
                        const elems = editorContext.elements.slice().map(e => {
                          if (e.id === editorContext.selectedElement?.id) {
-                           return {...e, ...newAttrs};
+                           return { ...e, ...newAttrs };
                          }
                          return e;
                        })
                        editorContext.setElements([...elems]);
                      }}
           />
+
+          {renderCanvasParams()}
 
           <Stage
             id="stage-canvas"
@@ -256,11 +286,11 @@ const Main = () => {
                     if (anchor.name() === 'rotater _anchor') {
                       anchor.visible(true);
                       // make rotater anchor filled black and looks like a circle
-                      anchor.fill("#e8ffe5");
+                      anchor.fill('#e8ffe5');
                       anchor.cornerRadius(anchor.width() / 2);
                     } else {
                       anchor.cornerRadius(2);
-                      anchor.stroke("#7a00ec");
+                      anchor.stroke('#7a00ec');
                     }
                   }}
                   nodes={layerRef.current.findOne(`#${editorContext.selectedElement?.id}`) && [layerRef.current.findOne(`#${editorContext.selectedElement?.id}`)]} // Assuming elements have unique IDs

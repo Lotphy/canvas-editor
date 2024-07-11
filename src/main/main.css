@@ -3,3 +3,34 @@
   background-size: 150px;
   margin: auto;
 }
+
+.canvas-params {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  background: #1c1b26;
+  border-radius: 16px 0 0 0;
+}
+
+.canvas-params .btn {
+  border-color: white;
+  color: white;
+  border-radius: 8px;
+}
+
+.canvas-params input[type=number] {
+  max-width: 80px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

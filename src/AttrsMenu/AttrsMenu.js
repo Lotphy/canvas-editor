@@ -39,7 +39,7 @@ const AttrsMenu = ({ node, id, onChange }) => {
 						<MDBInput
 							className="text-white"
 							type="number"
-							value={element?.attrs.relativeX}
+							value={Math.round(element?.attrs.relativeX)}
 							onChange={(e) => {
 								updateAttributes({
 									relativeX : Math.round(+e.target.value)
@@ -52,7 +52,7 @@ const AttrsMenu = ({ node, id, onChange }) => {
 						<MDBInput
 							className="text-white"
 							type="number"
-							value={element?.attrs.relativeY}
+							value={Math.round(element?.attrs.relativeY)}
 							onChange={(e) => {
 								updateAttributes({
 									relativeY : Math.round(+e.target.value)
