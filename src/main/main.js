@@ -25,34 +25,22 @@ const Main = () => {
   const dispatch = useDispatch();
   const drawableZone = useSelector(getDrawableZone);
 
-  const drawableZoneSize = {
-    width: 400,
-    height: 400
-  }
+  const updateCanvasSize = () => {
+    const canvasWrapper = document.querySelector('.canvas-wrapper');
+    if (canvasWrapper) {
+      const width = canvasWrapper.offsetWidth;
+      const height = canvasWrapper.offsetHeight;
+      setCanvasSize({
+        width,
+        height,
+      });
+    }
+  };
 
   useEffect(() => {
     enableZooming();
     // Update canvas size on window resize
-    const updateCanvasSize = () => {
-      const canvasWrapper = document.querySelector('.canvas-wrapper');
-      if (canvasWrapper) {
-        const width = canvasWrapper.offsetWidth;
-        const height = canvasWrapper.offsetHeight;
-        setCanvasSize({
-          width,
-          height,
-        });
-        dispatch(setDrawableZone({
-          drawableZone: {
-            x: (width - drawableZoneSize.width) / 2,
-            y: (height - drawableZoneSize.height) / 2,
-            width: drawableZoneSize.width,
-            height: drawableZoneSize.height
-          }
-        }));
-      }
-    };
-
+    updateDrawableZone(drawableZone)
     const onKeyPress = (e) => {
       switch (e.key) {
         case 'Delete':
@@ -132,6 +120,30 @@ const Main = () => {
     });
   }
 
+  const centerCanvas = () => {
+    stageRef.current.position(0, 0);
+    stageRef.current.scale({
+      x: 1,
+      y: 1
+    });
+  }
+
+  const updateDrawableZone = ({height, width}) => {
+    const canvasWrapper = document.querySelector('.canvas-wrapper');
+    if (canvasWrapper) {
+      const canvasWidth = canvasWrapper.offsetWidth;
+      const canvasHeight = canvasWrapper.offsetHeight;
+      dispatch(setDrawableZone({
+        drawableZone: {
+          x: (canvasWidth - width) / 2,
+          y: (canvasHeight - height) / 2,
+          width: width,
+          height: height
+        }
+      }));
+    }
+  }
+
   const renderCanvasParams = () => {
     return <div className="canvas-params d-flex p-2 px-3 text-white">
       <div className="text-white d-flex align-items-center bg-transparent shadow-0 px-0 me-3">
@@ -141,7 +153,7 @@ const Main = () => {
           type="number"
           value={drawableZone.width || 0}
           onChange={(e) => {
-            dispatch(setDrawableZone({ drawableZone: { ...drawableZone, width: +e.target.value } }));
+            updateDrawableZone({ height: drawableZone.height, width: +e.target.value });
           }}
         />
       </div>
@@ -152,11 +164,11 @@ const Main = () => {
           type="number"
           value={drawableZone.height || 0}
           onChange={(e) => {
-            dispatch(setDrawableZone({ drawableZone: { ...drawableZone, height: +e.target.value } }));
+            updateDrawableZone({ width: drawableZone.width, height: +e.target.value });
           }}
         />
       </div>
-      <MDBBtn outline>Center</MDBBtn>
+      <MDBBtn outline onClick={centerCanvas}>Center</MDBBtn>
     </div>
   }
 
