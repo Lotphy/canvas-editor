@@ -121,6 +121,7 @@ const Main = () => {
   }
 
   const centerCanvas = () => {
+    updateDrawableZone(drawableZone);
     stageRef.current.position(0, 0);
     stageRef.current.scale({
       x: 1,
