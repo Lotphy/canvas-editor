@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Ellipse, Group, Image, Rect, Shape, Text } from 'react-konva';
-import { useSelector } from 'react-redux';
 import { getDrawableZone } from '../shared/store/stage.reducer';
+import { EditorContext } from '../shared/context';
 
 const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage, transformer }) => {
   const shapeRef = React.useRef();
-  const drawableZone = useSelector(getDrawableZone);
+  const editorContext = useContext(EditorContext);
 
   const handleTextDbClick = (e) => {
     const textNode = shapeRef?.current;
@@ -184,8 +184,8 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
           const node = shapeRef.current;
           onChange({
             ...shapeProps,
-            relativeX: node.x() - drawableZone?.x,
-            relativeY: node.y() - drawableZone?.y,
+            relativeX: node.x() - editorContext.params.drawableZone?.x,
+            relativeY: node.y() - editorContext.params.drawableZone?.y,
           });
         }}
         onTransform={(e) => {
@@ -208,8 +208,8 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
           onChange({
             ...shapeProps,
             width: node.width() * scaleX,
-            relativeX: node.x() - drawableZone?.x,
-            relativeY: node.y() - drawableZone?.y,
+            relativeX: node.x() - editorContext.params.drawableZone?.x,
+            relativeY: node.y() - editorContext.params.drawableZone?.y,
           });
         }}
       />
@@ -233,8 +233,8 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
           const node = shapeRef.current;
           onChange({
             ...shapeProps,
-            relativeX: node.x() - drawableZone?.x,
-            relativeY: node.y() - drawableZone?.y,
+            relativeX: node.x() - editorContext.params.drawableZone?.x,
+            relativeY: node.y() - editorContext.params.drawableZone?.y,
           });
         }}
         // Maintain the scale of outlines while transforming
@@ -264,8 +264,8 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
             // set minimal value
             width: Math.max(5, node.width() * scaleX),
             height: Math.max(5, node.height() * scaleY),
-            relativeX: node.x() - drawableZone?.x,
-            relativeY: node.y() - drawableZone?.y,
+            relativeX: node.x() - editorContext.params.drawableZone?.x,
+            relativeY: node.y() - editorContext.params.drawableZone?.y,
           });
         }}
       />
@@ -289,8 +289,8 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
           const node = shapeRef.current;
           onChange({
             ...shapeProps,
-            relativeX: node.x() - drawableZone?.x,
-            relativeY: node.y() - drawableZone?.y,
+            relativeX: node.x() - editorContext.params.drawableZone?.x,
+            relativeY: node.y() - editorContext.params.drawableZone?.y,
           });
         }}
         onTransformEnd={(e) => {
@@ -306,8 +306,8 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
             ...shapeProps,
             radiusX: Math.max(2.5, node.radiusX() * scaleX), // Assuming radiusX for width
             radiusY: Math.max(2.5, node.radiusY() * scaleY), // Assuming radiusY for height
-            relativeX: node.x() - drawableZone?.x,
-            relativeY: node.y() - drawableZone?.y,
+            relativeX: node.x() - editorContext.params.drawableZone?.x,
+            relativeY: node.y() - editorContext.params.drawableZone?.y,
           });
         }}
       />
@@ -364,8 +364,8 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
           onChange({
             ...e.target.attrs,
             ...shapeProps,
-            relativeX: e.target.attrs.x - drawableZone?.x,
-            relativeY: e.target.attrs.y - drawableZone?.y,
+            relativeX: e.target.attrs.x - editorContext.params.drawableZone?.x,
+            relativeY: e.target.attrs.y - editorContext.params.drawableZone?.y,
           });
         }}
         onTransformEnd={(e) => {
@@ -380,8 +380,8 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
 	          rotation: node.attrs.rotation,
             width: Math.max(5, node.width()),
             height: Math.max(5, node.height()),
-            relativeX: node.x() - drawableZone?.x,
-            relativeY: node.y() - drawableZone?.y,
+            relativeX: node.x() - editorContext.params.drawableZone?.x,
+            relativeY: node.y() - editorContext.params.drawableZone?.y,
           });
         }}
         clipFunc={(ctx) => {

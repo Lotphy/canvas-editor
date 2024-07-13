@@ -13,7 +13,6 @@ import TemplateMenu from '../TemplateMenu/TemplateMenu';
 const SideMenu = ({stageRef}) => {
   const [toggledDrawer, setToggledDrawer] = useState('template');
   const editorContext = useContext(EditorContext);
-  const drawableZone = useSelector(getDrawableZone);
 
   const exportRatio = 3;
 
@@ -29,10 +28,10 @@ const SideMenu = ({stageRef}) => {
     });
     const stagePos = stageRef?.current?.position();
     const scale = stageRef?.current?.scale();
-    const x = (drawableZone.x) * scale.x + stagePos.x; // Define the x position of the part to export
-    const y = (drawableZone.y) * scale.y + stagePos.y; // Define the y position of the part to export
-    const width = drawableZone.width * scale.x; // Define the width of the part to export
-    const height = drawableZone.height * scale.y; // Define the height of the part to export
+    const x = (editorContext.params.drawableZone.x) * scale.x + stagePos.x; // Define the x position of the part to export
+    const y = (editorContext.params.drawableZone.y) * scale.y + stagePos.y; // Define the y position of the part to export
+    const width = editorContext.params.drawableZone.width * scale.x; // Define the width of the part to export
+    const height = editorContext.params.drawableZone.height * scale.y; // Define the height of the part to export
 
     // Create a new canvas to draw the specified part
     const canvas = document.createElement('canvas');
@@ -99,13 +98,21 @@ const SideMenu = ({stageRef}) => {
           <MDBIcon className="fs-2" fas icon="list-alt"/>
         </MDBBtn>
         <MDBBtn className={`p-3`}
-                onClick={() => {
-                  console.log(editorContext.elements)
-                  handleExport();
-                }}
+                onClick={handleExport}
                 noRipple
         >
           <MDBIcon className="fs-2" fas icon="download"/>
+        </MDBBtn>
+        <MDBBtn className={`p-3`}
+                onClick={() => {
+                  console.log({
+                    params: editorContext.params,
+                    elements: editorContext.elements
+                  });
+                }}
+                noRipple
+        >
+          <MDBIcon className="fs-2" fas icon="save"/>
         </MDBBtn>
       </div>
       {toggledDrawer !== '' &&
@@ -132,7 +139,7 @@ const SideMenu = ({stageRef}) => {
               <ImageMenu/>
             }
             {toggledDrawer === 'template' &&
-              <TemplateMenu/>
+              <TemplateMenu stageRef={stageRef}/>
             }
           </div>
         </MDBContainer>

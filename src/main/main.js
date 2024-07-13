@@ -5,10 +5,6 @@ import Element from '../element/element';
 import './main.css';
 import SideMenu from '../SideMenu/SideMenu';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  getDrawableZone,
-  setDrawableZone,
-} from '../shared/store/stage.reducer';
 import AttrsMenu from '../AttrsMenu/AttrsMenu';
 import { EditorContext } from '../shared/context';
 import Konva from 'konva';
@@ -23,7 +19,7 @@ const Main = () => {
   const transformerRef = useRef(null);
   const layerRef = useRef(null);
   const dispatch = useDispatch();
-  const drawableZone = useSelector(getDrawableZone);
+  // const drawableZone = useSelector(getDrawableZone);
 
   const updateCanvasSize = () => {
     const canvasWrapper = document.querySelector('.canvas-wrapper');
@@ -40,7 +36,7 @@ const Main = () => {
   useEffect(() => {
     enableZooming();
     // Update canvas size on window resize
-    updateDrawableZone(drawableZone)
+    editorContext.updateDrawableZone(editorContext.params)
     const onKeyPress = (e) => {
       switch (e.key) {
         case 'Delete':
@@ -119,9 +115,8 @@ const Main = () => {
       stage.position(newPos);
     });
   }
-
   const centerCanvas = () => {
-    updateDrawableZone(drawableZone);
+    editorContext.updateDrawableZone(editorContext.params);
     stageRef.current.position(0, 0);
     stageRef.current.scale({
       x: 1,
@@ -129,21 +124,19 @@ const Main = () => {
     });
   }
 
-  const updateDrawableZone = ({height, width}) => {
-    const canvasWrapper = document.querySelector('.canvas-wrapper');
-    if (canvasWrapper) {
-      const canvasWidth = canvasWrapper.offsetWidth;
-      const canvasHeight = canvasWrapper.offsetHeight;
-      dispatch(setDrawableZone({
-        drawableZone: {
-          x: (canvasWidth - width) / 2,
-          y: (canvasHeight - height) / 2,
-          width: width,
-          height: height
-        }
-      }));
-    }
-  }
+  // const updateDrawableZone = ({ height, width }) => {
+  //   const canvasWrapper = document.querySelector('.canvas-wrapper');
+  //   if (canvasWrapper) {
+  //     const canvasWidth = canvasWrapper.offsetWidth;
+  //     const canvasHeight = canvasWrapper.offsetHeight;
+  //     editorContext.setDrawableZone({
+  //       x: (canvasWidth - width) / 2,
+  //       y: (canvasHeight - height) / 2,
+  //       width: width,
+  //       height: height
+  //     });
+  //   }
+  // }
 
   const renderCanvasParams = () => {
     return <div className="canvas-params d-flex p-2 px-3 text-white">
@@ -152,9 +145,9 @@ const Main = () => {
         <MDBInput
           className="text-white"
           type="number"
-          value={drawableZone.width || 0}
+          value={editorContext.params.drawableZone.width || 0}
           onChange={(e) => {
-            updateDrawableZone({ height: drawableZone.height, width: +e.target.value });
+            editorContext.setNewWidth(+e.target.value);
           }}
         />
       </div>
@@ -163,9 +156,9 @@ const Main = () => {
         <MDBInput
           className="text-white"
           type="number"
-          value={drawableZone.height || 0}
+          value={editorContext.params.drawableZone.height || 0}
           onChange={(e) => {
-            updateDrawableZone({ width: drawableZone.width, height: +e.target.value });
+            editorContext.setNewHeight(+e.target.value);
           }}
         />
       </div>
@@ -221,11 +214,11 @@ const Main = () => {
               {/* Brighter square shape representing the drawable zone */}
               <Rect
                 name="stage"
-                x={drawableZone?.x} // Adjust the square position as needed
-                y={drawableZone?.y} // Adjust the square position as needed
-                width={drawableZone?.width} // Adjust the square size as needed
-                height={drawableZone?.height} // Adjust the square size as needed
-                fill="#fff" // Adjust the square color as needed
+                x={editorContext.params.drawableZone?.x} // Adjust the square position as needed
+                y={editorContext.params.drawableZone?.y} // Adjust the square position as needed
+                width={editorContext.params.drawableZone?.width} // Adjust the square size as needed
+                height={editorContext.params.drawableZone?.height} // Adjust the square size as needed
+                fill={editorContext.params.background} // Adjust the square color as needed
                 stroke="#999" // Adjust the stroke color as needed
                 strokeWidth={2} // Adjust the stroke width as needed
               />
@@ -233,7 +226,7 @@ const Main = () => {
               {/* Render Elements */}
               <Group
                 ref={layerRef}
-                clipFunc={(ctx) => ctx.rect(drawableZone?.x, drawableZone?.y, drawableZone?.width, drawableZone?.height)}
+                clipFunc={(ctx) => ctx.rect(editorContext.params.drawableZone?.x, editorContext.params.drawableZone?.y, editorContext.params.drawableZone?.width, editorContext.params.drawableZone?.height)}
               >
                 {editorContext.elements.map((element, i) => {
                   return (
@@ -242,8 +235,8 @@ const Main = () => {
                         shapeProps={{
                           ...element,
                           name: 'element',
-                          x: (element.relativeX + drawableZone?.x) || 0,
-                          y: (element.relativeY + drawableZone?.y) || 0
+                          x: (element.relativeX + editorContext.params.drawableZone?.x) || 0,
+                          y: (element.relativeY + editorContext.params.drawableZone?.y) || 0
                         }}
                         isSelected={element.id === editorContext.selectedElement?.id}
                         stage={stageRef?.current?.getStage()}

@@ -1,9 +1,11 @@
 export const TEMPLATES = [
   {
     src: 'template1.jpg',
-    canvas: {
-      width: 400,
-      height: 400,
+    params: {
+      drawableZone: {
+        width: 400,
+        height: 400,
+      },
       background: 'white'
     },
     elements: [
