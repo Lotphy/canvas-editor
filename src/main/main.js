@@ -4,7 +4,6 @@ import { Stage, Layer, Rect, Group, Transformer } from 'react-konva';
 import Element from '../element/element';
 import './main.css';
 import SideMenu from '../SideMenu/SideMenu';
-import { useDispatch, useSelector } from 'react-redux';
 import AttrsMenu from '../AttrsMenu/AttrsMenu';
 import { EditorContext } from '../shared/context';
 import Konva from 'konva';
@@ -119,20 +118,6 @@ const Main = () => {
       y: 1
     });
   }
-
-  // const updateDrawableZone = ({ height, width }) => {
-  //   const canvasWrapper = document.querySelector('.canvas-wrapper');
-  //   if (canvasWrapper) {
-  //     const canvasWidth = canvasWrapper.offsetWidth;
-  //     const canvasHeight = canvasWrapper.offsetHeight;
-  //     editorContext.setDrawableZone({
-  //       x: (canvasWidth - width) / 2,
-  //       y: (canvasHeight - height) / 2,
-  //       width: width,
-  //       height: height
-  //     });
-  //   }
-  // }
 
   const renderCanvasParams = () => {
     return <div className="canvas-params d-flex p-2 px-3 text-white">

@@ -7,7 +7,7 @@ function App() {
   const [selectedElement, setSelectedElement] = useState(null);
   const [elements, setElements] = useState([]);
   const [params, setParams] = useState({
-    background: 'green',
+    background: 'white',
     drawableZone: {
       x: 0,
       y: 0,
