@@ -14,12 +14,8 @@ const Main = () => {
   const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
   const editorContext = useContext(EditorContext);
 
-  const selectedElementIdRef = useRef(null);
-
   const transformerRef = useRef(null);
   const layerRef = useRef(null);
-  const dispatch = useDispatch();
-  // const drawableZone = useSelector(getDrawableZone);
 
   const updateCanvasSize = () => {
     const canvasWrapper = document.querySelector('.canvas-wrapper');
