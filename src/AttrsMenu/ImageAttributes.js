@@ -77,7 +77,7 @@ const ImageAttributes = ({ element, updateAttributes }) => {
   }
 
   return (
-    <div className="d-flex px-3">
+    <div className="d-flex ">
       <div className="d-flex position-relative">
         <MDBBtn className="text-white d-flex align-items-center bg-transparent shadow-0 px-2 me-3"
                 noRipple

@@ -17,7 +17,7 @@ const TemplateMenu = ({ stageRef }) => {
     TEMPLATES.forEach((template, index) => {
       renderer.push(
         <MDBCol className={`col-6 mb-3`} key={index} onClick={() => handleAddElement(template)}>
-          <img src={`${process.env.PUBLIC_URL}/assets/samples/templates/${template.src}`} alt="Template"
+          <img src={`${process.env.PUBLIC_URL}/assets/samples/templates/${template.thumbnail}`} alt="Template"
                className={`template-${index} mw-100`}/>
         </MDBCol>
       )

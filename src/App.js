@@ -1,17 +1,17 @@
 import './App.css';
 import Main from './main/main';
 import { EditorContext } from './shared/context';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 function App() {
   const [selectedElement, setSelectedElement] = useState(null);
   const [elements, setElements] = useState([]);
   const [params, setParams] = useState({
-    background: 'white',
+    background: '#FFF2DA',
     drawableZone: {
       x: 0,
       y: 0,
-      width: 400,
+      width: 600,
       height: 400,
     }
   });

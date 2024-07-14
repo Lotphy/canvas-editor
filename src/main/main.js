@@ -6,6 +6,7 @@ import './main.css';
 import SideMenu from '../SideMenu/SideMenu';
 import AttrsMenu from '../AttrsMenu/AttrsMenu';
 import { EditorContext } from '../shared/context';
+import CanvasParams from '../CanvasParams/CanvasParams.js';
 import Konva from 'konva';
 
 const Main = () => {
@@ -110,41 +111,9 @@ const Main = () => {
       stage.position(newPos);
     });
   }
-  const centerCanvas = () => {
-    editorContext.updateDrawableZone(editorContext.params);
-    stageRef.current.position(0, 0);
-    stageRef.current.scale({
-      x: 1,
-      y: 1
-    });
-  }
 
   const renderCanvasParams = () => {
-    return <div className="canvas-params d-flex p-2 px-3 text-white">
-      <div className="text-white d-flex align-items-center bg-transparent shadow-0 px-0 me-3">
-        <label className="me-2">Width</label>
-        <MDBInput
-          className="text-white"
-          type="number"
-          value={editorContext.params.drawableZone.width || 0}
-          onChange={(e) => {
-            editorContext.setNewWidth(+e.target.value);
-          }}
-        />
-      </div>
-      <div className="text-white d-flex align-items-center bg-transparent shadow-0 px-0 me-3">
-        <label className="me-2">Height</label>
-        <MDBInput
-          className="text-white"
-          type="number"
-          value={editorContext.params.drawableZone.height || 0}
-          onChange={(e) => {
-            editorContext.setNewHeight(+e.target.value);
-          }}
-        />
-      </div>
-      <MDBBtn outline onClick={centerCanvas}>Center</MDBBtn>
-    </div>
+
   }
 
   return (
@@ -169,7 +138,7 @@ const Main = () => {
                      }}
           />
 
-          {renderCanvasParams()}
+          <CanvasParams stageRef={stageRef}/>
 
           <Stage
             id="stage-canvas"
@@ -199,9 +168,12 @@ const Main = () => {
                 y={editorContext.params.drawableZone?.y} // Adjust the square position as needed
                 width={editorContext.params.drawableZone?.width} // Adjust the square size as needed
                 height={editorContext.params.drawableZone?.height} // Adjust the square size as needed
-                fill={editorContext.params.background} // Adjust the square color as needed
-                stroke="#999" // Adjust the stroke color as needed
-                strokeWidth={2} // Adjust the stroke width as needed
+                // fill={editorContext.params.background} // Adjust the square color as needed
+                stroke="#CCC" // Adjust the stroke color as needed
+                strokeWidth={1} // Adjust the stroke width as needed
+                fillLinearGradientStartPoint={{ x: 0, y: 0 }}
+                fillLinearGradientEndPoint={{ x: editorContext.params.drawableZone?.width, y: editorContext.params.drawableZone?.height }}
+                fillLinearGradientColorStops={[0, 'white', 1, '#dae9ff']}
               />
 
               {/* Render Elements */}
