@@ -3,6 +3,8 @@ export const TEMPLATES = [
     thumbnail: 'template1.jpg',
     params: {
       drawableZone: {
+        x: 0,
+        y: 0,
         width: 400,
         height: 400,
       },
@@ -314,8 +316,8 @@ export const TEMPLATES = [
     "params": {
       "background": "rgba(233,232,212,1)",
       "drawableZone": {
-        "x": 191,
-        "y": 126,
+        "x": 0,
+        "y": 0,
         "width": 600,
         "height": 400
       }
@@ -519,8 +521,8 @@ export const TEMPLATES = [
     "params": {
       "background": "rgba(233,232,212,1)",
       "drawableZone": {
-        "x": 255,
-        "y": 156,
+        "x": 0,
+        "y": 0,
         "width": 600,
         "height": 400
       }
@@ -762,8 +764,8 @@ export const TEMPLATES = [
     "params": {
       "background": "rgba(233,232,212,1)",
       "drawableZone": {
-        "x": 255,
-        "y": 156,
+        "x": 0,
+        "y": 0,
         "width": 600,
         "height": 400
       }
@@ -850,7 +852,7 @@ export const TEMPLATES = [
         "height": 200,
         "relativeX": 319.4258812164974,
         "relativeY": -1.4210854715202004e-13,
-        "stroke": "rgba(155,0,18,0.66)",
+        "stroke": "rgba(255,0,18,0.66)",
         "name": "element",
         "draggable": true,
         "rotation": 0,
@@ -984,32 +986,32 @@ export const TEMPLATES = [
         "opacity": 1,
         "scaleX": 1,
         "scaleY": 1,
-        "relativeX": -0.40299999999905367,
-        "relativeY": 331,
-        "width": 300.84009624255356,
-        "height": 69.43769954833968,
+        "relativeX": -60.508889290867785,
+        "relativeY": 330.99999999999665,
+        "width": 360.94598553341916,
+        "height": 83.31089907789932,
         "fillAfterStrokeEnabled": true,
-        "cornerRadius": 0,
+        "cornerRadius": 16,
         "name": "element",
-        "x": 254.59699999999992,
-        "y": 485.64157024793474
+        "x": 254.59700000000095,
+        "y": 487
       },
       {
         "id": "997be0b9-2937-4877-b8de-0f6dd78b11e4",
         "type": "text",
         "fillAfterStrokeEnabled": true,
-        "fill": "rgba(184,0,0,1)",
+        "fill": "rgba(208,2,27,1)",
         "strokeWidth": 0,
         "stroke": "white",
         "fontSize": 23,
-        "fontFamily": "Renovate, sans-serif",
+        "fontFamily": "Lato, sans-serif",
         "align": "center",
         "scaleX": 1,
         "scaleY": 1,
         "relativeX": 17.39818181818083,
-        "relativeY": 344,
+        "relativeY": 343,
         "text": "Intéressé.e ?\nContactez-moi !",
-        "fontStyle": "bold",
+        "fontStyle": " bold",
         "name": "element",
         "x": 272.39818181818083,
         "y": 500,
@@ -1029,8 +1031,8 @@ export const TEMPLATES = [
     "params": {
       "background": "#FFF2DA",
       "drawableZone": {
-        "x": 255,
-        "y": 156,
+        "x": 0,
+        "y": 0,
         "width": 600,
         "height": 400
       }

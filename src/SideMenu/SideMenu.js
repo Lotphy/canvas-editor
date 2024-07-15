@@ -20,50 +20,6 @@ const SideMenu = ({stageRef}) => {
     window.dispatchEvent(new Event('resize'));
   }, [toggledDrawer]);
 
-  const handleExport = () => {
-    stageRef.current.position(0, 0);
-    stageRef.current.scale({
-      x: 1,
-      y: 1
-    });
-    const stagePos = stageRef?.current?.position();
-    const scale = stageRef?.current?.scale();
-    const x = (editorContext.params.drawableZone.x) * scale.x + stagePos.x; // Define the x position of the part to export
-    const y = (editorContext.params.drawableZone.y) * scale.y + stagePos.y; // Define the y position of the part to export
-    const width = editorContext.params.drawableZone.width * scale.x; // Define the width of the part to export
-    const height = editorContext.params.drawableZone.height * scale.y; // Define the height of the part to export
-
-    // Create a new canvas to draw the specified part
-    const canvas = document.createElement('canvas');
-    canvas.width = width * exportRatio;
-    canvas.height = height * exportRatio;
-    const context = canvas.getContext('2d');
-
-    // Extract the part from the stage and draw it on the new canvas
-    context.drawImage(
-      stageRef?.current?.toCanvas({
-        x,
-        y,
-        width,
-        height,
-        pixelRatio: exportRatio
-      }),
-      0, 0, canvas.width, canvas.width,
-      0, 0, canvas.width, canvas.width
-    );
-
-    // Convert the new canvas to a data URL
-    const dataURL = canvas.toDataURL('image/jpeg');
-
-    // Create a link element to download the JPG file
-    const link = document.createElement('a');
-    link.href = dataURL;
-    link.download = 'exported-part.jpg';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
   return (
     <div className="d-flex">
       <div id="options-selector" className="d-flex flex-column">
@@ -98,7 +54,10 @@ const SideMenu = ({stageRef}) => {
           <MDBIcon className="fs-2" fas icon="list-alt"/>
         </MDBBtn>
         <MDBBtn className={`p-3`}
-                onClick={handleExport}
+                onClick={() => {
+                  const imgData = editorContext.generateImageFromCanvas(stageRef, editorContext.params);
+                  editorContext.downloadCanvasImage(imgData);
+                }}
                 noRipple
         >
           <MDBIcon className="fs-2" fas icon="download"/>

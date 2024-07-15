@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState, useContext } from 'react';
-import { MDBBtn, MDBContainer, MDBInput } from 'mdb-react-ui-kit';
+import { MDBContainer } from 'mdb-react-ui-kit';
 import { Stage, Layer, Rect, Group, Transformer } from 'react-konva';
 import Element from '../element/element';
 import './main.css';
