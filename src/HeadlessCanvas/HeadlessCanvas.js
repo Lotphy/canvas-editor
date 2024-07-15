@@ -5,20 +5,37 @@ import { Layer, Rect, Stage } from 'react-konva';
 import Element from '../element/element';
 import { TEMPLATES } from '../shared/constants';
 
-const HeadlessCanvas = () => {
+const HeadlessCanvas = ({ exportImageCallback, inputParams }) => {
   const stageRef = useRef(null);
   const editorContext = useContext(EditorContext);
 
   useEffect(() => {
-    const template = TEMPLATES[1];
+    applyParamsToTemplate();
+  }, []);
+
+  const applyParamsToTemplate = () => {
+    const template = TEMPLATES.filter(template => template.type === inputParams.type).shift();
+
+    // TODO Could be refactored
+    template.elements.map(elem => {
+      if (inputParams.content[elem.id] !== null) {
+        if (elem.type === 'text') {
+          elem.text = inputParams.content[elem.id];
+        }
+      }
+    });
+
     editorContext.setElements(template.elements)
     editorContext.setParams(template.params);
     // editorContext.updateDrawableZone(template.params);
-  }, []);
+  }
 
   useEffect(() => {
-
-  })
+    if (editorContext.elements.length > 0) {
+      const imgData = editorContext.generateImageFromCanvas(stageRef, editorContext.params);
+      exportImageCallback(imgData);
+    }
+  }, [editorContext.elements]);
 
   return (
     <>
@@ -28,7 +45,7 @@ const HeadlessCanvas = () => {
       }}>EXPORT</MDBBtn>
       <Stage
         id="stage-canvas"
-        className="h-100 w-100 d-flex d-none"
+        className="h-100 w-100 d-flex"
         width={editorContext.params.drawableZone.width}
         height={editorContext.params.drawableZone.height}
         ref={stageRef}>
@@ -40,8 +57,6 @@ const HeadlessCanvas = () => {
             width={editorContext.params.drawableZone?.width} // Adjust the square size as needed
             height={editorContext.params.drawableZone?.height} // Adjust the square size as needed
             // fill={editorContext.params.background} // Adjust the square color as needed
-            stroke="#CCC" // Adjust the stroke color as needed
-            strokeWidth={1} // Adjust the stroke width as needed
             fillLinearGradientStartPoint={{ x: 0, y: 0 }}
             fillLinearGradientEndPoint={{ x: editorContext.params.drawableZone?.width, y: editorContext.params.drawableZone?.height }}
             fillLinearGradientColorStops={[0, 'white', 1, '#dae9ff']}

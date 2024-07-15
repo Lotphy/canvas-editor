@@ -3,7 +3,7 @@ import { EditorContext } from '../shared/context';
 import { useState } from 'react';
 import HeadlessCanvas from '../HeadlessCanvas/HeadlessCanvas';
 
-function CanvasEditor({ headless } = {headless: false}) {
+function CanvasEditor({ headless, getCanvasExport, inputParams } = {headless: false}) {
   const [selectedElement, setSelectedElement] = useState(null);
   const [elements, setElements] = useState([]);
   const [params, setParams] = useState({
@@ -148,7 +148,7 @@ function CanvasEditor({ headless } = {headless: false}) {
 
   return (
     <EditorContext.Provider value={editorContext}>
-      { headless ? <HeadlessCanvas /> : <Main />}
+      { headless ? <HeadlessCanvas exportImageCallback={getCanvasExport} inputParams={inputParams} /> : <Main />}
     </EditorContext.Provider>
   );
 }

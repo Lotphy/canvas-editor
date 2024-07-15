@@ -1,6 +1,7 @@
 export const TEMPLATES = [
   {
     thumbnail: 'template1.jpg',
+    type: 'complex',
     params: {
       drawableZone: {
         x: 0,
@@ -761,6 +762,7 @@ export const TEMPLATES = [
   },
   {
     thumbnail: 'template4.jpg',
+    type: "",
     "params": {
       "background": "rgba(233,232,212,1)",
       "drawableZone": {
@@ -1028,6 +1030,7 @@ export const TEMPLATES = [
   },
   {
     thumbnail: "template5.jpg",
+    type: "agree",
     "params": {
       "background": "#FFF2DA",
       "drawableZone": {
@@ -1088,7 +1091,7 @@ export const TEMPLATES = [
         "strokeWidth": 8
       },
       {
-        "id": "35cd52a2-5cc8-481f-a004-ae4d0d407a1a",
+        "id": "author",
         "type": "text",
         "fillAfterStrokeEnabled": true,
         "fill": "rgba(0,0,0,1)",
@@ -1116,10 +1119,10 @@ export const TEMPLATES = [
         "width": 375.1000000000001
       },
       {
-        "id": "04f24a1d-122b-4741-9b4a-1f15eca97a50",
+        "id": "role",
         "type": "text",
         "fillAfterStrokeEnabled": true,
-        "fill": "rgba(74,74,74,1)",
+        "fill": "rgb(71,132,211)",
         "strokeWidth": 0,
         "stroke": "white",
         "fontSize": 22,
@@ -1144,7 +1147,7 @@ export const TEMPLATES = [
         "width": 375.2066115702479
       },
       {
-        "id": "4dfd23e2-8d0a-4c3f-8365-a9f247d2660a",
+        "id": "message",
         "type": "text",
         "fillAfterStrokeEnabled": true,
         "fill": "rgba(0,0,0,1)",
