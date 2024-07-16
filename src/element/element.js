@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { Ellipse, Group, Image, Rect, Shape, Text } from 'react-konva';
-import { getDrawableZone } from '../shared/store/stage.reducer';
 import { EditorContext } from '../shared/context';
 
 const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage, transformer }) => {

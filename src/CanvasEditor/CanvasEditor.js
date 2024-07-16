@@ -2,8 +2,10 @@ import Main from '../main/main';
 import { EditorContext } from '../shared/context';
 import { useState } from 'react';
 import HeadlessCanvas from '../HeadlessCanvas/HeadlessCanvas';
+import store from '../shared/store';
+import { Provider } from 'react-redux';
 
-function CanvasEditor({ headless, getCanvasExport, inputParams } = {headless: false}) {
+function CanvasEditor({ headless, getCanvasExport, inputParams } = { headless: false }) {
   const [selectedElement, setSelectedElement] = useState(null);
   const [elements, setElements] = useState([]);
   const [params, setParams] = useState({
@@ -147,9 +149,11 @@ function CanvasEditor({ headless, getCanvasExport, inputParams } = {headless: fa
   }
 
   return (
-    <EditorContext.Provider value={editorContext}>
-      { headless ? <HeadlessCanvas exportImageCallback={getCanvasExport} inputParams={inputParams} /> : <Main />}
-    </EditorContext.Provider>
+    <Provider store={store}>
+      <EditorContext.Provider value={editorContext}>
+        {headless ? <HeadlessCanvas exportImageCallback={getCanvasExport} inputParams={inputParams}/> : <Main/>}
+      </EditorContext.Provider>
+    </Provider>
   );
 }
 

@@ -112,10 +112,6 @@ const Main = () => {
     });
   }
 
-  const renderCanvasParams = () => {
-
-  }
-
   return (
     <div className="d-flex vh-100 flex-column">
       <div className="d-flex w-100 h-100">

@@ -1,20 +1,16 @@
 import React, { useEffect, useState, useContext } from 'react';
 import './SideMenu.css';
 import LayersMenu from '../LayersMenu/LayersMenu';
-import { MDBBtn, MDBCol, MDBContainer, MDBIcon, MDBRow } from 'mdb-react-ui-kit';
+import { MDBBtn, MDBContainer, MDBIcon } from 'mdb-react-ui-kit';
 import ShapeMenu from '../ShapeMenu/ShapeMenu';
 import TextMenu from '../TextMenu/TextMenu';
 import ImageMenu from '../ImageMenu/ImageMenu';
 import { EditorContext } from '../shared/context';
-import { useSelector } from 'react-redux';
-import { getDrawableZone } from '../shared/store/stage.reducer';
 import TemplateMenu from '../TemplateMenu/TemplateMenu';
 
 const SideMenu = ({stageRef}) => {
   const [toggledDrawer, setToggledDrawer] = useState('template');
   const editorContext = useContext(EditorContext);
-
-  const exportRatio = 3;
 
   useEffect(() => {
     window.dispatchEvent(new Event('resize'));
