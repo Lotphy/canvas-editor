@@ -1,8 +1,35 @@
 {
-  "name": "canvas-editor",
-  "version": "0.1.0",
-  "private": true,
+  "name": "canvas-editor-lib",
+  "version": "1.0.0",
+  "description": "Made with create-react-library",
+  "author": "Lotphy",
+  "license": "MIT",
+  "repository": "Lotphy/canvas-editor-lib",
+  "main": "dist/index.js",
+  "module": "dist/index.modern.js",
+  "source": "src/index.js",
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "build-assets": "node copy-assets.js & node scan-sample-images-folder.js",
+    "prepare": "node copy-assets.js & run-s build",
+    "build": "microbundle-crl --no-compress --format modern,cjs",
+    "start": "microbundle-crl watch --no-compress --no-css-modules --format modern,cjs",
+    "test": "run-s test:unit test:lint test:build",
+    "test:build": "run-s build",
+    "test:lint": "eslint .",
+    "test:unit": "cross-env CI=1 react-scripts test --env=jsdom",
+    "test:watch": "react-scripts test --env=jsdom",
+    "predeploy": "cd demo && yarn install && yarn run build",
+    "deploy": "gh-pages -d demo/build"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
   "dependencies": {
+    "@babel/runtime": "7.5.1",
     "@fortawesome/fontawesome-free": "^6.5.1",
     "@reduxjs/toolkit": "^2.2.1",
     "@testing-library/jest-dom": "^5.17.0",
@@ -10,42 +37,34 @@
     "@testing-library/user-event": "^13.5.0",
     "konva": "^9.3.5",
     "mdb-react-ui-kit": "^7.2.0",
-    "react": "^18.2.0",
     "react-color": "^2.19.3",
-    "react-dom": "^18.2.0",
     "react-konva": "^18.2.10",
     "react-redux": "^9.1.0",
     "react-scripts": "5.0.1",
     "redux": "^5.0.1",
     "web-vitals": "^2.1.4"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "scan-images": "node scan-sample-images-folder.js"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
   "devDependencies": {
+    "babel-eslint": "^10.0.3",
     "canvas": "^2.11.2",
+    "cross-env": "^7.0.2",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-config-standard-react": "^9.2.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.17.0",
+    "eslint-plugin-standard": "^4.0.1",
+    "gh-pages": "^2.2.0",
+    "microbundle-crl": "^0.13.10",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.0.4",
     "xml2js": "^0.6.2"
-  }
+  },
+  "files": [
+    "dist"
+  ]
 }

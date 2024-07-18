@@ -14,7 +14,8 @@ const ImageMenu = () => {
   const editorContext = useContext(EditorContext);
 
   useEffect(() => {
-    const sampleFiles = sampleImagesUrls.map(imageData => `${process.env.PUBLIC_URL}${imageData.url}`);
+    const sampleFiles = sampleImagesUrls.map(imageData => require(`./${imageData.url}`));
+    console.log(sampleFiles)
     setUploadedImages([...storedImages.map(img => img.data), ...sampleFiles]);
   }, []);
 
@@ -31,7 +32,7 @@ const ImageMenu = () => {
       type: 'image',
       src: imageBase64,
 	    mask,
-      x: 75, // Adjust these values as needed
+      x: 75,
       y: 50,
 	    originalWidth: image.width,
 	    originalHeight: image.height,

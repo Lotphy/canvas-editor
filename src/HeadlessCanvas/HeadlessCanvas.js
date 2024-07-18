@@ -38,7 +38,7 @@ const HeadlessCanvas = ({ exportImageCallback, inputParams }) => {
   }, [editorContext.elements]);
 
   return (
-    <>
+    <React.Fragment>
       <MDBBtn onClick={() => {
         const imgData = editorContext.generateImageFromCanvas(stageRef, editorContext.params);
         console.log(imgData)
@@ -80,7 +80,7 @@ const HeadlessCanvas = ({ exportImageCallback, inputParams }) => {
           })}
         </Layer>
       </Stage>
-    </>
+    </React.Fragment>
   )
 };
 

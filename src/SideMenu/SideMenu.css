@@ -50,7 +50,7 @@
   color: white;
 }
 
-.drawer-toggler {
+.btn.drawer-toggler {
   position: absolute;
   right: 1px;
   transform: translate(100%,-50%);

@@ -315,7 +315,7 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
 
   const renderImage = () => {
     const img = new window.Image();
-    img.src = shapeProps.src;
+    img.src = require(`./${shapeProps.src}`);
 
 		let cropParams = {}
 	  if (shapeProps.mask) {
@@ -418,7 +418,7 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
   }
 
   return (
-    <>
+    <React.Fragment>
       {
         shapeProps.type === 'text' && renderText()
       }
@@ -431,7 +431,7 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
       {
         shapeProps.type === 'image' && renderImage()
       }
-    </>
+    </React.Fragment>
   );
 };
 

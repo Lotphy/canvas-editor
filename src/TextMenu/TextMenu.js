@@ -1,4 +1,4 @@
-import React, { useContext }  from 'react';
+import React, { useContext } from 'react';
 import { MDBBtn, MDBCol, MDBRow } from 'mdb-react-ui-kit';
 import './TextMenu.css';
 import { EditorContext } from '../shared/context';
@@ -25,7 +25,7 @@ const TextMenu = () => {
       text: textList[index].name,
       ...textList[index].canvasStyle,
     };
-    editorContext.setElements(elems =>[...elems, newElement]);
+    editorContext.setElements(elems => [...elems, newElement]);
   };
 
   const textList = [
@@ -250,13 +250,13 @@ const TextMenu = () => {
   }
 
   return (
-    <>
-    <MDBRow className="image-menu d-flex m-0">
-      {renderAssetsList()}
-    </MDBRow>
-</>
-)
-  ;
+    <React.Fragment>
+      <MDBRow className="image-menu d-flex m-0">
+        {renderAssetsList()}
+      </MDBRow>
+    </React.Fragment>
+  )
+    ;
 };
 
 export default TextMenu;

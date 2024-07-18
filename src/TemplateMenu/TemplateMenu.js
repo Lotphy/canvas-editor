@@ -3,11 +3,12 @@ import { MDBCol, MDBRow } from 'mdb-react-ui-kit';
 import { TEMPLATES } from '../shared/constants';
 import { EditorContext } from '../shared/context';
 
-const TemplateMenu = ({ stageRef }) => {
+const TemplateMenu = () => {
   const editorContext = useContext(EditorContext);
 
   const handleAddElement = (template) => {
     editorContext.setElements(template.elements);
+    console.log(template.elements)
     editorContext.setParams(template.params);
     editorContext.updateDrawableZone(template.params);
   }
@@ -17,7 +18,7 @@ const TemplateMenu = ({ stageRef }) => {
     TEMPLATES.forEach((template, index) => {
       renderer.push(
         <MDBCol className={`col-6 mb-3`} key={index} onClick={() => handleAddElement(template)}>
-          <img src={`${process.env.PUBLIC_URL}/assets/samples/templates/${template.thumbnail}`} alt="Template"
+          <img src={require(`./${template.thumbnail}`)} alt="Template"
                className={`template-${index} mw-100`}/>
         </MDBCol>
       )

@@ -1,6 +1,6 @@
 export const TEMPLATES = [
   {
-    thumbnail: 'template1.jpg',
+    thumbnail: 'assets/samples/templates/template1.jpg',
     type: 'complex',
     params: {
       drawableZone: {
@@ -34,7 +34,7 @@ export const TEMPLATES = [
       {
         'id': 'adbe45b2-d63d-43e8-a733-81fef0df7679',
         'type': 'image',
-        'src': '/assets/samples/img/pikaso_texttoimage_35mm-film-photography-IT-engineer-developing-on-a-(1).jpeg',
+        'src': 'assets/samples/img/pikaso_texttoimage_35mm-film-photography-IT-engineer-developing-on-a-(1).jpeg',
         'x': 291.00000000000085,
         'y': 126.00000000000003,
         'originalWidth': 1216,
@@ -157,7 +157,7 @@ export const TEMPLATES = [
       {
         'id': '29ee371b-01a9-4dc7-8322-f3e8f3e222d7',
         'type': 'image',
-        'src': '/assets/samples/img/pikaso_texttoimage_35mm-film-photography-multicultural-3-persons-blac.jpeg',
+        'src': 'assets/samples/img/pikaso_texttoimage_35mm-film-photography-multicultural-3-persons-blac.jpeg',
         'x': 310.99999999999943,
         'y': 332.99999999999955,
         'originalWidth': 1216,
@@ -313,7 +313,7 @@ export const TEMPLATES = [
     ]
   },
   {
-    thumbnail: 'template2.jpg',
+    thumbnail: 'assets/samples/templates/template2.jpg',
     "params": {
       "background": "rgba(233,232,212,1)",
       "drawableZone": {
@@ -353,7 +353,7 @@ export const TEMPLATES = [
       {
         "id": "733c999d-577e-401f-8f9d-86a7ea41134a",
         "type": "image",
-        "src": "/assets/samples/img/pikaso_texttoimage_35mm-film-photography-HR-woman-working-on-a-comput.jpeg",
+        "src": "assets/samples/img/pikaso_texttoimage_35mm-film-photography-HR-woman-working-on-a-comput.jpeg",
         "x": 511.7268109079329,
         "y": 126.0000000000001,
         "originalWidth": 1216,
@@ -518,7 +518,7 @@ export const TEMPLATES = [
     ]
   },
   {
-    thumbnail: 'template3.jpg',
+    thumbnail: 'assets/samples/templates/template3.jpg',
     "params": {
       "background": "rgba(233,232,212,1)",
       "drawableZone": {
@@ -596,7 +596,7 @@ export const TEMPLATES = [
       {
         "id": "733c999d-577e-401f-8f9d-86a7ea41134a",
         "type": "image",
-        "src": "/assets/samples/img/pikaso_texttoimage_35mm-film-photography-multicultural-3-persons-smil.jpeg",
+        "src": "assets/samples/img/pikaso_texttoimage_35mm-film-photography-multicultural-3-persons-smil.jpeg",
         "x": 551.1902038504307,
         "y": 155.19020385042978,
         "originalWidth": 1216,
@@ -761,7 +761,7 @@ export const TEMPLATES = [
     ]
   },
   {
-    thumbnail: 'template4.jpg',
+    thumbnail: 'assets/samples/templates/template4.jpg',
     type: "",
     "params": {
       "background": "rgba(233,232,212,1)",
@@ -776,7 +776,7 @@ export const TEMPLATES = [
       {
         "id": "a2c036d1-2d9d-4340-81cd-f9268c86ed94",
         "type": "image",
-        "src": "/assets/samples/img/pikaso_texttoimage_35mm-film-photography-IT-developer-in-a-modern-ope.jpeg",
+        "src": "assets/samples/img/pikaso_texttoimage_35mm-film-photography-IT-developer-in-a-modern-ope.jpeg",
         "x": 254.0999999999997,
         "y": 158.70000000000002,
         "originalWidth": 1216,
@@ -845,7 +845,7 @@ export const TEMPLATES = [
       {
         "id": "733c999d-577e-401f-8f9d-86a7ea41134a",
         "type": "image",
-        "src": "/assets/samples/img/pikaso_texttoimage_35mm-film-photography-3-HR-people-in-office-stanin(1).jpeg",
+        "src": "assets/samples/img/pikaso_texttoimage_35mm-film-photography-3-HR-people-in-office-stanin(1).jpeg",
         "x": 574.4258812164974,
         "y": 155.99999999999986,
         "originalWidth": 1216,
@@ -1029,7 +1029,7 @@ export const TEMPLATES = [
     ]
   },
   {
-    thumbnail: "template5.jpg",
+    thumbnail: "assets/samples/templates/template5.jpg",
     type: "agree",
     "params": {
       "background": "#FFF2DA",
@@ -1044,7 +1044,7 @@ export const TEMPLATES = [
       {
         "id": "0e655cfd-0804-4581-8d2e-b9439fa98502",
         "type": "image",
-        "src": "/assets/samples/img/6.jpg",
+        "src": "assets/samples/img/6.jpg",
         "x": 255.0000000000002,
         "y": 155.99999999999972,
         "originalWidth": 2000,
@@ -1068,7 +1068,7 @@ export const TEMPLATES = [
       {
         "id": "e85e1800-5d65-4f9f-9649-162a465fae83",
         "type": "image",
-        "src": "/assets/samples/img/pikaso_texttoimage_35mm-film-photography-HR-woman-passing-an-intervie(5).jpeg",
+        "src": "assets/samples/img/pikaso_texttoimage_35mm-film-photography-HR-woman-passing-an-intervie(5).jpeg",
         "x": 330.0000000000008,
         "y": 206.0000000000002,
         "originalWidth": 1216,

@@ -4,9 +4,7 @@ import { sampleImagesUrls, svgPathData } from '../shared/sample-resources';
 import { SketchPicker } from 'react-color';
 
 const ImageAttributes = ({ element, updateAttributes }) => {
-  const [mask, setMask] = useState(null);
   const [maskSelector, setMaskSelector] = useState(false);
-  const [imageSource, setImageSource] = useState('');
   const [imageSelector, setImageSelector] = useState(false);
   const [strokeWidth, setStrokeWidth] = useState(0);
   const [outlineSelector, setOutlineSelector] = useState(false);
@@ -15,8 +13,6 @@ const ImageAttributes = ({ element, updateAttributes }) => {
   useEffect(() => {
     if (element) {
       // Update input values whenever element attributes change
-      setMask(element.attrs.mask || '');
-      setImageSource(element.attrs.src || '');
       setStrokeWidth(element.attrs.strokeWidth || 0);
       setOutlineColor(element.attrs.stroke || 'transparent');
     }
@@ -25,7 +21,6 @@ const ImageAttributes = ({ element, updateAttributes }) => {
   const renderMasks = () => {
     const renderer = [
 	    <MDBCol className={`col-4 mb-3 d-flex align-items-center`} key={null} onClick={() => {
-		    setMask(null);
 		    updateAttributes({
           mask: null
         });
@@ -38,12 +33,11 @@ const ImageAttributes = ({ element, updateAttributes }) => {
       renderer.push(
         <MDBCol className={`col-4 mb-3 d-flex align-items-center`} key={index} onClick={() => {
           const maskPath = maskData.path2D;
-          setMask(maskPath);
           updateAttributes({
             mask: maskPath
           });
         }}>
-          <img src={maskData.url} alt="mask" className={`mask-${index} mw-100`} />
+          <img src={require(`./${maskData.url}`)} alt="mask" className={`mask-${index} mw-100`} />
         </MDBCol>
       )
     })
@@ -56,14 +50,13 @@ const ImageAttributes = ({ element, updateAttributes }) => {
 	  sampleImagesUrls.forEach((imageData, index) => {
       renderer.push(
         <MDBCol className={`col-6 mb-3 d-flex align-items-center`} key={index} onClick={() => {
-          setImageSource(imageData.url);
           updateAttributes({
             src: imageData.url,
             originalHeight: imageData.originalHeight,
             originalWidth: imageData.originalWidth,
           })
         }}>
-          <img src={imageData.url} alt="sample-image" className={`image-${index} mw-100`} />
+          <img src={require(`./${imageData.url}`)} alt="sample-image" className={`image-${index} mw-100`} />
         </MDBCol>
       )
     })

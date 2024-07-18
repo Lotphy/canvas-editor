@@ -259,50 +259,50 @@
 
 @font-face {
     font-family: 'Bolota';
-    src: local('Bolota'), url('/public/assets/fonts/Bolota.ttf') format('truetype');
+    src: local('Bolota'), url('./assets/fonts/Bolota.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'Renovate';
-    src: local('Renovate'), url('/public/assets/fonts/LTRenovate.otf') format('opentype');
+    src: local('Renovate'), url('./assets/fonts/LTRenovate.otf') format('opentype');
 }
 
 @font-face {
     font-family: 'MadimiOne';
-    src: local('MadimiOne'), url('/public/assets/fonts/MadimiOne.otf') format('opentype');
+    src: local('MadimiOne'), url('./assets/fonts/MadimiOne.otf') format('opentype');
 }
 
 @font-face {
     font-family: 'Quadriana';
-    src: local('Quadriana'), url('/public/assets/fonts/quadriana.otf') format('opentype');
+    src: local('Quadriana'), url('./assets/fonts/quadriana.otf') format('opentype');
 }
 
 @font-face {
     font-family: 'Voye';
-    src: local('Voye'), url('/public/assets/fonts/Voye.otf') format('opentype');
+    src: local('Voye'), url('./assets/fonts/Voye.otf') format('opentype');
 }
 
 @font-face {
     font-family: 'Beverage';
-    src: local('Beverage'), url('/public/assets/fonts/Beverage.otf') format('opentype');
+    src: local('Beverage'), url('./assets/fonts/Beverage.otf') format('opentype');
 }
 
 @font-face {
     font-family: 'Wave';
-    src: local('Wave'), url('/public/assets/fonts/Wave.otf') format('opentype');
+    src: local('Wave'), url('./assets/fonts/Wave.otf') format('opentype');
 }
 
 @font-face {
     font-family: 'OakSans';
-    src: local('OakSans'), url('/public/assets/fonts/OakSans.woff2') format('woff2');
+    src: local('OakSans'), url('./assets/fonts/OakSans.woff2') format('woff2');
 }
 
 @font-face {
     font-family: 'TokyoZoo';
-    src: local('TokyoZoo'), url('/public/assets/fonts/TokyoZoo.otf') format('opentype');
+    src: local('TokyoZoo'), url('./assets/fonts/TokyoZoo.otf') format('opentype');
 }
 
 @font-face {
     font-family: 'RampartOne';
-    src: local('RampartOne'), url('/public/assets/fonts/RampartOne.ttf') format('truetype');
+    src: local('RampartOne'), url('./assets/fonts/RampartOne.ttf') format('truetype');
 }
