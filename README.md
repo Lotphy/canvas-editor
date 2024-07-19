@@ -7,7 +7,7 @@
 ## Install
 
 ```bash
-npm install --save canvas-editor-lib
+npm install --save canvas-editor
 ```
 
 ## Usage
@@ -15,12 +15,12 @@ npm install --save canvas-editor-lib
 ```jsx
 import React, { Component } from 'react'
 
-import MyComponent from 'canvas-editor-lib'
-import 'canvas-editor-lib/dist/index.css'
+import CanvasEdtior from 'canvas-editor'
+import 'canvas-editor/dist/index.css'
 
 class Example extends Component {
   render() {
-    return <MyComponent />
+    return <CanvasEdtior />
   }
 }
 ```
