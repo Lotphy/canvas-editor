@@ -16,6 +16,7 @@
     "prepare": "node copy-assets.js & run-s build",
     "build": "microbundle-crl --no-compress --format modern,cjs",
     "start": "microbundle-crl watch --no-compress --no-css-modules --format modern,cjs",
+    "local-start": "react-scripts start",
     "test": "run-s test:unit test:lint test:build",
     "test:build": "run-s build",
     "test:lint": "eslint .",

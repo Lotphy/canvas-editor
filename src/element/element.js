@@ -315,7 +315,7 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
 
   const renderImage = () => {
     const img = new window.Image();
-    img.src = require(`./${shapeProps.src}`);
+    img.src = shapeProps.src.includes('data:image') ? shapeProps.src : require(`./${shapeProps.src}`);
 
 		let cropParams = {}
 	  if (shapeProps.mask) {

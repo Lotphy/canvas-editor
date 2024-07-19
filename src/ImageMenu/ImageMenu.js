@@ -14,15 +14,14 @@ const ImageMenu = () => {
   const editorContext = useContext(EditorContext);
 
   useEffect(() => {
-    const sampleFiles = sampleImagesUrls.map(imageData => require(`./${imageData.url}`));
-    console.log(sampleFiles)
+    const sampleFiles = sampleImagesUrls.map(imageData => imageData.url);
     setUploadedImages([...storedImages.map(img => img.data), ...sampleFiles]);
   }, []);
 
-  const handleAddElement = (imageBase64) => {
+  const handleAddElement = (imageSrc) => {
     const id = crypto.randomUUID();
     const image = new Image();
-    image.src = imageBase64;
+    image.src = imageSrc.includes('data:image') ? imageSrc : require(`./${imageSrc}`);
     const displayHeight = 200;
     const ratio = displayHeight / image.height;
     const displayWidth = image.width * ratio;
@@ -30,7 +29,7 @@ const ImageMenu = () => {
     const newElement = {
       id,
       type: 'image',
-      src: imageBase64,
+      src: imageSrc,
 	    mask,
       x: 75,
       y: 50,
@@ -66,10 +65,11 @@ const ImageMenu = () => {
 
   const renderImages = () => {
     const renderer = [];
-    uploadedImages.forEach((imageBase64, index) => {
+    uploadedImages.forEach((imageSrc, index) => {
+      const imageData = imageSrc.includes('data:image') ? imageSrc : require(`./${imageSrc}`);
       renderer.push(
-        <MDBCol className={`col-6 mb-3`} key={index} onClick={() => handleAddElement(imageBase64)}>
-          <img src={imageBase64} alt="Sample" className={`sample-${index} mw-100`} />
+        <MDBCol className={`col-6 mb-3`} key={index} onClick={() => handleAddElement(imageSrc)}>
+          <img src={imageData} alt="Sample" className={`sample-${index} mw-100`} />
         </MDBCol>
       )
     })
