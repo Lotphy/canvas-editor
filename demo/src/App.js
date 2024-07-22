@@ -1,7 +1,7 @@
 import React from 'react'
 
-import 'canvas-editor-lib/dist/index.css'
-import CanvasEditor from 'canvas-editor-lib';
+import 'canvas-editor/dist/index.css'
+import CanvasEditor from 'canvas-editor';
 
 const inputParams = {
   type: 'agree',
