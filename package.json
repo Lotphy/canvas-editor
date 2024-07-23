@@ -26,11 +26,11 @@
     "deploy": "gh-pages -d demo/build"
   },
   "peerDependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "@reduxjs/toolkit": "^2.2.1",
-    "react-redux": "^9.1.0",
-    "redux": "^5.0.1"
+    "react-redux": "^8.0.5",
+    "redux": "^4.2.1"
   },
   "dependencies": {
     "@babel/runtime": "7.5.1",
@@ -46,6 +46,7 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
     "babel-eslint": "^10.0.3",
     "canvas": "^2.11.2",
     "cross-env": "^7.0.2",
@@ -63,8 +64,7 @@
     "microbundle-crl": "^0.13.10",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.0.4",
-    "xml2js": "^0.6.2",
-    "@reduxjs/toolkit": "^2.2.1"
+    "xml2js": "^0.6.2"
   },
   "files": [
     "dist"
