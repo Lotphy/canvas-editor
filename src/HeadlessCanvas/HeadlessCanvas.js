@@ -1,9 +1,10 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { MDBBtn } from 'mdb-react-ui-kit';
-import EditorContext, { useEditor } from '../shared/EditorContext';
+import { useEditor } from '../shared/EditorContext';
 import { Layer, Rect, Stage } from 'react-konva';
 import Element from '../element/element';
 import { TEMPLATES } from '../shared/constants';
+import { svgPathData } from '../shared/sample-resources';
 
 const HeadlessCanvas = ({ exportImageCallback, inputParams }) => {
   const stageRef = useRef(null);
@@ -19,8 +20,17 @@ const HeadlessCanvas = ({ exportImageCallback, inputParams }) => {
     // TODO Could be refactored
     template.elements.map(elem => {
       if (inputParams.content[elem.id] !== null) {
-        if (elem.type === 'text') {
+        if (elem.type === 'text' && inputParams.content[elem.id]) {
           elem.text = inputParams.content[elem.id];
+        }
+        if (elem.customization) {
+          Object.keys(elem.customization).forEach(key => {
+            elem[key] = inputParams.content[elem.customization[key]];
+            if (key === 'mask') {
+              const randomMask = svgPathData[Math.floor(Math.random() * svgPathData.length)];
+              elem.mask = randomMask.path2D;
+            }
+          })
         }
       }
     });
@@ -30,9 +40,6 @@ const HeadlessCanvas = ({ exportImageCallback, inputParams }) => {
       elements: template.elements,
       params: template.params
     })
-
-    // editorContext.setElements(template.elements)
-    // editorContext.setParams(template.params);
   }
 
   useEffect(() => {

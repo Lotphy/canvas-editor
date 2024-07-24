@@ -518,6 +518,7 @@ export const TEMPLATES = [
     ]
   },
   {
+    type: "hiring",
     thumbnail: 'assets/samples/templates/template3.jpg',
     "params": {
       "background": "rgba(233,232,212,1)",
@@ -532,6 +533,9 @@ export const TEMPLATES = [
       {
         "id": "d9d9d565-8d78-45dc-9176-932ea424a0ad",
         "type": "circle",
+        "customization": {
+          fill: 'secondaryColor',
+        },
         "fill": "rgba(144,19,254,0.16)",
         "stroke": "rgb(220,115,97)",
         "strokeWidth": 0,
@@ -549,8 +553,11 @@ export const TEMPLATES = [
         "radiusY": 270.17497857572533
       },
       {
-        "id": "84fe3a09-2d6f-4246-a4da-9281b41c672c",
+        "id": "topic",
         "type": "text",
+        "customization": {
+          fill: 'primaryColor',
+        },
         "fillAfterStrokeEnabled": true,
         "fill": "rgba(144,19,254,1)",
         "strokeWidth": 0,
@@ -567,7 +574,7 @@ export const TEMPLATES = [
         "name": "element",
         "x": 275,
         "y": 226,
-        "width": 278.3000000000001,
+        "width": 278,
         "draggable": true,
         "rotation": 0,
         "skewX": 0,
@@ -577,6 +584,9 @@ export const TEMPLATES = [
       {
         "id": "a5533ea3-66e3-4933-a01f-22140444b35f",
         "type": "rectangle",
+        "customization": {
+          fill: 'primaryColor',
+        },
         "stroke": "rgb(97,146,220)",
         "strokeWidth": 0,
         "fill": "rgba(144,19,254,1)",
@@ -590,15 +600,19 @@ export const TEMPLATES = [
         "fillAfterStrokeEnabled": true,
         "cornerRadius": 0,
         "name": "element",
-        "x": 254.59700000000106,
-        "y": 485.64157024793474
+        "x": 255,
+        "y": 485
       },
       {
         "id": "733c999d-577e-401f-8f9d-86a7ea41134a",
         "type": "image",
+        "customization": {
+          stroke: 'primaryColor',
+          mask: 'random'
+        },
         "src": "assets/samples/img/pikaso_texttoimage_35mm-film-photography-multicultural-3-persons-smil.jpeg",
-        "x": 551.1902038504307,
-        "y": 155.19020385042978,
+        "x": 551,
+        "y": 155,
         "originalWidth": 1216,
         "originalHeight": 832,
         "width": 292.3076923076923,
@@ -619,7 +633,7 @@ export const TEMPLATES = [
         "strokeWidth": 20
       },
       {
-        "id": "0f788c48-e263-481d-a28c-31ab40608a90",
+        "id": "company",
         "type": "text",
         "fillAfterStrokeEnabled": true,
         "fill": "rgba(0,0,0,1)",
@@ -647,7 +661,7 @@ export const TEMPLATES = [
         "width": 278.18181818181824
       },
       {
-        "id": "87066450-d363-4ad8-8872-7eb3618b52a9",
+        "id": "role",
         "type": "text",
         "fillAfterStrokeEnabled": true,
         "fill": "rgba(0,0,0,1)",
@@ -663,8 +677,8 @@ export const TEMPLATES = [
         "text": "Poste : Business Developer",
         "fontStyle": "bold",
         "name": "element",
-        "x": 211,
-        "y": 284.9999999999997,
+        "x": 210,
+        "y": 285,
         "draggable": true,
         "rotation": 0,
         "offsetX": 0,
@@ -672,10 +686,10 @@ export const TEMPLATES = [
         "skewX": 0,
         "skewY": 0,
         "visible": true,
-        "width": 278.0000000000001
+        "width": 280
       },
       {
-        "id": "07114ed3-f1fc-43f7-aebd-93c72889598c",
+        "id": "date",
         "type": "text",
         "fillAfterStrokeEnabled": true,
         "fill": "rgba(0, 0, 0, 1)",
@@ -703,7 +717,7 @@ export const TEMPLATES = [
         "width": 278.0000000000001
       },
       {
-        "id": "472a8855-6fb9-4618-909a-1703195d5157",
+        "id": "location",
         "type": "text",
         "fillAfterStrokeEnabled": true,
         "fill": "rgba(0, 0, 0, 1)",
@@ -731,14 +745,14 @@ export const TEMPLATES = [
         "width": 278.0000000000001
       },
       {
-        "id": "997be0b9-2937-4877-b8de-0f6dd78b11e4",
+        "id": "cta",
         "type": "text",
         "fillAfterStrokeEnabled": true,
         "fill": "rgba(255,255,255,1)",
         "strokeWidth": 0,
         "stroke": "white",
         "fontSize": 23,
-        "fontFamily": "Voye, cursive",
+        "fontFamily": "Wave, cursive",
         "align": "left",
         "scaleX": 1,
         "scaleY": 1,
@@ -747,8 +761,8 @@ export const TEMPLATES = [
         "text": "Envoyez-moi votre CV",
         "fontStyle": "bold",
         "name": "element",
-        "x": 272.99999999999903,
-        "y": 508.9999999999981,
+        "x": 270,
+        "y": 510,
         "draggable": true,
         "rotation": 0,
         "offsetX": 0,
@@ -756,7 +770,7 @@ export const TEMPLATES = [
         "skewX": 0,
         "skewY": 0,
         "visible": true,
-        "width": 262.7272727272725
+        "width": 350
       }
     ]
   },
