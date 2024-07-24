@@ -5,7 +5,7 @@ import Element from '../element/element';
 import './main.css';
 import SideMenu from '../SideMenu/SideMenu';
 import AttrsMenu from '../AttrsMenu/AttrsMenu';
-import { EditorContext } from '../shared/context';
+import EditorContext from '../shared/EditorContext';
 import CanvasParams from '../CanvasParams/CanvasParams.js';
 import Konva from 'konva';
 

@@ -3,7 +3,7 @@ import { MDBBtn, MDBCol, MDBIcon, MDBRow } from 'mdb-react-ui-kit';
 import './ImageMenu.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUploadedImages, storeUploadedImage } from '../shared/store/stage.reducer';
-import { EditorContext } from '../shared/context';
+import EditorContext from '../shared/EditorContext';
 import { sampleImagesUrls } from '../shared/sample-resources';
 
 const ImageMenu = () => {

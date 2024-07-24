@@ -5,7 +5,7 @@ import { MDBBtn, MDBContainer, MDBIcon } from 'mdb-react-ui-kit';
 import ShapeMenu from '../ShapeMenu/ShapeMenu';
 import TextMenu from '../TextMenu/TextMenu';
 import ImageMenu from '../ImageMenu/ImageMenu';
-import { EditorContext } from '../shared/context';
+import EditorContext from '../shared/EditorContext';
 import TemplateMenu from '../TemplateMenu/TemplateMenu';
 
 const SideMenu = ({stageRef}) => {

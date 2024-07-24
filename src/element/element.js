@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Ellipse, Group, Image, Rect, Shape, Text } from 'react-konva';
-import { EditorContext } from '../shared/context';
+import EditorContext from '../shared/EditorContext';
 
 const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage, transformer }) => {
   const shapeRef = React.useRef();
@@ -316,6 +316,10 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
   const renderImage = () => {
     const img = new window.Image();
     img.src = shapeProps.src.includes('data:image') ? shapeProps.src : require(`./${shapeProps.src}`);
+
+    img.onload = () => {
+      shapeProps.loaded = true;
+    }
 
 		let cropParams = {}
 	  if (shapeProps.mask) {

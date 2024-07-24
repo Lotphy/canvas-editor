@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useRef } from 'react';
 import { MDBBtn } from 'mdb-react-ui-kit';
-import { EditorContext } from '../shared/context';
+import EditorContext, { useEditor } from '../shared/EditorContext';
 import { Layer, Rect, Stage } from 'react-konva';
 import Element from '../element/element';
 import { TEMPLATES } from '../shared/constants';
 
 const HeadlessCanvas = ({ exportImageCallback, inputParams }) => {
   const stageRef = useRef(null);
-  const editorContext = useContext(EditorContext);
+  const {editorContext, setEditorContext} = useEditor();
 
   useEffect(() => {
     applyParamsToTemplate();
@@ -25,15 +25,22 @@ const HeadlessCanvas = ({ exportImageCallback, inputParams }) => {
       }
     });
 
-    editorContext.setElements(template.elements)
-    editorContext.setParams(template.params);
-    // editorContext.updateDrawableZone(template.params);
+    setEditorContext({
+      ...editorContext,
+      elements: template.elements,
+      params: template.params
+    })
+
+    // editorContext.setElements(template.elements)
+    // editorContext.setParams(template.params);
   }
 
   useEffect(() => {
     if (editorContext.elements.length > 0) {
-      const imgData = editorContext.generateImageFromCanvas(stageRef, editorContext.params);
-      exportImageCallback(imgData);
+      setTimeout(() => {
+        const imgData = editorContext.generateImageFromCanvas(stageRef, editorContext.params);
+        exportImageCallback(imgData);
+      }, 1000)
     }
   }, [editorContext.elements]);
 

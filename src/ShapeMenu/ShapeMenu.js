@@ -1,7 +1,7 @@
 import React, { useContext }  from 'react';
 import { MDBCol, MDBIcon, MDBRow, } from 'mdb-react-ui-kit';
 import './ShapeMenu.css';
-import { EditorContext } from '../shared/context';
+import EditorContext from '../shared/EditorContext';
 
 const ShapeMenu = () => {
   const editorContext = useContext(EditorContext);

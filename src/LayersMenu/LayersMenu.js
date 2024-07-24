@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { MDBBtn, MDBCol, MDBIcon, MDBRow } from 'mdb-react-ui-kit';
 import './LayersMenu.css';
 import { useContext } from 'react';
-import { EditorContext } from '../shared/context';
+import EditorContext from '../shared/EditorContext';
 
 const LayersMenu = () => {
   const editorContext = useContext(EditorContext);

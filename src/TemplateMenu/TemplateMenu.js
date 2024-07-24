@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { MDBCol, MDBRow } from 'mdb-react-ui-kit';
 import { TEMPLATES } from '../shared/constants';
-import { EditorContext } from '../shared/context';
+import EditorContext from '../shared/EditorContext';
 
 const TemplateMenu = () => {
   const editorContext = useContext(EditorContext);

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { MDBBtn, MDBInput } from 'mdb-react-ui-kit';
 import { SketchPicker } from 'react-color';
-import { EditorContext } from '../shared/context';
+import EditorContext from '../shared/EditorContext';
 import './CanvasParams.css';
 
 const CanvasParams = ({stageRef}) => {
