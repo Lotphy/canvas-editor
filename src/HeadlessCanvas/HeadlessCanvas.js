@@ -8,7 +8,7 @@ import { svgPathData } from '../shared/sample-resources';
 
 const HeadlessCanvas = ({ exportImageCallback, inputParams }) => {
   const stageRef = useRef(null);
-  const {editorContext, setEditorContext} = useEditor();
+  const editorContext = useEditor();
 
   useEffect(() => {
     applyParamsToTemplate();
@@ -35,11 +35,8 @@ const HeadlessCanvas = ({ exportImageCallback, inputParams }) => {
       }
     });
 
-    setEditorContext({
-      ...editorContext,
-      elements: template.elements,
-      params: template.params
-    })
+    editorContext.setElements(template.elements)
+    editorContext.setParams(template.params);
   }
 
   useEffect(() => {

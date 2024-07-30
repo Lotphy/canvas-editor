@@ -1,7 +1,8 @@
 import React from 'react'
-
 import 'canvas-editor/dist/index.css'
-import CanvasEditor from 'canvas-editor';
+import CanvasEditor from 'canvas-editor/dist';
+
+console.log(CanvasEditor);
 
 const inputParams = {
   type: 'agree',
@@ -18,7 +19,7 @@ const getCanvasExport = (e) => {
 
 const App = () => {
   return <>
-    <CanvasEditor headless={false} getCanvasExport={getCanvasExport} inputParams={inputParams}/>
+    <CanvasEditor headless={true} getCanvasExport={getCanvasExport} inputParams={inputParams}/>
   </>
 }
 

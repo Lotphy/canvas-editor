@@ -146,10 +146,10 @@ export const EditorProvider = ({ children }) => {
     }
   }
 
-  const [editorContext, setEditorContext] = useState(initialState); // Replace {} with your initial state
+  // const [editorContext, setEditorContext] = useState(initialState); // Replace {} with your initial state
 
   return (
-    <EditorContext.Provider value={{ editorContext, setEditorContext }}>
+    <EditorContext.Provider value={initialState}>
       {children}
     </EditorContext.Provider>
   );
