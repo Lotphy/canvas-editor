@@ -19,7 +19,7 @@ const getCanvasExport = (e) => {
 
 const App = () => {
   return <>
-    <CanvasEditor headless={true} getCanvasExport={getCanvasExport} inputParams={inputParams}/>
+    <CanvasEditor headless={false} getCanvasExport={getCanvasExport} inputParams={inputParams}/>
   </>
 }
 
