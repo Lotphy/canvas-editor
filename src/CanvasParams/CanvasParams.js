@@ -27,7 +27,7 @@ const CanvasParams = ({stageRef}) => {
                   setBackgroundPalette(!backgroundPalette);
                 }}>
           <div className="color-selector transparent-canvas">
-            <div className="selected-color" style={{ backgroundColor: editorContext.params.background }}/>
+            <div className="selected-color" style={{ backgroundColor: editorContext.params.background.color }}/>
           </div>
         </MDBBtn>
         {
@@ -38,7 +38,7 @@ const CanvasParams = ({stageRef}) => {
               onChange={(e) => {
                 const color = `rgba(${e.rgb.r},${e.rgb.g},${e.rgb.b},${e.rgb.a})`;
                 setBackgroundColor(color);
-                editorContext.setParams({background: color});
+                editorContext.setParams({background: { color }});
               }}
             />
           </div>

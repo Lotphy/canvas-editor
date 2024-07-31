@@ -169,7 +169,11 @@ const Main = () => {
                 strokeWidth={1} // Adjust the stroke width as needed
                 fillLinearGradientStartPoint={{ x: 0, y: 0 }}
                 fillLinearGradientEndPoint={{ x: editorContext.params.drawableZone?.width, y: editorContext.params.drawableZone?.height }}
-                fillLinearGradientColorStops={[0, 'white', 1, '#dae9ff']}
+                fillLinearGradientColorStops={[
+                  0,
+                  editorContext.params.background.startColor ? editorContext.params.background.startColor : editorContext.params.background.color,
+                  1,
+                  editorContext.params.background.endColor ? editorContext.params.background.endColor : editorContext.params.background.color]}
               />
 
               {/* Render Elements */}

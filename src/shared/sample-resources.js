@@ -43,6 +43,41 @@ export const sampleImagesUrls = [
     "originalHeight": 1500
   },
   {
+    "url": "assets/samples/img/court,law,lawyer.jpg",
+    "originalWidth": 1000,
+    "originalHeight": 667
+  },
+  {
+    "url": "assets/samples/img/law,0.jpg",
+    "originalWidth": 1000,
+    "originalHeight": 667
+  },
+  {
+    "url": "assets/samples/img/law,1.jpg",
+    "originalWidth": 667,
+    "originalHeight": 1000
+  },
+  {
+    "url": "assets/samples/img/law,2.jpg",
+    "originalWidth": 667,
+    "originalHeight": 1000
+  },
+  {
+    "url": "assets/samples/img/law,court,lawyer.jpg",
+    "originalWidth": 1000,
+    "originalHeight": 1000
+  },
+  {
+    "url": "assets/samples/img/lawyer,tax,0.jpg",
+    "originalWidth": 1000,
+    "originalHeight": 667
+  },
+  {
+    "url": "assets/samples/img/lawyer,tax.jpg",
+    "originalWidth": 1000,
+    "originalHeight": 892
+  },
+  {
     "url": "assets/samples/img/pikaso_texttoimage_35mm-film-photography-3-HR-people-in-office-stanin(1).jpeg",
     "originalWidth": 1216,
     "originalHeight": 832

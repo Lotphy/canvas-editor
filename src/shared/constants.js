@@ -3,13 +3,15 @@ export const TEMPLATES = [
     thumbnail: 'assets/samples/templates/template1.jpg',
     type: 'complex',
     params: {
+      background: {
+        color: "rgba(233,232,212,1)"
+      },
       drawableZone: {
         x: 0,
         y: 0,
         width: 400,
         height: 400,
       },
-      background: 'white'
     },
     elements: [
       {
@@ -315,7 +317,9 @@ export const TEMPLATES = [
   {
     thumbnail: 'assets/samples/templates/template2.jpg',
     "params": {
-      "background": "rgba(233,232,212,1)",
+      "background": {
+        color: "rgba(233,232,212,1)"
+      },
       "drawableZone": {
         "x": 0,
         "y": 0,
@@ -521,7 +525,9 @@ export const TEMPLATES = [
     type: "hiring",
     thumbnail: 'assets/samples/templates/template3.jpg',
     "params": {
-      "background": "rgba(233,232,212,1)",
+      "background": {
+        color: "rgba(233,232,212,1)"
+      },
       "drawableZone": {
         "x": 0,
         "y": 0,
@@ -553,7 +559,7 @@ export const TEMPLATES = [
         "radiusY": 270.17497857572533
       },
       {
-        "id": "topic",
+        "id": "376cace2-4fe5-4dac-0012-549fd1ac667d",
         "type": "text",
         "customization": {
           fill: 'primaryColor',
@@ -571,7 +577,7 @@ export const TEMPLATES = [
         "relativeY": 70,
         "text": "Recherche 1 Stagiaire",
         "fontStyle": "bold",
-        "name": "element",
+        "name": "title",
         "x": 275,
         "y": 226,
         "width": 278,
@@ -633,7 +639,7 @@ export const TEMPLATES = [
         "strokeWidth": 20
       },
       {
-        "id": "company",
+        "id": "376cace2-dsqf-4dac-a8c0-549fd1ac6645",
         "type": "text",
         "fillAfterStrokeEnabled": true,
         "fill": "rgba(0,0,0,1)",
@@ -648,7 +654,7 @@ export const TEMPLATES = [
         "relativeY": 35,
         "text": "Merith Technologies",
         "fontStyle": "bold",
-        "name": "element",
+        "name": "companyName",
         "x": 275,
         "y": 311,
         "draggable": true,
@@ -661,7 +667,7 @@ export const TEMPLATES = [
         "width": 278.18181818181824
       },
       {
-        "id": "role",
+        "id": "246174bc-406d-428f-8f55-3be02d89cef9",
         "type": "text",
         "fillAfterStrokeEnabled": true,
         "fill": "rgba(0,0,0,1)",
@@ -674,9 +680,9 @@ export const TEMPLATES = [
         "scaleY": 1,
         "relativeX": 20,
         "relativeY": 185,
-        "text": "Poste : Business Developer",
+        "text": "Poste : Business Developer \nLocalisation : Paris \nDate : 01 aout",
         "fontStyle": "bold",
-        "name": "element",
+        "name": "description",
         "x": 210,
         "y": 285,
         "draggable": true,
@@ -689,63 +695,7 @@ export const TEMPLATES = [
         "width": 280
       },
       {
-        "id": "date",
-        "type": "text",
-        "fillAfterStrokeEnabled": true,
-        "fill": "rgba(0, 0, 0, 1)",
-        "strokeWidth": 0,
-        "stroke": "white",
-        "fontSize": 20,
-        "fontFamily": "Renovate, sans-serif",
-        "align": "left",
-        "scaleX": 1,
-        "scaleY": 1,
-        "relativeX": 20,
-        "relativeY": 245,
-        "text": "Date : 01 aout",
-        "fontStyle": "bold",
-        "name": "element",
-        "x": 211,
-        "y": 316.99999999999966,
-        "draggable": true,
-        "rotation": 0,
-        "offsetX": 0,
-        "offsetY": 0,
-        "skewX": 0,
-        "skewY": 0,
-        "visible": true,
-        "width": 278.0000000000001
-      },
-      {
-        "id": "location",
-        "type": "text",
-        "fillAfterStrokeEnabled": true,
-        "fill": "rgba(0, 0, 0, 1)",
-        "strokeWidth": 0,
-        "stroke": "white",
-        "fontSize": 20,
-        "fontFamily": "Renovate, sans-serif",
-        "align": "left",
-        "scaleX": 1,
-        "scaleY": 1,
-        "relativeX": 20,
-        "relativeY": 215,
-        "text": "Localisation : Paris",
-        "fontStyle": "bold",
-        "name": "element",
-        "x": 211,
-        "y": 346,
-        "draggable": true,
-        "rotation": 0,
-        "offsetX": 0,
-        "offsetY": 0,
-        "skewX": 0,
-        "skewY": 0,
-        "visible": true,
-        "width": 278.0000000000001
-      },
-      {
-        "id": "cta",
+        "id": "733c9911-577e-401f-8f9d-86a7ea41134a",
         "type": "text",
         "fillAfterStrokeEnabled": true,
         "fill": "rgba(255,255,255,1)",
@@ -760,7 +710,7 @@ export const TEMPLATES = [
         "relativeY": 352.99999999999795,
         "text": "Envoyez-moi votre CV",
         "fontStyle": "bold",
-        "name": "element",
+        "name": "cta",
         "x": 270,
         "y": 510,
         "draggable": true,
@@ -778,7 +728,9 @@ export const TEMPLATES = [
     thumbnail: 'assets/samples/templates/template4.jpg',
     type: "",
     "params": {
-      "background": "rgba(233,232,212,1)",
+      "background": {
+        color: "rgba(233,232,212,1)"
+      },
       "drawableZone": {
         "x": 0,
         "y": 0,
@@ -1046,7 +998,9 @@ export const TEMPLATES = [
     thumbnail: "assets/samples/templates/template5.jpg",
     type: "agree",
     "params": {
-      "background": "#FFF2DA",
+      "background": {
+        color: "rgba(233,232,212,1)"
+      },
       "drawableZone": {
         "x": 0,
         "y": 0,
@@ -1189,5 +1143,188 @@ export const TEMPLATES = [
         "width": 458.18181818181796
       }
     ]
+  },
+  {
+    thumbnail: "assets/samples/templates/template6.jpg",
+    type: "TBD",
+    "params": {
+      "background": {
+        "color": "rgba(247,235,255,1)"
+      },
+      "drawableZone": {
+        "x": 305,
+        "y": 156,
+        "width": 500,
+        "height": 400
+      }
+    },
+    "elements": [
+      {
+        "id": "2959018a-49b4-47c3-b2a9-70b56205b0b7",
+        "type": "rectangle",
+        "stroke": "rgb(97,146,220)",
+        "strokeWidth": 0,
+        "fill": "rgba(4,0,46,1)",
+        "opacity": 1,
+        "scaleX": 1,
+        "scaleY": 1,
+        "relativeX": 140,
+        "relativeY": 5.684341886080802e-14,
+        "width": 362.5413295214611,
+        "height": 400.54132952146176,
+        "fillAfterStrokeEnabled": true,
+        "cornerRadius": 0,
+        "name": "element",
+        "x": 445,
+        "y": 155
+      },
+      {
+        "id": "98e750e0-ce73-4cba-ab14-1049b983e459",
+        "type": "image",
+        "src": "assets/samples/img/law,2.jpg",
+        "x": 315.00000000000017,
+        "y": 165.99999999999983,
+        "originalWidth": 667,
+        "originalHeight": 1000,
+        "width": 224.2152466367713,
+        "height": 200,
+        "relativeX": 10.00000000000017,
+        "relativeY": 9.99999999999983,
+        "stroke": "rgba(4,0,46,1)",
+        "name": "picture1",
+        "draggable": true,
+        "rotation": 0,
+        "scaleX": 1.8791544021999191,
+        "scaleY": 1.9049707364425312,
+        "offsetX": 0,
+        "offsetY": 0,
+        "skewX": 0,
+        "skewY": 0,
+        "loaded": true,
+        "strokeWidth": 8,
+        "mask": "M 174.269531 0.00390625 L 26.160156 0.00390625 C 26.015625 0 25.871094 0 25.726562 0 C 11.515625 0.00390625 0 11.523438 0 25.730469 L 0 173.84375 C 0.046875 188.269531 11.730469 199.953125 26.160156 200 L 174.269531 200 C 188.527344 199.722656 199.953125 188.105469 200 173.84375 L 200 25.730469 C 200 11.523438 188.480469 0.00390625 174.269531 0.00390625 Z M 174.269531 0.00390625 "
+      },
+      {
+        "id": "376cace2-4fe5-4dac-a8c0-549fd1ac667d",
+        "type": "rectangle",
+        "stroke": "rgb(97,146,220)",
+        "strokeWidth": 0,
+        "fill": "rgba(255,255,255,1)",
+        "opacity": 1,
+        "scaleX": 1,
+        "scaleY": 1,
+        "relativeX": 302.65780375230486,
+        "relativeY": 43.21303635565698,
+        "width": 167.18517619252077,
+        "height": 317.0747109858204,
+        "fillAfterStrokeEnabled": true,
+        "cornerRadius": 8,
+        "name": "element",
+        "x": 598.6578037523049,
+        "y": 196.21303635565698
+      },
+      {
+        "id": "641673df-63d5-4211-8e77-94e849d8e044",
+        "type": "text",
+        "fillAfterStrokeEnabled": true,
+        "fill": "rgba(0, 0, 0, 1)",
+        "strokeWidth": 0,
+        "stroke": "white",
+        "fontSize": 24,
+        "fontFamily": "Palatino Linotype, serif",
+        "align": "center",
+        "scaleX": 1,
+        "scaleY": 1,
+        "relativeX": 310.0000000000001,
+        "relativeY": 130,
+        "text": "Fiscalité\n& TVA",
+        "fontStyle": "bold",
+        "name": "title",
+        "x": 600.0000000000001,
+        "y": 226,
+        "width": 150.00000000000009,
+        "draggable": true,
+        "rotation": 0,
+        "offsetX": 0,
+        "offsetY": 0,
+        "skewX": 0,
+        "skewY": 0,
+        "visible": true
+      },
+      {
+        "id": "b709325a-86f9-4a05-bc8e-e6507339f016",
+        "type": "text",
+        "fillAfterStrokeEnabled": true,
+        "fill": "rgba(0, 0, 0, 1)",
+        "strokeWidth": 0,
+        "stroke": "white",
+        "fontSize": 18,
+        "fontFamily": "Lato, sans-serif",
+        "align": "center",
+        "scaleX": 1,
+        "scaleY": 1,
+        "relativeX": 316.9999999999991,
+        "relativeY": 245,
+        "text": "Comprendre la fiscalité de votre société",
+        "fontStyle": "bold",
+        "name": "subtitle",
+        "x": 621.9999999999991,
+        "y": 366,
+        "draggable": true,
+        "rotation": 0,
+        "offsetX": 0,
+        "offsetY": 0,
+        "skewX": 0,
+        "skewY": 0,
+        "visible": true,
+        "width": 139.75500000000008
+      },
+      {
+        "id": "cd63e9fb-d509-4b43-8039-07822a94d527",
+        "type": "rectangle",
+        "stroke": "rgb(97,146,220)",
+        "strokeWidth": 0,
+        "fill": "rgba(4,0,46,1)",
+        "opacity": 1,
+        "scaleX": 1,
+        "scaleY": 1,
+        "relativeX": 335,
+        "relativeY": 210,
+        "width": 99.99999999999994,
+        "height": 10.822999999999087,
+        "fillAfterStrokeEnabled": true,
+        "cornerRadius": 4,
+        "name": "element",
+        "x": 454.9999999999993,
+        "y": 306.0000000000008
+      },
+      {
+        "id": "24d82fd5-06be-42e0-b405-6be0fd13af71",
+        "type": "image",
+        "src": "assets/samples/img/pikaso_texttoimage_35mm-film-photography-HR-woman-passing-an-intervie(5).jpeg",
+        "x": 380.00000000000074,
+        "y": 206.00000000000082,
+        "originalWidth": 1216,
+        "originalHeight": 832,
+        "width": 292.3076923076923,
+        "height": 200,
+        "relativeX": 358.471074380166,
+        "relativeY": 60,
+        "stroke": "rgba(144,19,254,1)",
+        "name": "logo",
+        "draggable": true,
+        "mask": "M 12 17 L 12 100 C 12 149.300781 52.5 189.101562 102.101562 188 C 148.898438 186.898438 187.101562 148.601562 188 101.800781 C 188.5 76.800781 178.5 54.101562 162.199219 37.800781 C 146.300781 21.898438 124.300781 12 100 12 L 17 12 C 14.300781 12 12 14.300781 12 17 Z M 12 17 ",
+        "strokeWidth": 8,
+        "rotation": 0,
+        "scaleX": 0.29179815777253626,
+        "scaleY": 0.29179815777253615,
+        "skewX": 0,
+        "skewY": 0,
+        "offsetX": 0,
+        "offsetY": 0,
+        "loaded": true
+      }
+    ]
   }
+
 ]

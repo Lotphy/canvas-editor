@@ -7,11 +7,13 @@ export const EditorProvider = ({ children }) => {
   const [selectedElement, setSelectedElement] = useState(null);
   const [elements, setElements] = useState([]);
   const [params, setParams] = useState({
-    background: '#FFF2DA',
+    background: {
+      color: '#FFFFFF'
+    },
     drawableZone: {
       x: 0,
       y: 0,
-      width: 600,
+      width: 500,
       height: 400,
     }
   });
