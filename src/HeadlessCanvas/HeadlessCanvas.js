@@ -4,7 +4,7 @@ import { useEditor } from '../shared/EditorContext';
 import { Layer, Rect, Stage } from 'react-konva';
 import Element from '../element/element';
 import { TEMPLATES } from '../shared/constants';
-import { svgPathData } from '../shared/sample-resources';
+import { sampleImagesUrls, svgPathData } from '../shared/sample-resources';
 
 const HeadlessCanvas = ({ exportImageCallback, inputParams }) => {
   const stageRef = useRef(null);
@@ -23,6 +23,14 @@ const HeadlessCanvas = ({ exportImageCallback, inputParams }) => {
         if (inputParams.content[elem.name] !== null) {
           if (elem.type === 'text' && inputParams.content[elem.name]) {
             elem.text = inputParams.content[elem.name];
+          }
+          if (elem.type === 'image' && elem.name === 'picture1') {
+            const field = inputParams.field;
+            const lawImages = sampleImagesUrls.filter(image => image.url.includes(field));
+            const selectedImageIndex = Math.floor(Math.random() * lawImages.length);
+            elem.src = lawImages[selectedImageIndex].url;
+            elem.originalHeight = lawImages[selectedImageIndex].originalHeight;
+            elem.originalWidth = lawImages[selectedImageIndex].originalWidth;
           }
           if (elem.customization) {
             Object.keys(elem.customization).forEach(key => {
