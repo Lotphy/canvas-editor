@@ -60,10 +60,12 @@ const SideMenu = ({stageRef}) => {
         </MDBBtn>
         <MDBBtn className={`p-3`}
                 onClick={() => {
-                  console.log({
+                  alert(JSON.stringify({
+                    thumbnail: 'assets/samples/templates/template.jpg',
+                    type: '',
                     params: editorContext.params,
                     elements: editorContext.elements
-                  });
+                  }));
                 }}
                 noRipple
         >
