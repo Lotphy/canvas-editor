@@ -35,6 +35,8 @@ const ImageMenu = () => {
       y: 50,
 	    originalWidth: image.width,
 	    originalHeight: image.height,
+      scaleX: 1,
+      scaleY: 1,
       width: displayWidth,
       height: displayHeight,
       relativeX: 75,

@@ -96,7 +96,7 @@ const SquareAttributes = ({ element, updateAttribute }) => {
           type="number"
           value={cornerRadius}
           onChange={(e) => {
-            const value = parseInt(e.target.value) || 0;
+            const value = Math.max(+e.target.value, 0);
             setCornerRadius(value);
             updateAttribute('cornerRadius', value);
           }}
