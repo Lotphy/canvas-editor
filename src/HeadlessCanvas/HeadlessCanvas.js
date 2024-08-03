@@ -15,8 +15,10 @@ const HeadlessCanvas = ({ exportImageCallback, inputParams }) => {
   }, [inputParams])
 
   const applyParamsToTemplate = () => {
-    const template = TEMPLATES.filter(template => template.type === inputParams.type).shift();
-
+    console.log('Generating...')
+    const templates = TEMPLATES.filter(template => template.type === inputParams.type);
+    const template = templates[Math.floor(Math.random() * templates.length)];
+    console.log('Template selected.');
     if (template) {
       // TODO Could be refactored
       template.elements.map(elem => {
@@ -26,11 +28,11 @@ const HeadlessCanvas = ({ exportImageCallback, inputParams }) => {
           }
           if (elem.type === 'image' && elem.name === 'picture1') {
             const field = inputParams.field;
-            const lawImages = sampleImagesUrls.filter(image => image.url.includes(field));
-            const selectedImageIndex = Math.floor(Math.random() * lawImages.length);
-            elem.src = lawImages[selectedImageIndex].url;
-            elem.originalHeight = lawImages[selectedImageIndex].originalHeight;
-            elem.originalWidth = lawImages[selectedImageIndex].originalWidth;
+            const fieldImages = sampleImagesUrls.filter(image => image.url.includes(field));
+            const selectedImageIndex = Math.floor(Math.random() * fieldImages.length);
+            elem.src = fieldImages[selectedImageIndex].url;
+            elem.originalHeight = fieldImages[selectedImageIndex].originalHeight;
+            elem.originalWidth = fieldImages[selectedImageIndex].originalWidth;
           }
           if (elem.customization) {
             Object.keys(elem.customization).forEach(key => {
@@ -43,18 +45,22 @@ const HeadlessCanvas = ({ exportImageCallback, inputParams }) => {
           }
         }
       });
+      console.log('Elements update.', template.elements);
 
-      editorContext.setElements(template.elements)
+      editorContext.setElements(template.elements);
       editorContext.setParams(template.params);
-
-      if (editorContext.elements.length > 0) {
-        setTimeout(() => {
-          const imgData = editorContext.generateImageFromCanvas(stageRef, editorContext.params);
-          exportImageCallback(imgData);
-        }, 1000)
-      }
     }
   }
+
+  useEffect(() => {
+    if (editorContext.elements.length > 0) {
+      setTimeout(() => {
+        const imgData = editorContext.generateImageFromCanvas(stageRef, editorContext.params);
+        exportImageCallback(imgData);
+        console.log('Generation done!');
+      }, 1000);
+    }
+  }, [editorContext.elements]);
 
   return (
     <React.Fragment>

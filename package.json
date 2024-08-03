@@ -1,6 +1,6 @@
 {
   "name": "canvas-editor",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Made with create-react-library",
   "author": "Lotphy",
   "license": "MIT",
@@ -46,6 +46,7 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
     "babel-eslint": "^10.0.3",
     "canvas": "^2.11.2",
     "cross-env": "^7.0.2",
@@ -63,7 +64,6 @@
     "microbundle-crl": "^0.13.10",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.0.4",
-    "@reduxjs/toolkit": "^1.9.5",
     "react-redux": "^8.0.5",
     "xml2js": "^0.6.2"
   },

@@ -28,11 +28,6 @@ export const sampleImagesUrls = [
     "originalHeight": 1500
   },
   {
-    "url": "assets/samples/img/6.jpg",
-    "originalWidth": 2000,
-    "originalHeight": 1500
-  },
-  {
     "url": "assets/samples/img/7.jpg",
     "originalWidth": 2250,
     "originalHeight": 1500
@@ -123,47 +118,7 @@ export const sampleImagesUrls = [
     "originalHeight": 832
   },
   {
-    "url": "assets/samples/img/pikaso_texttoimage_35mm-film-photography-HR-woman-working-on-a-comput(1).jpeg",
-    "originalWidth": 1216,
-    "originalHeight": 832
-  },
-  {
-    "url": "assets/samples/img/pikaso_texttoimage_35mm-film-photography-HR-woman-working-on-a-comput(2).jpeg",
-    "originalWidth": 1216,
-    "originalHeight": 832
-  },
-  {
-    "url": "assets/samples/img/pikaso_texttoimage_35mm-film-photography-HR-woman-working-on-a-comput.jpeg",
-    "originalWidth": 1216,
-    "originalHeight": 832
-  },
-  {
     "url": "assets/samples/img/pikaso_texttoimage_35mm-film-photography-IT-developer-in-a-modern-ope.jpeg",
-    "originalWidth": 1216,
-    "originalHeight": 832
-  },
-  {
-    "url": "assets/samples/img/pikaso_texttoimage_35mm-film-photography-IT-engineer-developing-on-a-(1).jpeg",
-    "originalWidth": 1216,
-    "originalHeight": 832
-  },
-  {
-    "url": "assets/samples/img/pikaso_texttoimage_35mm-film-photography-IT-engineer-developing-on-a-(2).jpeg",
-    "originalWidth": 1216,
-    "originalHeight": 832
-  },
-  {
-    "url": "assets/samples/img/pikaso_texttoimage_35mm-film-photography-IT-engineer-developing-on-a-.jpeg",
-    "originalWidth": 1216,
-    "originalHeight": 832
-  },
-  {
-    "url": "assets/samples/img/pikaso_texttoimage_35mm-film-photography-IT-engineer-girl-developing-(1).jpeg",
-    "originalWidth": 1216,
-    "originalHeight": 832
-  },
-  {
-    "url": "assets/samples/img/pikaso_texttoimage_35mm-film-photography-IT-engineer-girl-developing-.jpeg",
     "originalWidth": 1216,
     "originalHeight": 832
   },
@@ -224,6 +179,51 @@ export const sampleImagesUrls = [
   },
   {
     "url": "assets/samples/img/pikaso_texttoimage_35mm-film-photography-multicultural-3-persons-smil.jpeg",
+    "originalWidth": 1216,
+    "originalHeight": 832
+  },
+  {
+    "url": "assets/samples/img/tech,0.jpeg",
+    "originalWidth": 1216,
+    "originalHeight": 832
+  },
+  {
+    "url": "assets/samples/img/tech,1.jpeg",
+    "originalWidth": 1216,
+    "originalHeight": 832
+  },
+  {
+    "url": "assets/samples/img/tech,2.jpeg",
+    "originalWidth": 1216,
+    "originalHeight": 832
+  },
+  {
+    "url": "assets/samples/img/tech,3.jpeg",
+    "originalWidth": 1216,
+    "originalHeight": 832
+  },
+  {
+    "url": "assets/samples/img/tech,4.jpeg",
+    "originalWidth": 1216,
+    "originalHeight": 832
+  },
+  {
+    "url": "assets/samples/img/tech,5.jpeg",
+    "originalWidth": 1216,
+    "originalHeight": 832
+  },
+  {
+    "url": "assets/samples/img/tech,6.jpg",
+    "originalWidth": 2000,
+    "originalHeight": 1500
+  },
+  {
+    "url": "assets/samples/img/tech,7.jpeg",
+    "originalWidth": 1216,
+    "originalHeight": 832
+  },
+  {
+    "url": "assets/samples/img/tech,8.jpeg",
     "originalWidth": 1216,
     "originalHeight": 832
   }
