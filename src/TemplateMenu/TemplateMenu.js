@@ -8,7 +8,6 @@ const TemplateMenu = () => {
 
   const handleAddElement = (template) => {
     editorContext.setElements(template.elements);
-    console.log(template.elements)
     editorContext.setParams(template.params);
     editorContext.updateDrawableZone(template.params);
   }

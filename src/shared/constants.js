@@ -1,5 +1,6 @@
 export const TEMPLATES = [
   {
+    'id': 'template1',
     thumbnail: 'assets/samples/templates/template1.jpg',
     type: 'complex',
     params: {
@@ -315,6 +316,7 @@ export const TEMPLATES = [
     ]
   },
   {
+    'id': 'template2',
     thumbnail: 'assets/samples/templates/template2.jpg',
     'params': {
       'background': {
@@ -522,6 +524,7 @@ export const TEMPLATES = [
     ]
   },
   {
+    'id': 'template3',
     type: 'hiring',
     thumbnail: 'assets/samples/templates/template3.jpg',
     'params': {
@@ -725,6 +728,7 @@ export const TEMPLATES = [
     ]
   },
   {
+    'id': 'template4',
     thumbnail: 'assets/samples/templates/template4.jpg',
     'type': 'TBD',
     'params': {
@@ -995,6 +999,7 @@ export const TEMPLATES = [
     ]
   },
   {
+    'id': 'template5',
     thumbnail: 'assets/samples/templates/template5.jpg',
     type: 'agree',
     'params': {
@@ -1145,6 +1150,7 @@ export const TEMPLATES = [
     ]
   },
   {
+    'id': 'template6',
     'thumbnail': 'assets/samples/templates/template6.jpg',
     'type': 'standard',
     'params': {
@@ -1312,6 +1318,7 @@ export const TEMPLATES = [
     }]
   },
   {
+    'id': 'template7',
     'thumbnail': 'assets/samples/templates/template7.jpg',
     'type': 'standard',
     'params': {
@@ -1463,14 +1470,16 @@ export const TEMPLATES = [
       'height': 5,
       'fillAfterStrokeEnabled': true,
       'cornerRadius': 16
-    }]
+    }
+    ]
   },
   {
+    'id': 'template8',
     'thumbnail': 'assets/samples/templates/template8.jpg',
     'type': 'standard',
     'params': {
       'background': { 'color': '#FFFFFF' },
-      'drawableZone': { 'x': 1257, 'y': 443.5, 'width': 500, 'height': 400 }
+      'drawableZone': { 'x': 0, 'y': 0, 'width': 500, 'height': 400 }
     },
     'elements': [{
       'id': '91b34624-f37e-48f1-97c4-3e73801d0da2',
@@ -1502,7 +1511,7 @@ export const TEMPLATES = [
       'type': 'rectangle',
       'stroke': 'rgba(0,0,0,1)',
       'strokeWidth': 0,
-      'fill': 'rgba(255,255,255,1)',
+      'fill': 'rgb(246,249,255)',
       'opacity': 1,
       'scaleX': 1,
       'scaleY': 1,
@@ -1515,6 +1524,10 @@ export const TEMPLATES = [
     }, {
       'id': 'ffbbe7a8-9cff-49d6-b5a2-2ff63e86a175',
       'type': 'text',
+      'customization': {
+        maxSize: 32,
+        minSize: 24,
+      },
       'fillAfterStrokeEnabled': true,
       'fill': 'rgba(0, 0, 0, 1)',
       'strokeWidth': 0,
@@ -1526,7 +1539,7 @@ export const TEMPLATES = [
       'scaleY': 1,
       'relativeX': 255,
       'relativeY': 35,
-      'text': 'Boostez votre entreprise',
+      'text': 'Boostez votre entrepriseBoostez votre entreprise',
       'fontStyle': 'normal',
       'name': 'title',
       'x': 1262,
@@ -1542,6 +1555,10 @@ export const TEMPLATES = [
     }, {
       'id': '1e7de8a9-d511-4661-b857-f96e127c599d',
       'type': 'text',
+      'customization': {
+        maxSize: 32,
+        minSize: 24,
+      },
       'fillAfterStrokeEnabled': true,
       'fill': 'rgba(0, 0, 0, 1)',
       'strokeWidth': 0,
@@ -1612,11 +1629,181 @@ export const TEMPLATES = [
       'scaleX': 1,
       'scaleY': 1,
       'relativeX': 335,
-      'relativeY': 130,
+      'relativeY': 145,
       'width': 80,
       'height': 5,
       'fillAfterStrokeEnabled': true,
       'cornerRadius': 16
     }]
+  },
+  {
+    'id': 'template9',
+    'thumbnail': 'assets/samples/templates/template9.jpg',
+    'type': '',
+    'params': {
+      'background': { 'color': 'rgba(247,235,255,1)' },
+      'drawableZone': { 'x': 497, 'y': 245, 'width': 550, 'height': 400 }
+    },
+    'elements': [
+      {
+        'id': '2959018a-49b4-47c3-b2a9-70b56205b0b7',
+        'type': 'rectangle',
+        'stroke': 'rgb(97,146,220)',
+        'strokeWidth': 0,
+        'fill': 'rgba(4,0,46,1)',
+        'opacity': 1,
+        'scaleX': 1,
+        'scaleY': 1,
+        'relativeX': 140,
+        'relativeY': 5.684341886080802e-14,
+        'width': 460,
+        'height': 400.54132952146176,
+        'fillAfterStrokeEnabled': true,
+        'cornerRadius': 0,
+        'name': 'element',
+        'x': 445,
+        'y': 155
+      }, {
+        'id': '98e750e0-ce73-4cba-ab14-1049b983e459',
+        'type': 'image',
+        'src': 'assets/samples/img/pikaso_texttoimage_35mm-film-photography-multicultural-3-persons-smil.jpeg',
+        'x': 315.00000000000017,
+        'y': 165.99999999999983,
+        'originalWidth': 1216,
+        'originalHeight': 832,
+        'width': 224.2152466367713,
+        'height': 200,
+        'relativeX': 10.00000000000017,
+        'relativeY': 9.99999999999983,
+        'stroke': 'rgba(4,0,46,1)',
+        'name': 'picture1',
+        'draggable': true,
+        'rotation': 0,
+        'scaleX': 1.8791544021999191,
+        'scaleY': 1.9049707364425312,
+        'offsetX': 0,
+        'offsetY': 0,
+        'skewX': 0,
+        'skewY': 0,
+        'loaded': true,
+        'strokeWidth': 8,
+        'mask': 'M 174.269531 0.00390625 L 26.160156 0.00390625 C 26.015625 0 25.871094 0 25.726562 0 C 11.515625 0.00390625 0 11.523438 0 25.730469 L 0 173.84375 C 0.046875 188.269531 11.730469 199.953125 26.160156 200 L 174.269531 200 C 188.527344 199.722656 199.953125 188.105469 200 173.84375 L 200 25.730469 C 200 11.523438 188.480469 0.00390625 174.269531 0.00390625 Z M 174.269531 0.00390625 '
+      }, {
+        'id': '376cace2-4fe5-4dac-a8c0-549fd1ac667d',
+        'type': 'rectangle',
+        'stroke': 'rgb(97,146,220)',
+        'strokeWidth': 0,
+        'fill': 'rgba(255,255,255,1)',
+        'opacity': 1,
+        'scaleX': 1,
+        'scaleY': 1,
+        'relativeX': 300,
+        'relativeY': 43.21303635565698,
+        'width': 200,
+        'height': 317.0747109858204,
+        'fillAfterStrokeEnabled': true,
+        'cornerRadius': 8,
+        'name': 'element',
+        'x': 598.6578037523049,
+        'y': 196.21303635565698
+      }, {
+        'id': '641673df-63d5-4211-8e77-94e849d8e044',
+        'type': 'text',
+        'fillAfterStrokeEnabled': true,
+        'fill': 'rgba(0, 0, 0, 1)',
+        'strokeWidth': 0,
+        'stroke': 'white',
+        'fontSize': 26,
+        'fontFamily': 'Arial, sans-serif',
+        'align': 'center',
+        'scaleX': 1,
+        'scaleY': 1,
+        'relativeX': 310.0000000000001,
+        'relativeY': 155,
+        'text': 'Actualité Juridique',
+        'fontStyle': 'bold',
+        'name': 'element',
+        'x': 807.0000000000001,
+        'y': 390,
+        'width': 180.071848760957,
+        'draggable': true,
+        'rotation': 0,
+        'offsetX': 0,
+        'offsetY': 0,
+        'skewX': 0,
+        'skewY': 0,
+        'visible': true
+      }, {
+        'id': 'b709325a-86f9-4a05-bc8e-e6507339f016',
+        'type': 'text',
+        'fillAfterStrokeEnabled': true,
+        'fill': 'rgba(0, 0, 0, 1)',
+        'strokeWidth': 0,
+        'stroke': 'white',
+        'fontSize': 25,
+        'fontFamily': 'Wave, cursive',
+        'align': 'center',
+        'scaleX': 1,
+        'scaleY': 1,
+        'relativeX': 310,
+        'relativeY': 245,
+        'text': 'droit des affaires',
+        'fontStyle': 'italic',
+        'name': 'element',
+        'x': 807,
+        'y': 490,
+        'draggable': true,
+        'rotation': 0,
+        'offsetX': 0,
+        'offsetY': 0,
+        'skewX': 0,
+        'skewY': 0,
+        'visible': true,
+        'width': 180
+      }, {
+        'id': 'cd63e9fb-d509-4b43-8039-07822a94d527',
+        'type': 'rectangle',
+        'stroke': 'rgb(97,146,220)',
+        'strokeWidth': 0,
+        'fill': 'rgba(4,0,46,1)',
+        'opacity': 1,
+        'scaleX': 1,
+        'scaleY': 1,
+        'relativeX': 370,
+        'relativeY': 220,
+        'width': 60,
+        'height': 5,
+        'fillAfterStrokeEnabled': true,
+        'cornerRadius': 4,
+        'name': 'element',
+        'x': 454.9999999999993,
+        'y': 306.0000000000008
+      }, {
+        'id': '2fcb93f9-5daa-45ac-b074-4d246f984ddb',
+        'type': 'image',
+        'src': 'assets/samples/img/law,1.jpg',
+        'x': 854.4847163120482,
+        'y': 314.48471631204904,
+        'originalWidth': 667,
+        'originalHeight': 1000,
+        'scaleX': 0.43333333333333335,
+        'scaleY': 0.425,
+        'width': 300,
+        'height': 200,
+        'relativeX': 355,
+        'relativeY': 55,
+        'stroke': 'rgba(0,0,0,1)',
+        'name': 'element',
+        'draggable': true,
+        'mask': 'M 12 17 L 12 100 C 12 149.300781 52.5 189.101562 102.101562 188 C 148.898438 186.898438 187.101562 148.601562 188 101.800781 C 188.5 76.800781 178.5 54.101562 162.199219 37.800781 C 146.300781 21.898438 124.300781 12 100 12 L 17 12 C 14.300781 12 12 14.300781 12 17 Z M 12 17 ',
+        'rotation': 0,
+        'skewX': 0,
+        'skewY': 0,
+        'offsetX': 0,
+        'offsetY': 0,
+        'loaded': true,
+        'strokeWidth': 8
+      }
+    ]
   }
 ]

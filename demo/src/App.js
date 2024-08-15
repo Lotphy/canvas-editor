@@ -2,14 +2,11 @@ import React from 'react'
 import 'canvas-editor/dist/index.css'
 import CanvasEditor from 'canvas-editor/dist';
 
-console.log(CanvasEditor);
-
 const inputParams = {
-  type: 'agree',
+  id: 'template8',
   content: {
-    author: 'Jackie Chong',
-    role: 'Martial Art Professional',
-    message: 'I fear not the man who has practiced 10,000 kicks once, but I fear the man who has practiced one kick 10,000 times.',
+    title: 'Communication ouvertez',
+    subtitle: 'Investir dans la formation et le développement personnel ',
   }
 }
 

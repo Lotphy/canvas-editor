@@ -16,9 +16,15 @@ const HeadlessCanvas = ({ exportImageCallback, inputParams }) => {
 
   const applyParamsToTemplate = () => {
     editorContext.setElements([]);
-    console.log('Generating...')
-    const templates = TEMPLATES.filter(template => template.type === inputParams.type);
-    const template = templates[Math.floor(Math.random() * templates.length)];
+    console.log('Generating...');
+    let template;
+    if (inputParams.id) {
+      template = TEMPLATES.filter(template => template.id === inputParams.id).shift();
+    } else {
+      const templates = TEMPLATES.filter(template => template.type === inputParams.type);
+      template = templates[Math.floor(Math.random() * templates.length)];
+    }
+    console.log(template)
     console.log('Template selected.');
     if (template) {
       // TODO Could be refactored
@@ -26,6 +32,10 @@ const HeadlessCanvas = ({ exportImageCallback, inputParams }) => {
         if (inputParams.content[elem.name] !== null) {
           if (elem.type === 'text' && inputParams.content[elem.name]) {
             elem.text = inputParams.content[elem.name];
+            if (elem.customization?.minSize || elem.customization?.maxSize) {
+              elem.fontSize = adjustTextSize(elem.text, elem.customization?.minSize, elem.customization?.maxSize);
+              console.log(elem.fontSize)
+            }
           }
           if (elem.type === 'image' && elem.name === 'picture1') {
             const field = inputParams.field;
@@ -62,6 +72,26 @@ const HeadlessCanvas = ({ exportImageCallback, inputParams }) => {
       }, 1000);
     }
   }, [editorContext?.elements]);
+
+  const adjustTextSize = (text, minSize = 26, maxSize = 40) => {
+    const textLength = text.length;
+
+    // If text length is less than 20, return the max size
+    if (textLength < 20) {
+      return maxSize;
+    }
+
+    // If text length is 50 or more, return the minimum size
+    if (textLength >= 50) {
+      return minSize;
+    }
+
+    // Calculate the step decrease in font size for each character over 20 characters
+    const sizeDecrease = (maxSize - minSize) / (50 - 20);
+    const newSize = maxSize - ((textLength - 20) * sizeDecrease);
+
+    return newSize;
+  }
 
   return (
     <React.Fragment>
