@@ -1368,6 +1368,10 @@ export const TEMPLATES = [
     }, {
       'id': 'ffbbe7a8-9cff-49d6-b5a2-2ff63e86a175',
       'type': 'text',
+	    'customization': {
+		    maxSize: 32,
+		    minSize: 24,
+	    },
       'fillAfterStrokeEnabled': true,
       'fill': 'rgba(0, 0, 0, 1)',
       'strokeWidth': 0,
@@ -1395,6 +1399,10 @@ export const TEMPLATES = [
     }, {
       'id': '1e7de8a9-d511-4661-b857-f96e127c599d',
       'type': 'text',
+	    'customization': {
+		    maxSize: 32,
+		    minSize: 24,
+	    },
       'fillAfterStrokeEnabled': true,
       'fill': 'rgba(0, 0, 0, 1)',
       'strokeWidth': 0,

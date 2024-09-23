@@ -13,7 +13,7 @@
     "react-dom": "^18.2.0",
     "react-redux": "^9.1.0",
     "redux": "^5.0.1",
-    "canvas-editor": "https://github.com/Lotphy/canvas-editor.git"
+    "canvas-editor": "git+https://github.com/Lotphy/canvas-editor.git#v1.3.0"
   },
   "devDependencies": {
     "@babel/plugin-syntax-object-rest-spread": "^7.8.3"

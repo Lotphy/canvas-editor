@@ -16,15 +16,16 @@ const HeadlessCanvas = ({ exportImageCallback, inputParams }) => {
 
   const applyParamsToTemplate = () => {
     editorContext.setElements([]);
+    editorContext.setParams([]);
     console.log('Generating...');
     let template;
     if (inputParams.id) {
-      template = TEMPLATES.filter(template => template.id === inputParams.id).shift();
+      template = TEMPLATES.filter(template => template.id === inputParams.id)[0];
     } else {
       const templates = TEMPLATES.filter(template => template.type === inputParams.type);
       template = templates[Math.floor(Math.random() * templates.length)];
     }
-    console.log(template)
+    console.log(template);
     console.log('Template selected.');
     if (template) {
       // TODO Could be refactored
@@ -57,8 +58,12 @@ const HeadlessCanvas = ({ exportImageCallback, inputParams }) => {
         }
       });
 
-      editorContext.setElements(template.elements);
-      editorContext.setParams(template.params);
+      editorContext.setElements([
+	      ...template.elements
+      ]);
+      editorContext.setParams([
+	      ...template.params
+      ]);
       console.log('Elements update.', template.elements);
     }
   }
