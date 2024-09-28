@@ -9,8 +9,10 @@ import { sampleImagesUrls, svgPathData } from '../shared/sample-resources';
 const HeadlessCanvas = ({ exportImageCallback, inputParams }) => {
   const stageRef = useRef(null);
   const editorContext = useEditor();
+	let template;
 
-  useEffect(() => {
+
+	useEffect(() => {
     applyParamsToTemplate();
   }, [inputParams])
 
@@ -18,13 +20,17 @@ const HeadlessCanvas = ({ exportImageCallback, inputParams }) => {
     editorContext.setElements([]);
     editorContext.setParams([]);
     console.log('Generating...');
-    let template;
-    if (inputParams.id) {
-      template = TEMPLATES.filter(template => template.id === inputParams.id)[0];
-    } else {
-      const templates = TEMPLATES.filter(template => template.type === inputParams.type);
-      template = templates[Math.floor(Math.random() * templates.length)];
-    }
+		console.log('PARAMS ', inputParams);
+		if (inputParams.providedTemplate) {
+			template = inputParams.providedTemplate;
+		} else {
+			if (inputParams.id) {
+				template = TEMPLATES.filter(template => template.id === inputParams.id)[0];
+			} else {
+				const templates = TEMPLATES.filter(template => template.type === inputParams.type);
+				template = templates[Math.floor(Math.random() * templates.length)];
+			}
+		}
     console.log(template);
     console.log('Template selected.');
     if (template) {
@@ -38,7 +44,8 @@ const HeadlessCanvas = ({ exportImageCallback, inputParams }) => {
               console.log(elem.fontSize)
             }
           }
-          if (elem.type === 'image' && elem.name === 'picture1') {
+					// Randomize picture only if no providedElements
+          if (!inputParams.providedTemplate && elem.type === 'image' && elem.name === 'picture1') {
             const field = inputParams.field;
             const fieldImages = sampleImagesUrls.filter(image => image.url.includes(field));
             const selectedImage = fieldImages.length > 0 ? fieldImages[Math.floor(Math.random() * fieldImages.length)] : sampleImagesUrls[Math.floor(Math.random() * sampleImagesUrls.length)];
@@ -65,6 +72,7 @@ const HeadlessCanvas = ({ exportImageCallback, inputParams }) => {
 	      ...template.params
       ]);
       console.log('Elements update.', template.elements);
+      console.log('Params update.', template.params);
     }
   }
 
@@ -72,7 +80,11 @@ const HeadlessCanvas = ({ exportImageCallback, inputParams }) => {
     if (editorContext?.elements?.length > 0) {
       setTimeout(() => {
         const imgData = editorContext.generateImageFromCanvas(stageRef, editorContext.params);
-        exportImageCallback(imgData);
+        exportImageCallback({
+	        encodedImage: imgData,
+	        elements: editorContext.elements,
+	        params: editorContext.params
+        });
         console.log('Generation done!');
       }, 1000);
     }
