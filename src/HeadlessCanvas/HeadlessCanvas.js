@@ -68,9 +68,9 @@ const HeadlessCanvas = ({ exportImageCallback, inputParams }) => {
       editorContext.setElements([
 	      ...template.elements
       ]);
-      editorContext.setParams([
+      editorContext.setParams({
 	      ...template.params
-      ]);
+      });
       console.log('Elements update.', template.elements);
       console.log('Params update.', template.params);
     }
