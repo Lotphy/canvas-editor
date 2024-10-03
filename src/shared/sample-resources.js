@@ -44,23 +44,13 @@ export const sampleImagesUrls = [
   },
   {
     "url": "assets/samples/img/feedler-logo.png",
-    "originalWidth": 414,
-    "originalHeight": 456
+    "originalWidth": 2195,
+    "originalHeight": 500
   },
   {
     "url": "assets/samples/img/feedler.png",
     "originalWidth": 420,
     "originalHeight": 465
-  },
-  {
-    "url": "assets/samples/img/feedler_white_logo.png",
-    "originalWidth": 2325,
-    "originalHeight": 500
-  },
-  {
-    "url": "assets/samples/img/img.png",
-    "originalWidth": 2325,
-    "originalHeight": 500
   },
   {
     "url": "assets/samples/img/law,0.jpg",

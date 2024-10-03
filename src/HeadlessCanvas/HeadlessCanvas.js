@@ -47,8 +47,9 @@ const HeadlessCanvas = ({ exportImageCallback, inputParams }) => {
 					// Randomize picture only if no providedElements
           if (!inputParams.providedTemplate && elem.type === 'image' && elem.name === 'picture1') {
             const field = inputParams.field;
-            const fieldImages = sampleImagesUrls.filter(image => image.url.includes(field));
-            const selectedImage = fieldImages.length > 0 ? fieldImages[Math.floor(Math.random() * fieldImages.length)] : sampleImagesUrls[Math.floor(Math.random() * sampleImagesUrls.length)];
+            const imgGallery = sampleImagesUrls.filter(image => !image.url.includes('feedler'));
+            const fieldImages = imgGallery.filter(image => image.url.includes(field));
+            const selectedImage = fieldImages.length > 0 ? fieldImages[Math.floor(Math.random() * fieldImages.length)] : imgGallery[Math.floor(Math.random() * sampleImagesUrls.length)];
             elem.src = selectedImage.url;
             elem.originalHeight = selectedImage.originalHeight;
             elem.originalWidth = selectedImage.originalWidth;
