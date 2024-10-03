@@ -43,6 +43,11 @@ export const sampleImagesUrls = [
     "originalHeight": 667
   },
   {
+    "url": "assets/samples/img/feedler-logo.png",
+    "originalWidth": 414,
+    "originalHeight": 456
+  },
+  {
     "url": "assets/samples/img/feedler.png",
     "originalWidth": 420,
     "originalHeight": 465
