@@ -187,7 +187,6 @@ const Main = () => {
                       <Element
                         shapeProps={{
                           ...element,
-                          name: 'element',
                           x: (element.relativeX + editorContext.params.drawableZone?.x) || 0,
                           y: (element.relativeY + editorContext.params.drawableZone?.y) || 0
                         }}

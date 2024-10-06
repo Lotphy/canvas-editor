@@ -9,7 +9,7 @@ import EditorContext from '../shared/EditorContext';
 import TemplateMenu from '../TemplateMenu/TemplateMenu';
 
 const SideMenu = ({stageRef}) => {
-  const [toggledDrawer, setToggledDrawer] = useState('shape');
+  const [toggledDrawer, setToggledDrawer] = useState('template');
   const editorContext = useContext(EditorContext);
 
   useEffect(() => {

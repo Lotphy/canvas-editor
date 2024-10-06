@@ -19,7 +19,7 @@ const CircleAttributes = ({ element, updateAttribute }) => {
   }, [element]);
 
   return (
-    <div className="d-flex px-3">
+    <div className="d-flex ">
       <div className="d-flex">
         <MDBBtn className="text-white d-flex align-items-center bg-transparent shadow-0 px-0 me-3"
                 noRipple

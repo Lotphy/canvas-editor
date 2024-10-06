@@ -4,6 +4,8 @@ import { SketchPicker } from 'react-color';
 
 const TextAttributes = ({ element, updateAttribute }) => {
   const [fontSize, setFontSize] = useState(0);
+  const [minFontSize, setMinFontSize] = useState(0);
+  const [maxFontSize, setMaxFontSize] = useState(0);
   const [fontFamily, setFontFamily] = useState('');
   const [textAlign, setTextAlign] = useState('left');
   const [fontStyle, setFontStyle] = useState([]);
@@ -17,6 +19,8 @@ const TextAttributes = ({ element, updateAttribute }) => {
     if (element) {
       // Update input values whenever element attributes change
       setFontSize(element.attrs.fontSize || 0);
+      setMinFontSize(element.attrs.customization?.minSize || 0);
+      setMaxFontSize(element.attrs.customization?.maxSize || 0);
       setFontFamily(element.attrs.fontFamily || 'Arial');
       setTextAlign(element.attrs.align || 'left');
       setFontStyle(element.attrs.fontStyle?.split(' ') || []);
@@ -46,7 +50,7 @@ const TextAttributes = ({ element, updateAttribute }) => {
   }
 
   return (
-    <div className="d-flex px-3">
+    <div className="d-flex">
       <div className="text-white d-flex align-items-center bg-transparent shadow-0 px-0 me-3">
         <label className="me-2">Font:</label>
         <select
@@ -95,6 +99,38 @@ const TextAttributes = ({ element, updateAttribute }) => {
             const value = parseInt(e.target.value) || 0;
             setFontSize(value);
             updateAttribute('fontSize', value);
+          }}
+        />
+      </div>
+      <div className="text-white d-flex align-items-center bg-transparent shadow-0 px-0 me-3">
+        <label className="me-2">Min Size:</label>
+        <MDBInput
+          className="text-white"
+          type="number"
+          value={minFontSize}
+          onChange={(e) => {
+            const value = parseInt(e.target.value) || 0;
+            setMinFontSize(value);
+            updateAttribute('customization', {
+              ...element?.attrs?.customization,
+              minSize: value
+            });
+          }}
+        />
+      </div>
+      <div className="text-white d-flex align-items-center bg-transparent shadow-0 px-0 me-3">
+        <label className="me-2">Max Size:</label>
+        <MDBInput
+          className="text-white"
+          type="number"
+          value={maxFontSize}
+          onChange={(e) => {
+            const value = parseInt(e.target.value) || 0;
+            setMaxFontSize(value);
+            updateAttribute('customization', {
+              ...element?.attrs?.customization,
+              maxSize: value
+            });
           }}
         />
       </div>
@@ -160,7 +196,7 @@ const TextAttributes = ({ element, updateAttribute }) => {
           }}
         />
       </div>
-      <div className="d-flex p-2 switch-group">
+      <div className="d-flex p-0 me-2 switch-group">
         <MDBBtn className={`shadow-0 ${textAlign === 'left' && 'active'}`} onClick={() => updateTextAlign('left')}>
           <MDBIcon fas icon="align-left" size="lg" className="d-inline-block"/>
         </MDBBtn>
@@ -172,8 +208,8 @@ const TextAttributes = ({ element, updateAttribute }) => {
         </MDBBtn>
       </div>
 
-      <div className="d-flex p-2 switch-group">
-        <MDBBtn className={`shadow-0 ${fontStyle.includes('bold') && 'active'}`}
+      <div className="d-flex p-0 switch-group">
+        <MDBBtn className={`me-2 shadow-0 ${fontStyle.includes('bold') && 'active'}`}
                 onClick={() => updateFontStyle('bold')}>
           <MDBIcon fas icon="bold" size="lg" className="d-inline-block"/>
         </MDBBtn>
