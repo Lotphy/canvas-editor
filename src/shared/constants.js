@@ -315,11 +315,12 @@ export const TEMPLATES = [
       }
     ]
   }, {
+    'id': 'template2',
     'thumbnail': 'assets/samples/templates/template2.jpg',
     'type': 'standard',
     'params': {
       'background': { 'color': 'rgba(94,0,255,1)' },
-      'drawableZone': { 'x': 447, 'y': 105.5, 'width': 600, 'height': 400 }
+      'drawableZone': { 'x': 255, 'y': 156, 'width': 600, 'height': 400 }
     },
     'elements': [{
       'id': '4c86f979-8027-45df-98a4-5ac5aebcacc3',
@@ -344,7 +345,22 @@ export const TEMPLATES = [
       'skewX': 0,
       'skewY': 0,
       'loaded': true,
-      'strokeWidth': 200
+      'strokeWidth': 0
+    }, {
+      'id': '969522c9-f193-4323-95ba-4d3d4d5a0d51',
+      'type': 'rectangle',
+      'stroke': 'rgb(97,146,220)',
+      'strokeWidth': 0,
+      'fill': 'rgba(63,80,129,0.87)',
+      'opacity': 1,
+      'scaleX': 1,
+      'scaleY': 1,
+      'relativeX': 0,
+      'relativeY': 0,
+      'width': 600,
+      'height': 400,
+      'fillAfterStrokeEnabled': true,
+      'cornerRadius': 0
     }, {
       'id': '6341efd5-206f-4746-a417-a30a83f27c43',
       'type': 'rectangle',
@@ -641,8 +657,25 @@ export const TEMPLATES = [
       'offsetY': 0,
       'skewX': 0,
       'skewY': 0,
-      'strokeWidth': 500,
+      'strokeWidth': 0,
       'mask': 'M 174.269531 0.00390625 L 26.160156 0.00390625 C 26.015625 0 25.871094 0 25.726562 0 C 11.515625 0.00390625 0 11.523438 0 25.730469 L 0 173.84375 C 0.046875 188.269531 11.730469 199.953125 26.160156 200 L 174.269531 200 C 188.527344 199.722656 199.953125 188.105469 200 173.84375 L 200 25.730469 C 200 11.523438 188.480469 0.00390625 174.269531 0.00390625 Z M 174.269531 0.00390625 '
+    }, {
+      'id': '5c77a371-af1b-493a-93e3-4168d6006e39',
+      'type': 'rectangle',
+      'stroke': 'rgb(97,146,220)',
+      'strokeWidth': 0,
+      'fill': 'rgba(161,0,0,0.91)',
+      'opacity': 1,
+      'scaleX': 1,
+      'scaleY': 1,
+      'relativeX': 0,
+      'relativeY': 0,
+      'width': 600,
+      'height': 400,
+      'fillAfterStrokeEnabled': true,
+      'cornerRadius': 0,
+      'x': 405,
+      'y': 306
     }, {
       'id': 'd9d9d565-8d78-45dc-9176-932ea424a0ad',
       'type': 'circle',
@@ -1617,7 +1650,7 @@ export const TEMPLATES = [
     'type': 'standard',
     'params': {
       'background': { 'color': 'rgba(233,232,212,1)' },
-      'drawableZone': { 'x': 447, 'y': 75, 'width': 600, 'height': 400 }
+      'drawableZone': { 'x': 255, 'y': 156, 'width': 600, 'height': 400 }
     },
     'elements': [{
       'id': 'a2c036d1-2d9d-4340-81cd-f9268c86ed94',
@@ -1629,7 +1662,7 @@ export const TEMPLATES = [
       'originalHeight': 667,
       'width': 292.3076923076923,
       'height': 200,
-      'relativeX': -10.800000000000239,
+      'relativeX': 0,
       'relativeY': -100,
       'stroke': 'rgba(38,75,0,0.95)',
       'name': 'picture1',
@@ -1641,8 +1674,25 @@ export const TEMPLATES = [
       'offsetY': 0,
       'skewX': 0,
       'skewY': 0,
-      'strokeWidth': 500,
+      'strokeWidth': 0,
       'mask': 'M 174.269531 0.00390625 L 26.160156 0.00390625 C 26.015625 0 25.871094 0 25.726562 0 C 11.515625 0.00390625 0 11.523438 0 25.730469 L 0 173.84375 C 0.046875 188.269531 11.730469 199.953125 26.160156 200 L 174.269531 200 C 188.527344 199.722656 199.953125 188.105469 200 173.84375 L 200 25.730469 C 200 11.523438 188.480469 0.00390625 174.269531 0.00390625 Z M 174.269531 0.00390625 '
+    }, {
+      'id': '5c77a371-af1b-493a-93e3-4168d6006e39',
+      'type': 'rectangle',
+      'stroke': 'rgb(97,146,220)',
+      'strokeWidth': 0,
+      'fill': 'rgba(2,163,18,0.8)',
+      'opacity': 1,
+      'scaleX': 1,
+      'scaleY': 1,
+      'relativeX': 0,
+      'relativeY': 0,
+      'width': 600,
+      'height': 400,
+      'fillAfterStrokeEnabled': true,
+      'cornerRadius': 0,
+      'x': 405,
+      'y': 306
     }, {
       'id': 'd9d9d565-8d78-45dc-9176-932ea424a0ad',
       'type': 'circle',
@@ -1788,7 +1838,8 @@ export const TEMPLATES = [
       'name': 'logo',
       'mask': null
     }]
-  }, {
+  }
+  , {
     id: 'template11',
     'thumbnail': 'assets/samples/templates/template11.jpg',
     'type': 'standard',

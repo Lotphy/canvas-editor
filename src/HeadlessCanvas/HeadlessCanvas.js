@@ -11,7 +11,6 @@ const HeadlessCanvas = ({ exportImageCallback, inputParams }) => {
   const editorContext = useEditor();
 	let template;
 
-
 	useEffect(() => {
     applyParamsToTemplate();
   }, [inputParams])
