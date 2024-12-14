@@ -36,6 +36,9 @@ const HeadlessCanvas = ({ exportImageCallback, inputParams }) => {
       // TODO Could be refactored
       template.elements.map(elem => {
         if (inputParams.content[elem.name] !== null) {
+          if (elem.name === 'logo') {
+            elem.src = inputParams.content?.logo;
+          }
           if (elem.type === 'text' && inputParams.content[elem.name]) {
             elem.text = inputParams.content[elem.name];
             if (elem.customization?.minSize || elem.customization?.maxSize) {
@@ -49,7 +52,7 @@ const HeadlessCanvas = ({ exportImageCallback, inputParams }) => {
             const imgGallery = sampleImagesUrls.filter(image => !image.url.includes('feedler'));
             const fieldImages = imgGallery.filter(image => image.url.includes(field));
             const selectedImage = fieldImages.length > 0 ? fieldImages[Math.floor(Math.random() * fieldImages.length)] : imgGallery[Math.floor(Math.random() * sampleImagesUrls.length)];
-            elem.src = selectedImage.url;
+            elem.src = selectedImage?.url;
             elem.originalHeight = selectedImage.originalHeight;
             elem.originalWidth = selectedImage.originalWidth;
           }
