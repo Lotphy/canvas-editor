@@ -320,6 +320,8 @@ const Element = ({ shapeProps, onSelect, onChange, onMouseUp, onMouseDown, stage
     } else if (shapeProps.src.includes('https://')) {
       img.crossOrigin = 'Anonymous'; // Allow cross-origin images
       img.src = shapeProps.src;
+	    shapeProps.originalHeight = img.height;
+	    shapeProps.originalWidth = img.width;
     } else {
       img.src = require(`./${shapeProps.src}`);
     }

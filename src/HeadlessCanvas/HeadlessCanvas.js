@@ -43,7 +43,6 @@ const HeadlessCanvas = ({ exportImageCallback, inputParams }) => {
             elem.text = inputParams.content[elem.name];
             if (elem.customization?.minSize || elem.customization?.maxSize) {
               elem.fontSize = adjustTextSize(elem.text, elem.customization?.minSize, elem.customization?.maxSize);
-              console.log(elem.fontSize)
             }
           }
 					// Randomize picture only if no providedElements
@@ -52,13 +51,21 @@ const HeadlessCanvas = ({ exportImageCallback, inputParams }) => {
             const imgGallery = sampleImagesUrls.filter(image => !image.url.includes('feedler'));
             const fieldImages = imgGallery.filter(image => image.url.includes(field));
             const selectedImage = fieldImages.length > 0 ? fieldImages[Math.floor(Math.random() * fieldImages.length)] : imgGallery[Math.floor(Math.random() * sampleImagesUrls.length)];
-            elem.src = selectedImage?.url;
-            elem.originalHeight = selectedImage.originalHeight;
-            elem.originalWidth = selectedImage.originalWidth;
+            if (selectedImage) {
+	            elem.src = selectedImage?.url;
+	            elem.originalHeight = selectedImage.originalHeight;
+	            elem.originalWidth = selectedImage.originalWidth;
+            }
           }
           if (elem.customization) {
             Object.keys(elem.customization).forEach(key => {
-              elem[key] = inputParams.content[elem.customization[key]];
+							if (key === 'fill' || key === 'stroke' ) {
+								// Extract alpha value from template elem and put in brand color vals
+								const alpha = parseFloat(elem[key].split(',').pop().replace(')', ''));
+								elem[key] = convertRgbToRgba(inputParams.content[elem.customization[key]], alpha)
+							} else {
+								elem[key] = inputParams.content[elem.customization[key]];
+							}
               if (key === 'mask') {
                 const randomMask = svgPathData[Math.floor(Math.random() * svgPathData.length)];
                 elem.mask = randomMask.path2D;
@@ -92,6 +99,15 @@ const HeadlessCanvas = ({ exportImageCallback, inputParams }) => {
       }, 1000);
     }
   }, [editorContext?.elements]);
+
+	function convertRgbToRgba(rgbString, alpha) {
+		// Extract the RGB values using regex
+		const rgbMatch = rgbString.match(/rgb\((\d{1,3}),(\d{1,3}),(\d{1,3})\)/);
+		if (!rgbMatch) return null; // Return null for invalid input
+
+		const [_, r, g, b] = rgbMatch; // Extract R, G, B values
+		return `rgba(${r},${g},${b},${alpha})`; // Insert alpha
+	}
 
   const adjustTextSize = (text, minSize = 26, maxSize = 40) => {
     const textLength = text.length;
