@@ -141,12 +141,23 @@ const AttrsMenu = ({ node, id, onChange }) => {
 	              wrapperClass="w-auto"
                 className="text-white w-auto"
                 type="text"
-                value={JSON.stringify(element?.attrs.customization) || JSON.stringify({})}
+                value={typeof element?.attrs.customization === 'object' ? JSON.stringify(element?.attrs.customization) : element?.attrs.customization || ''}
                 onChange={(e) => {
                   updateAttributes({
-                    customization: JSON.parse(e.target.value)
+                    customization: e.target.value
                   })
                 }}
+	              onBlur={(e) => {
+		              try {
+			              const parsedInput = JSON.parse(e.target.value)
+			              console.log(parsedInput)
+			              updateAttributes(() => {
+				              return { customization: parsedInput }
+			              })
+		              } catch (e) {
+										alert('Could not parse Customization JSON')
+		              }
+	              }}
               />
             </div>
           </div>
