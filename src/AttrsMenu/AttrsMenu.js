@@ -4,7 +4,7 @@ import TextAttributes from './TextAttributes';
 import SquareAttributes from './SquareAttributes';
 import CircleAttributes from './CircleAttributes';
 import ImageAttributes from './ImageAttributes';
-import { MDBInput } from 'mdb-react-ui-kit';
+import {MDBInput, MDBTextArea} from 'mdb-react-ui-kit';
 
 const AttrsMenu = ({ node, id, onChange }) => {
   const [element, setElement] = useState(null);
@@ -131,6 +131,20 @@ const AttrsMenu = ({ node, id, onChange }) => {
                 onChange={(e) => {
                   updateAttributes({
                     name: e.target.value
+                  })
+                }}
+              />
+            </div>
+            <div className="text-white d-flex align-items-center bg-transparent shadow-0 px-0 me-3">
+              <label className="me-2">Customization</label>
+              <MDBTextArea
+	              wrapperClass="w-auto"
+                className="text-white w-auto"
+                type="text"
+                value={JSON.stringify(element?.attrs.customization) || JSON.stringify({})}
+                onChange={(e) => {
+                  updateAttributes({
+                    customization: JSON.parse(e.target.value)
                   })
                 }}
               />
