@@ -15,6 +15,7 @@ const getCanvasExport = (e) => {
 }
 
 const App = () => {
+  console.log('DEBUG', inputParams)
   return <>
     <CanvasEditor headless={false} getCanvasExport={getCanvasExport} inputParams={inputParams}/>
   </>
